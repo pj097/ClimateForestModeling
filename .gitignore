@@ -1,0 +1,7 @@
+data/*
+.*
+!.gitignore
+
+treesatai/lgbm
+treesatai/models
+treesatai/s2/*/
