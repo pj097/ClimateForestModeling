@@ -1,0 +1,30 @@
+sources:
+    sample_gb_forestry:
+        description: 10k sample GB Forestry 2021, Great Britain
+        driver: geojson
+        args:
+            urlpath: '{{ CATALOG_DIR }}data/National_Forest_Inventory_Woodland_GB_2021_10ksample.geojson'
+        metadata:
+            categories: {'general': 'IFT_IOA'}
+            usecols: ['OBJECTID_1', 'CATEGORY', 'IFT_IOA', 'Area_ha', 'geometry']
+
+    gb_forestry:
+        description: Full GB Forestry 2021, Great Britain
+        driver: geojson
+        args:
+            urlpath: '{{ CATALOG_DIR }}data/National_Forest_Inventory_Woodland_GB_2021.geojson'
+        metadata:
+            categories: {'general': 'IFT_IOA'}
+            usecols: ['OBJECTID_1', 'IFT_IOA', 'Area_ha', 'geometry']
+    
+    treesat:
+        description: TREESAT AI Benchmark, Germany
+        driver: geojson
+        args:
+            urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.GeoJSON'
+        metadata:
+            categories: {'general': 'l1', 'common_name': 'l2'}
+            usecols: ['l1', 'l2', 'geometry']
+
+
+        
