@@ -1,13 +1,4 @@
 sources:
-    sample_treesat:
-        description: TREESAT AI Benchmark 10k sample, Germany
-        driver: geojson
-        args:
-            urlpath: '{{ CATALOG_DIR }}data/sample_treesat.geojson'
-        metadata:
-            categories: {'general': 'l1'}
-            usecols: ['l1', 'geometry']
-            
     sample_gb_forestry:
         description: 10k sample GB Forestry 2021, Great Britain
         driver: geojson
@@ -16,6 +7,16 @@ sources:
         metadata:
             categories: {'general': 'IFT_IOA'}
             usecols: ['IFT_IOA', 'geometry']
+
+    sample_treesat:
+        description: TREESAT AI Benchmark 10k sample, Germany
+        driver: geojson
+        args:
+            urlpath: '{{ CATALOG_DIR }}data/sample_treesat.geojson'
+        metadata:
+            categories: {'general': 'l1', 'generic'}
+            usecols: ['l1', 'l2', 'geometry']
+        
             
     gb_forestry:
         description: Full GB Forestry 2021, Great Britain
@@ -32,8 +33,8 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.GeoJSON'
         metadata:
-            categories: {'general': 'l1'}
-            usecols: ['l1', 'geometry']
+            categories: {'generic': 'l2'}
+            usecols: ['l2', 'geometry']
 
     
     ptreesat:
