@@ -36,15 +36,6 @@ sources:
             categories: {'generic': 'l2'}
             usecols: ['l2', 'geometry']
 
-    
-    ptreesat:
-        description: TREESAT AI Benchmark, Germany
-        driver: geojson
-        args:
-            urlpath: '{{ CATALOG_DIR }}treesatai/buffered_p.GeoJSON'
-        metadata:
-            categories: {'general': 'l1'}
-            usecols: ['l1', 'geometry']
 
     
 
