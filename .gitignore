@@ -3,11 +3,6 @@ models/*
 .*
 !.gitignore
 
-treesatai/lgbm
-treesatai/models
-treesatai/s2
-treesatai/data
-treesatai/processed_data
-treesatai/earthengine.googleapis.com
+treesatai/*/
 treesatai/bb_60m.GeoJSON
 treesatai/TreeSatBA_v9_60m_multi_labels.json
