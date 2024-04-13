@@ -5,7 +5,7 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}data/National_Forest_Inventory_Woodland_GB_2021_10ksample.geojson'
         metadata:
-            categories: {'general': 'IFT_IOA'}
+            categories: {'multi': 'IFT_IOA'}
             usecols: ['IFT_IOA', 'geometry']
 
     sample_treesat:
@@ -14,7 +14,7 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}data/sample_treesat.geojson'
         metadata:
-            categories: {'general': 'l1', 'generic': 'l2'}
+            categories: {'multi': 'l1', 'trinary': 'l2'}
             usecols: ['l1', 'l2', 'geometry']
         
             
@@ -24,7 +24,7 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}data/National_Forest_Inventory_Woodland_GB_2021.geojson'
         metadata:
-            categories: {'general': 'IFT_IOA'}
+            categories: {'multi': 'IFT_IOA'}
             usecols: ['IFT_IOA', 'geometry']
     
     treesat:
@@ -33,7 +33,7 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.GeoJSON'
         metadata:
-            categories: {'generic': 'l2', 'general': 'l1'}
+            categories: {'multi': 'l2', 'trinary': 'l1'}
             usecols: ['l1', 'l2', 'geometry']
 
 
