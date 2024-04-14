@@ -36,6 +36,15 @@ sources:
             categories: {'multi': 'l2', 'trinary': 'l1'}
             usecols: ['l1', 'l2', 'geometry']
 
+    london_trees:
+        description: London Borough Trees
+        driver: geojson
+        args:
+            urlpath: '{{ CATALOG_DIR }}data/buffered_london_trees.geojson'
+        metadata:
+            categories: {'multi': 'tree_name'}
+            usecols: ['tree_name', 'geometry']
+
 
     
 
