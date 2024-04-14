@@ -33,8 +33,8 @@ sources:
         args:
             urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.GeoJSON'
         metadata:
-            categories: {'multi': 'l2', 'trinary': 'l1'}
-            usecols: ['l1', 'l2', 'geometry']
+            categories: {'multi': 'l3', 'trinary': 'l1'}
+            usecols: ['l1', 'l3', 'geometry']
 
     london_trees:
         description: London Borough Trees
