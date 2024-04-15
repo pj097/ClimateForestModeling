@@ -31,10 +31,22 @@ sources:
         description: TREESAT AI Benchmark, Germany
         driver: geojson
         args:
-            urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.GeoJSON'
+            urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.geojson'
         metadata:
-            categories: {'multi': 'l3', 'trinary': 'l1'}
-            usecols: ['l1', 'l3', 'geometry']
+            categories: {'multi': 'l2', 'trinary': 'l1', 'multi3': 'l3'}
+            usecols: ['l1', 'l2', 'l3', 'geometry']
+
+    treesat_multi:
+        description: TREESAT AI Benchmark with multilabels, Germany
+        driver: csv
+        args:
+            urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m_multilabel.csv'
+        metadata:
+            categories: {'multi': [
+                'Pseudotsuga', 'Abies', 'Larix', 'Acer', 'Picea', 'Betula', 'Cleared',
+                'Fagus', 'Quercus', 'Fraxinus', 'Pinus', 'Alnus', 'Populus', 'Prunus',
+                'Tilia'
+            ]}
 
     london_trees:
         description: London Borough Trees
