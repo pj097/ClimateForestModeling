@@ -36,6 +36,15 @@ sources:
             categories: {'multi': 'l2', 'trinary': 'l1', 'multi3': 'l3'}
             usecols: ['l1', 'l2', 'l3', 'geometry']
 
+    treesat_csv:
+        description: TREESAT AI Benchmark, Germany
+        driver: csv
+        args:
+            urlpath: '{{ CATALOG_DIR }}treesatai/bb_60m.csv'
+        metadata:
+            categories: {'multi': 'l2', 'trinary': 'l1', 'multi3': 'l3'}
+            usecols: ['l1', 'l2', 'l3']
+
     treesat_multi:
         description: TREESAT AI Benchmark with multilabels, Germany
         driver: csv
