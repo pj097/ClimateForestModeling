@@ -1,0 +1,34 @@
+[I 2024-05-16 13:34:33.692 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2024-05-16 13:34:33.696 ServerApp] jupyter_server_mathjax | extension was successfully linked.
+[I 2024-05-16 13:34:33.699 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2024-05-16 13:34:33.703 ServerApp] jupyterlab | extension was successfully linked.
+[I 2024-05-16 13:34:33.703 ServerApp] nbdime | extension was successfully linked.
+[I 2024-05-16 13:34:33.706 ServerApp] notebook | extension was successfully linked.
+[I 2024-05-16 13:34:33.837 ServerApp] notebook_shim | extension was successfully linked.
+[I 2024-05-16 13:34:33.837 ServerApp] panel.io.jupyter_server_extension | extension was successfully linked.
+[I 2024-05-16 13:34:33.849 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2024-05-16 13:34:33.850 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2024-05-16 13:34:33.851 ServerApp] jupyter_server_mathjax | extension was successfully loaded.
+[I 2024-05-16 13:34:33.851 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2024-05-16 13:34:33.853 LabApp] JupyterLab extension loaded from /home/potato/miniconda3/envs/keras/lib/python3.10/site-packages/jupyterlab
+[I 2024-05-16 13:34:33.853 LabApp] JupyterLab application directory is /home/potato/miniconda3/envs/keras/share/jupyter/lab
+[I 2024-05-16 13:34:33.853 LabApp] Extension Manager is 'pypi'.
+[I 2024-05-16 13:34:33.880 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2024-05-16 13:34:33.912 ServerApp] nbdime | extension was successfully loaded.
+[I 2024-05-16 13:34:33.915 ServerApp] notebook | extension was successfully loaded.
+[I 2024-05-16 13:34:33.915 ServerApp] panel.io.jupyter_server_extension | extension was successfully loaded.
+[I 2024-05-16 13:34:33.916 ServerApp] Serving notebooks from local directory: /home/potato/sentinel
+[I 2024-05-16 13:34:33.916 ServerApp] Jupyter Server 2.10.0 is running at:
+[I 2024-05-16 13:34:33.916 ServerApp] http://localhost:1234/lab?token=2f241201914f3985ddaeb0c52d374367cd687daead3332ff
+[I 2024-05-16 13:34:33.916 ServerApp]     http://127.0.0.1:1234/lab?token=2f241201914f3985ddaeb0c52d374367cd687daead3332ff
+[I 2024-05-16 13:34:33.916 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2024-05-16 13:34:33.917 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///home/potato/.local/share/jupyter/runtime/jpserver-4231-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:1234/lab?token=2f241201914f3985ddaeb0c52d374367cd687daead3332ff
+        http://127.0.0.1:1234/lab?token=2f241201914f3985ddaeb0c52d374367cd687daead3332ff
+[I 2024-05-16 13:34:33.933 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2024-05-16 13:35:10.269 ServerApp] Shutting down on /api/shutdown request.
+[I 2024-05-16 13:35:10.269 ServerApp] Shutting down 8 extensions
