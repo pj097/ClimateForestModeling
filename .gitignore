@@ -8,5 +8,7 @@ treesatai/*/
 treesatai/earthengine*
 treesatai/bb_60m.GeoJSON
 treesatai/TreeSatBA_v9_60m_multi_labels.json
+usda/
+
 
 nohup*
