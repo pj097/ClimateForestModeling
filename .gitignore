@@ -1,6 +1,3 @@
-data/*
-models/*
-london/
 .*
 !.gitignore
 
@@ -8,7 +5,5 @@ treesatai/*/
 treesatai/earthengine*
 treesatai/bb_60m.GeoJSON
 treesatai/TreeSatBA_v9_60m_multi_labels.json
-usda/
 
-
-nohup*
+eu_forest/sentinel_data
