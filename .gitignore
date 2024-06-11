@@ -6,4 +6,4 @@ treesatai/earthengine*
 treesatai/bb_60m.GeoJSON
 treesatai/TreeSatBA_v9_60m_multi_labels.json
 
-eu_forest/sentinel_data
+eu_forest/*/
