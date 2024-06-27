@@ -34,13 +34,21 @@ class DataGenerator(tf.keras.utils.PyDataset):
     def data_generation(self, list_IDs_temp):
         'Generate batch.'
         X = np.empty((self.batch_size, *self.dim, len(self.bands)))
-        y = np.empty((self.batch_size, len(self.keep_classes)))
+        y = np.empty((self.batch_size, len(self.utils.keep_classes)))
 
         for i, ID in enumerate(list_IDs_temp):
-            X[i,...] = np.load(self.shards_dir.joinpath(
+            data = np.load(self.shards_dir.joinpath(
                 f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))[..., self.bands]
+            
+            X[i,...] = self.utils.normalise(data, self.normal_type)
+            
             y[i] = np.load(
-                self.shards_dir.joinpath(f'labels_{self.data_tag}').joinpath(f'label_{ID}.npy')
-            )[self.keep_classes]
+                self.shards_dir.joinpath(f'labels').joinpath(f'label_{ID}.npy')
+            )[self.utils.keep_classes]
             
         return X, y
+
+
+
+
+

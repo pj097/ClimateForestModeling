@@ -11,6 +11,9 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
 
+import data_generator
+from importlib import reload
+reload(data_generator)
 from data_generator import DataGenerator
 
 class KerasModelCreator:
@@ -56,31 +59,6 @@ class KerasModelCreator:
             ),
         ]
         return callbacks
-    
-    def get_bias_and_weights(self):
-        initial_bias_file = self.model_dir.joinpath('initial_bias.npy')
-        class_weights_file = self.model_dir.joinpath('class_weights.npy')
-        if class_weights_file.is_file():
-            initial_bias = np.load(initial_bias_file)[0]
-            class_weights = np.load(class_weights_file, allow_pickle=True).item()
-        else:
-            print('Calculating initial bias and class weights...')
-            all_labels = []
-            for ID in self.IDs:
-                f = self.shards_dir.joinpath(f'labels_{self.data_tag}').joinpath(f'label_{ID}.npy')
-                all_labels.append(np.load(f))
-            all_labels = np.vstack(all_labels)
-            
-            neg, pos = np.bincount(all_labels.astype(int).flatten())
-            initial_bias = np.log([pos/neg])
-            
-            class_weights = all_labels.shape[0]/(all_labels.shape[1]*all_labels.sum(axis=0))
-            class_indices = list(range(all_labels.shape[1]))
-            class_weights = dict(zip(class_indices, class_weights))
-            np.save(initial_bias_file, np.array([initial_bias]))
-            np.save(class_weights_file, class_weights)
-        
-        return initial_bias, class_weights
 
     def get_metrics(self):
         prc = tf.keras.metrics.AUC(name='prc', curve='PR')
@@ -110,7 +88,7 @@ class KerasModelCreator:
         metrics = self.get_metrics()
 
         if self.overwrite:
-            for f in self.model_dirmodel_dir.glob('*'):
+            for f in self.model_dir.glob('*'):
                 f.unlink(missing_ok=True)
                 
         self.display_logger(log_file, metrics)
@@ -123,8 +101,6 @@ class KerasModelCreator:
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
         validation_generator = DataGenerator(validation_ids, shuffle=False, **self.kwargs)
-
-        initial_bias, class_weights = self.get_bias_and_weights()
     
         if self.model_dir.joinpath('model.keras').is_file():
             print('Loading model...')
@@ -132,9 +108,9 @@ class KerasModelCreator:
         else:
             print('Building model...')
             model = self.build_model(
-                len(self.keep_classes), (*self.dim, len(self.bands)), metrics,
+                len(self.utils.keep_classes), (*self.dim, len(self.bands)), metrics,
                 self.architecture, self.loss,
-                output_bias=initial_bias,
+                output_bias=self.utils.data_summary['initial_bias'],
             )
         print('Fitting...')
         model.fit(
@@ -142,7 +118,7 @@ class KerasModelCreator:
             validation_data=validation_generator,
             epochs=self.epochs,
             callbacks=callbacks,
-            class_weight=class_weights
+            class_weight=self.utils.data_summary['class_weights']
         )
         return model, testing_generator
 
