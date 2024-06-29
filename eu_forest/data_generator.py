@@ -34,18 +34,22 @@ class DataGenerator(tf.keras.utils.PyDataset):
     def data_generation(self, list_IDs_temp):
         'Generate batch.'
         X = np.empty((self.batch_size, *self.dim, len(self.bands)))
-        y = np.empty((self.batch_size, len(self.utils.keep_classes)))
+
+        y = self.utils.selected_classes.loc[list_IDs_temp].to_numpy()
 
         for i, ID in enumerate(list_IDs_temp):
-            data = np.load(self.shards_dir.joinpath(
-                f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))[..., self.bands]
-            
-            X[i,...] = self.utils.normalise(data, self.normal_type)
-            
-            y[i] = np.load(
-                self.shards_dir.joinpath(f'labels').joinpath(f'label_{ID}.npy')
-            )[self.utils.keep_classes]
-            
+            sentinel_data = np.load(self.shards_dir.joinpath(
+                f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))
+            sentinel_data = self.utils.normalise_sentinel(sentinel_data, self.normal_type)
+
+            if 13 in self.bands:
+                elevation_data = np.load(self.shards_dir.joinpath(
+                    'elevations').joinpath(f'elevation_{ID}.npy'))
+                elevation_data = np.expand_dims(elevation_data/5000, axis=-1)
+                X[i,...] = np.concatenate([sentinel_data, elevation_data], axis=-1)[..., self.bands]
+            else:
+                X[i,...] = sentinel_data[..., self.bands]
+ 
         return X, y
 
 

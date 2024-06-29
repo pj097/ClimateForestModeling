@@ -3,29 +3,27 @@ from collections import OrderedDict
 from pathlib import Path
 from tqdm.notebook import tqdm
 import numpy as np
+import pandas as pd
 
 class SentinelUtils:
-    def __init__(self, feature_shards, label_shards, min_occurrences=0,
+    def __init__(self, feature_shards, all_labels, min_occurrences=0,
                  overwrite_existing=False):
         self.all_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12', 'TCI_R', 'TCI_G', 'TCI_B']
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
         summary_path = tmp.joinpath('data_summary.json')
-        keep_shards_path = tmp.joinpath('keep_shards.npy')
-        keep_classes_path = tmp.joinpath('keep_classes.npy')
+        selected_classes_path = tmp.joinpath('selected_classes.csv')
         
         if summary_path.is_file() and not overwrite_existing:
             self.data_summary = json.loads(summary_path.read_text())
-            self.keep_shards = np.load(keep_shards_path)
-            self.keep_classes = np.load(keep_classes_path)
+            self.selected_classes = pd.read_csv(selected_classes_path, index_col='selected_index')
         else:
-            self.data_summary = self.process_features(feature_shards)
+            data_summary = self.process_features(feature_shards)
             
-            self.keep_shards, self.keep_classes, self.data_summary = self.process_labels(
-                label_shards, min_occurrences, keep_shards_path, keep_classes_path, self.data_summary
+            self.selected_classes, self.data_summary = self.process_labels(
+                all_labels, min_occurrences, data_summary, summary_path, selected_classes_path
             )
-            summary_path.write_text(json.dumps(self.data_summary))
 
     def process_features(self, feature_shards):
         print('Calculating feature statistics...')
@@ -38,7 +36,7 @@ class SentinelUtils:
             for shard_path in tqdm(feature_shards, leave=False):
                 with open(shard_path, 'rb') as f:
                     data = np.load(f)
-                    band_data.append(np.copy(data[i]))
+                    band_data.append(np.copy(data[..., i]))
     
             band_data = np.vstack(band_data)
             data_summary['mean'][band] = band_data.mean()
@@ -49,42 +47,36 @@ class SentinelUtils:
         
         return data_summary
 
-    def process_labels(self, label_shards, min_occurrences, keep_shards_path, keep_classes_path, data_summary):
-        all_labels = []
-        print('Loading labels..')
-        for s in tqdm(label_shards):
-            all_labels.append(np.load(s))
-    
+    def process_labels(self, all_labels, min_occurrences, data_summary, 
+                       summary_path, selected_classes_path):
         print('Selecting occurrences..')
-        all_labels = np.vstack(all_labels)
-
         keep_classes = np.where(all_labels.sum(axis=0) >= min_occurrences)[0]
+        selected_labels = all_labels.iloc[:, keep_classes]
+        keep_shards = np.where(selected_labels.sum(axis=1) > 0)[0]
         
-        keep_shards = np.where(all_labels[..., keep_classes].sum(axis=1) > 0)[0]
-
         print('Calculating label statistics...')
-        selected_labels = all_labels[keep_shards]
-        selected_labels = selected_labels[..., keep_classes]
+        selected_labels = selected_labels.iloc[keep_shards, :]
 
-        neg, pos = np.bincount(all_labels.astype(int).flatten())
+        neg, pos = np.bincount(selected_labels.to_numpy().astype(int).flatten())
         initial_bias = np.log([pos/neg])
         data_summary['initial_bias'] = initial_bias[0]
+        
 
-        class_weights = all_labels.shape[0]/(all_labels.shape[1]*all_labels.sum(axis=0))
-        class_indices = list(range(all_labels.shape[1]))
+        class_weights = selected_labels.shape[0]/(selected_labels.shape[1]*selected_labels.sum(axis=0))
+        class_indices = list(range(selected_labels.shape[1]))
         class_weights = dict(zip(class_indices, class_weights.tolist()))
         data_summary['class_weights'] = class_weights
 
-        np.save(keep_shards_path, keep_shards)
-        np.save(keep_classes_path, keep_classes)
+        selected_labels.to_csv(selected_classes_path, index_label='selected_index')
+        summary_path.write_text(json.dumps(data_summary))
         
         print(f'Dropped {all_labels.shape[1] - selected_labels.shape[1]} columns, '
               f'{all_labels.shape[0] - selected_labels.shape[0]} rows')
+        
+        return selected_labels, data_summary
 
-        return keep_shards, keep_classes, data_summary
 
-
-    def normalise(self, X, normal_type):
+    def normalise_sentinel(self, X, normal_type):
         stats = {}
         for stat in ['mean', 'std', 'percentile1', 'percentile50', 'percentile99']:
             stats[stat] = np.array(list(self.data_summary[stat].values()))
@@ -94,14 +86,14 @@ class SentinelUtils:
                 return X
             case 'zscore':
                 return (X - stats['mean'])/stats['std']
+            case 'log':
+                return np.log(np.where(X == 0, stats['percentile1'], X))
             case 'zscore_p50':
                 return (X - stats['percentile50'])/stats['std']
             case 'minmax':
                 X_normalised = np.clip(X, stats['percentile1'], stats['percentile99'])
                 X_normalised = (X_normalised - stats['percentile1'])/(stats['percentile99'] - stats['percentile1'])
                 return X_normalised
-            case 'clip':
-                return np.clip(X, stats['percentile1'], stats['percentile99'])
     
 
     

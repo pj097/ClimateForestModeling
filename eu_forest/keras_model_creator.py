@@ -108,7 +108,7 @@ class KerasModelCreator:
         else:
             print('Building model...')
             model = self.build_model(
-                len(self.utils.keep_classes), (*self.dim, len(self.bands)), metrics,
+                self.utils.selected_classes.shape[1], (*self.dim, len(self.bands)), metrics,
                 self.architecture, self.loss,
                 output_bias=self.utils.data_summary['initial_bias'],
             )
@@ -176,13 +176,12 @@ class KerasModelCreator:
         return Add()([x, r])
 
     def build_simple(self, input_layer):
-        for i in range(1, 2):
-            x = Conv2D(
-                filters=self.base_filters*i, kernel_size=3, padding='same', activation='relu',
-            )(input_layer)
-            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
-            x = BatchNormalization()(x)
-            x = Dropout(self.dropout)(x)
+        x = Conv2D(
+            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
+        )(input_layer)
+        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
 
         
         x = Flatten()(x)
