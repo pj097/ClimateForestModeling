@@ -95,7 +95,7 @@ class KerasModelCreator:
         
         callbacks = self.define_callbacks_and_logger(log_file, metrics)
         
-        training_ids, test_ids = train_test_split(self.IDs, test_size=10000, random_state=42)
+        training_ids, test_ids = train_test_split(self.shard_ids, test_size=10000, random_state=42)
         validation_ids, test_ids = train_test_split(test_ids, test_size=5000, random_state=42)
 
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)

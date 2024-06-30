@@ -3,10 +3,10 @@ import numpy as np
 
 class DataGenerator(tf.keras.utils.PyDataset):
     'Generates data for Keras'
-    def __init__(self, list_IDs, shuffle, **kwargs):
+    def __init__(self, all_IDs, shuffle, **kwargs):
         super().__init__()
         vars(self).update(kwargs)
-        self.list_IDs = list_IDs
+        self.all_IDs = all_IDs
         self.shuffle = shuffle
         
         self.use_multiprocessing = True
@@ -16,28 +16,28 @@ class DataGenerator(tf.keras.utils.PyDataset):
 
     def __len__(self):
         'Number of batches per epoch.'
-        return int(np.floor(len(self.list_IDs) / self.batch_size))
+        return int(np.floor(len(self.all_IDs) / self.batch_size))
 
     def __getitem__(self, index):
         'Get one batch of data.'
         indexes = self.indexes[index*self.batch_size:(index+1)*self.batch_size]
-        list_IDs_temp = [self.list_IDs[k] for k in indexes]
-        X, y = self.data_generation(list_IDs_temp)
+        batch_IDs = [self.all_IDs[k] for k in indexes]
+        X, y = self.data_generation(batch_IDs)
         return X, y
 
     def on_epoch_end(self):
         'Update and shuffle indexes after each epoch.'
-        self.indexes = np.arange(len(self.list_IDs))
+        self.indexes = np.arange(len(self.all_IDs))
         if self.shuffle == True:
             np.random.shuffle(self.indexes)
 
-    def data_generation(self, list_IDs_temp):
+    def data_generation(self, batch_IDs):
         'Generate batch.'
         X = np.empty((self.batch_size, *self.dim, len(self.bands)))
 
-        y = self.utils.selected_classes.loc[list_IDs_temp].to_numpy()
+        y = self.utils.selected_classes.loc[batch_IDs].to_numpy()
 
-        for i, ID in enumerate(list_IDs_temp):
+        for i, ID in enumerate(batch_IDs):
             sentinel_data = np.load(self.shards_dir.joinpath(
                 f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))
             sentinel_data = self.utils.normalise_sentinel(sentinel_data, self.normal_type)

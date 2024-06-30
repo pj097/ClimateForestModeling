@@ -8,7 +8,7 @@ import pandas as pd
 class SentinelUtils:
     def __init__(self, feature_shards, all_labels, min_occurrences=0,
                  overwrite_existing=False):
-        self.all_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+        sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
@@ -19,19 +19,19 @@ class SentinelUtils:
             self.data_summary = json.loads(summary_path.read_text())
             self.selected_classes = pd.read_csv(selected_classes_path, index_col='selected_index')
         else:
-            data_summary = self.process_features(feature_shards)
+            data_summary = self.process_features(feature_shards, sentinel_bands)
             
             self.selected_classes, self.data_summary = self.process_labels(
                 all_labels, min_occurrences, data_summary, summary_path, selected_classes_path
             )
 
-    def process_features(self, feature_shards):
+    def process_features(self, feature_shards, sentinel_bands):
         print('Calculating feature statistics...')
         data_summary = {}
         for stat in ['std', 'mean', 'percentile1', 'percentile50', 'percentile99']:
             data_summary[stat] = OrderedDict()
 
-        for i, band in enumerate(tqdm(self.all_bands)):
+        for i, band in enumerate(tqdm(sentinel_bands)):
             band_data = []
             for shard_path in tqdm(feature_shards, leave=False):
                 with open(shard_path, 'rb') as f:
@@ -86,6 +86,9 @@ class SentinelUtils:
                 return X
             case 'zscore':
                 return (X - stats['mean'])/stats['std']
+            case 'zscore_clip':
+                X_normalised = np.clip(X, stats['percentile1'], stats['percentile99'])
+                return (X_normalised - stats['mean'])/stats['std']
             case 'log':
                 return np.log(np.where(X == 0, stats['percentile1'], X))
             case 'zscore_p50':
