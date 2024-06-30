@@ -8,7 +8,7 @@ import pandas as pd
 class SentinelUtils:
     def __init__(self, feature_shards, all_labels, min_occurrences=0,
                  overwrite_existing=False):
-        self.all_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12', 'TCI_R', 'TCI_G', 'TCI_B']
+        self.all_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         

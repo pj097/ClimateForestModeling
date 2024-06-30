@@ -42,7 +42,7 @@ class DataGenerator(tf.keras.utils.PyDataset):
                 f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))
             sentinel_data = self.utils.normalise_sentinel(sentinel_data, self.normal_type)
 
-            if 13 in self.bands:
+            if 10 in self.bands:
                 elevation_data = np.load(self.shards_dir.joinpath(
                     'elevations').joinpath(f'elevation_{ID}.npy'))
                 elevation_data = np.expand_dims(elevation_data/5000, axis=-1)
