@@ -19,7 +19,7 @@ class EEDownloader:
       )
       return image.updateMask(mask)
 
-    def get_sentinel_image(self, bbox, start_date, end_date):
+    def get_sentinel_image(self, start_date, end_date):
         selected_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
         image = (
             ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
@@ -30,31 +30,44 @@ class EEDownloader:
             .map(self.mask_s2_clouds)
             .select(selected_bands)
             .median()
-            .clip(bbox)
         )
         return image
 
-    def create_elevation_inputs(self, shards_dir, geometries, bbox, start_date, end_date):
-        chunks = self.create_chunks(geometries, chunk_size=100)
-    
-        elevations_dir = shards_dir.joinpath('elevations')
-        elevations_dir.mkdir(exist_ok=True)
-
-        # Check if this chunk's download has been completed
-        exists = self.check_existing(chunk.shape[0], ith_chunk, chunk_size, elevations_dir)
-        if exists:
+    def download_soil(self, ith_chunk, chunk, chunk_size, soil_dir):
+        # Check if it has already been downloaded
+        if soil_dir.joinpath(f'elevation_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
             return
 
-        elevation_inputs = []
-        for ith_chunk, chunk in enumerate(chunks):
-            elevation_inputs.append((ith_chunk, chunk, chunk_size, bbox, elevations_dir))
-                
-        return elevation_inputs
-
-    def download_elevations(self, input_tuple):
-        ith_chunk, chunk, chunk_size, bbox, elevations_dir = input_tuple
+        sleep(ith_chunk%10)
+            
+        soilgrids_band = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd', 'ocs', 'phh2o', 'sand', 'silt', 'soc']
+        soilgrids_band = [f'{a}_mean' for a in soilgrids_band]
         params = {'fileFormat': 'NPY'}
-        image = ee.ImageCollection('COPERNICUS/DEM/GLO30').select('DEM').max().clip(bbox)
+
+        for i, geometry in enumerate(tqdm(chunk, leave=False)):
+            band_data = []
+            for band in soilgrids_band:
+                soilgrids = ee.Image(f'projects/soilgrids-isric/{band}').reduce(ee.Reducer.median())
+                bbox = ee.Geometry.BBox(*geometry.bounds)
+                params['expression'] = soilgrids.clipToBoundsAndScale(
+                    bbox, width=4, height=4)
+                pixels = ee.data.computePixels(params)
+                data = np.load(BytesIO(pixels)).astype(float)
+                band_data.append(data)
+
+            shard_id = ith_chunk*chunk_size + i
+            shard_path = soil_dir.joinpath(f'elevation_{shard_id}.npy')
+
+            np.save(shard_path, np.stack(band_data, axis=-1))
+                
+
+    def download_elevations(self, ith_chunk, chunk, chunk_size, elevations_dir):
+        # Check if it has already been downloaded
+        if features_dir.joinpath(f'elevation_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
+            return
+            
+        params = {'fileFormat': 'NPY'}
+        image = ee.ImageCollection('COPERNICUS/DEM/GLO30').select('DEM').max()
         sleep(ith_chunk%10)
         
         for i, geometry in enumerate(pbar := tqdm(chunk, leave=False)):
@@ -64,58 +77,25 @@ class EEDownloader:
             
             shard_path = elevations_dir.joinpath(f'elevation_{shard_id}.npy')
     
-            if shard_path.is_file():
-                continue
-    
             bbox = ee.Geometry.BBox(*geometry.bounds)
             params['expression'] = image.clipToBoundsAndScale(bbox, width=100, height=100)
             pixels = ee.data.computePixels(params)
-            data = np.load(io.BytesIO(pixels)).astype(float)
+            data = np.load(BytesIO(pixels)).astype(float)
             
             np.save(shard_path, data)
 
-    def create_chunks(self, geometries, chunk_size=100):
-        chunk_size = 100
-        chunks = [geometries[i: i + chunk_size] for i in range(0, geometries.shape[0], chunk_size)]
-        return chunks
-
-    def create_sentinel_inputs(self, shards_dir, geometries, bbox, start_date, end_date):
-        chunks = self.create_chunks(geometries, chunk_size=100)
-    
-        date_tag = f'{start_date.year}{str(start_date.month).zfill(2)}'
-        features_dir = shards_dir.joinpath(f'features_{date_tag}')
-        features_dir.mkdir(exist_ok=True)
-
-        sentinel_inputs = []
-        for ith_chunk, chunk in enumerate(chunks):
-            sentinel_inputs.append((ith_chunk, chunk, chunk_size, bbox, start_date, end_date, features_dir))
-                
-        return sentinel_inputs
-
-    def check_existing(self, chunk_fragments, ith_chunk, chunk_size, shards_dir):
-        # Check if this chunk's download has been completed
-        total_shards = 0
-        for n in range(chunk_fragments):
-            shard_id = ith_chunk*chunk_size + n
-            s = shards_dir.joinpath(f'*_{shard_id}.npy')
-            if s.is_file():
-                total_shards += 1
-        return total_shards == chunk_fragments:
-
-    def download_sentinel_shards(self, input_tuple):
-        ith_chunk, chunk, chunk_size, bbox, start_date, end_date, features_dir = input_tuple
+    def download_sentinel_shards(self, ith_chunk, chunk, chunk_size, features_dir, start_date, end_date):
+        # Check if it has already been downloaded
+        if features_dir.joinpath(f'feature_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
+            return
+            
         # Sleep time helps with parallel processing,
         # if you're brave enough to try it
         sleep_time = ith_chunk%10
         sleep(sleep_time)
     
-        # Check if this chunk's download has been completed
-        exists = self.check_existing(chunk.shape[0], ith_chunk, chunk_size, features_dir)
-        if exists:
-            return
-    
         # Cloud masked, band selected, mean image of the bbox area. 
-        sentinel_image = SentinelGetter().get_image(bbox, start_date, end_date)
+        sentinel_image = self.get_sentinel_image(start_date, end_date)
             
         # For further options, see
         # https://developers.google.com/earth-engine/apidocs/ee-data-computepixels
@@ -160,7 +140,3 @@ class EEDownloader:
                 features_dir.joinpath(f'feature_{shard_id}.npy'), 
                 features[ii, ...]
             )
-
-    
-
-    
