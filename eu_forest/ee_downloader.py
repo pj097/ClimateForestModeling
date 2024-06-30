@@ -104,31 +104,17 @@ class EEDownloader:
         all_data = []
         for geometry in (pbar := tqdm(chunk, leave=False)):
             pbar.set_description(f'Chunk {ith_chunk}')
-            # Not ideal but a lot of connection errors can occur here.
-            # They are (so far) not program ending, simply retry.
-            retry = True
-            while retry:
-                try:
-                    this_bbox = ee.Geometry.BBox(*geometry.bounds)
-                    params['expression'] = sentinel_image.clipToBoundsAndScale(
-                        this_bbox, width=100, height=100)
-    
-                    # There can be a delay before the URL becomes available,
-                    # in which case the loop simply retries (seems rare so far).
-                    pixels = ee.data.computePixels(params)
-                    data = np.load(BytesIO(pixels))
-    
-                    # Numpy ndarray being appended to a list of ndarrays.
-                    # Ensure all_data uses python's list instead of ndarray.tolist().
-                    all_data.append(data)
-                    retry = False
-                    
-                except Exception as e:
-                    print(e)
-                    # Sleep for 1 second if error, Google seems
-                    # fine with 100/s requests.
-                    sleep(sleep_time)
-                    retry = True
+
+            this_bbox = ee.Geometry.BBox(*geometry.bounds)
+            params['expression'] = sentinel_image.clipToBoundsAndScale(
+                this_bbox, width=100, height=100)
+
+            pixels = ee.data.computePixels(params)
+            data = np.load(BytesIO(pixels))
+
+            # Numpy ndarray being appended to a list of ndarrays.
+            # Ensure all_data uses python's list instead of ndarray.tolist().
+            all_data.append(data)
                     
         raw_features = np.array(all_data)
         features = raw_features.view((float, len(raw_features.dtype.names)))
