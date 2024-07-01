@@ -22,8 +22,8 @@ class DataGenerator(tf.keras.utils.PyDataset):
         'Get one batch of data.'
         indexes = self.indexes[index*self.batch_size:(index+1)*self.batch_size]
         batch_IDs = [self.all_IDs[k] for k in indexes]
-        X, y = self.data_generation(batch_IDs)
-        return X, y
+        (X_sentinel, X_elevation), y = self.data_generation(batch_IDs)
+        return (X_sentinel, X_elevation), y
 
     def on_epoch_end(self):
         'Update and shuffle indexes after each epoch.'
@@ -33,24 +33,26 @@ class DataGenerator(tf.keras.utils.PyDataset):
 
     def data_generation(self, batch_IDs):
         'Generate batch.'
-        X = np.empty((self.batch_size, *self.dim, len(self.bands)))
+        sentinel_bands = self.bands[:10]
+        X_sentinel = np.empty((self.batch_size, *self.dim, len(sentinel_bands)))
+
+        X_elevation = np.empty((self.batch_size, *self.dim))
 
         y = self.utils.selected_classes.loc[batch_IDs].to_numpy()
 
         for i, ID in enumerate(batch_IDs):
             sentinel_data = np.load(self.shards_dir.joinpath(
                 f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))
-            sentinel_data = self.utils.normalise_sentinel(sentinel_data, self.normal_type)
 
-            if 10 in self.bands:
-                elevation_data = np.load(self.shards_dir.joinpath(
-                    'elevations').joinpath(f'elevation_{ID}.npy'))
-                elevation_data = np.expand_dims(elevation_data/5000, axis=-1)
-                X[i,...] = np.concatenate([sentinel_data, elevation_data], axis=-1)[..., self.bands]
-            else:
-                X[i,...] = sentinel_data[..., self.bands]
- 
-        return X, y
+            X_sentinel[i,...] = sentinel_data[..., sentinel_bands]
+
+            X_elevation[i,...] = np.load(self.shards_dir.joinpath(
+                'elevations').joinpath(f'elevation_{ID}.npy'))
+            
+        X_sentinel = self.utils.normalise(X_sentinel, sentinel_bands)
+        X_elevation = self.utils.normalise(X_sentinel, 10)
+        
+        return (X_sentinel, X_elevation), y
 
 
 

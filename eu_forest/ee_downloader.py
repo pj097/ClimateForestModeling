@@ -88,13 +88,10 @@ class EEDownloader:
         # Check if it has already been downloaded
         if features_dir.joinpath(f'feature_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
             return
-            
-        # Sleep time helps with parallel processing,
-        # if you're brave enough to try it
+
         sleep_time = ith_chunk%10
         sleep(sleep_time)
     
-        # Cloud masked, band selected, mean image of the bbox area. 
         sentinel_image = self.get_sentinel_image(start_date, end_date)
             
         # For further options, see
@@ -112,8 +109,6 @@ class EEDownloader:
             pixels = ee.data.computePixels(params)
             data = np.load(BytesIO(pixels))
 
-            # Numpy ndarray being appended to a list of ndarrays.
-            # Ensure all_data uses python's list instead of ndarray.tolist().
             all_data.append(data)
                     
         raw_features = np.array(all_data)

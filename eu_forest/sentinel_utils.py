@@ -5,10 +5,11 @@ from tqdm.notebook import tqdm
 import numpy as np
 import pandas as pd
 
+from concurrent.futures import ThreadPoolExecutor
+
 class SentinelUtils:
-    def __init__(self, feature_shards, all_labels, min_occurrences=0,
-                 overwrite_existing=False):
-        sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+    def __init__(self, all_labels, all_bands, feature_shards, elevation_shards,
+                 min_occurrences=0, overwrite_existing=False):
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
@@ -19,31 +20,35 @@ class SentinelUtils:
             self.data_summary = json.loads(summary_path.read_text())
             self.selected_classes = pd.read_csv(selected_classes_path, index_col='selected_index')
         else:
-            data_summary = self.process_features(feature_shards, sentinel_bands)
+            data_summary = self.process_features(all_bands, feature_shards, elevation_shards)
             
             self.selected_classes, self.data_summary = self.process_labels(
                 all_labels, min_occurrences, data_summary, summary_path, selected_classes_path
             )
 
-    def process_features(self, feature_shards, sentinel_bands):
+    def process_features(self, all_bands, feature_shards, elevation_shards):
         print('Calculating feature statistics...')
         data_summary = {}
-        for stat in ['std', 'mean', 'percentile1', 'percentile50', 'percentile99']:
+        for stat in ['std', 'mean']:
             data_summary[stat] = OrderedDict()
 
-        for i, band in enumerate(tqdm(sentinel_bands)):
+        for i, band in enumerate(tqdm(all_bands)):
             band_data = []
-            for shard_path in tqdm(feature_shards, leave=False):
-                with open(shard_path, 'rb') as f:
-                    data = np.load(f)
-                    band_data.append(np.copy(data[..., i]))
-    
+            # Sentinel bands
+            if i < 10:
+                for shard_path in tqdm(feature_shards, leave=False):
+                    with open(shard_path, 'rb') as f:
+                        data = np.load(f)
+                        band_data.append(np.copy(data[..., i]))
+            if band == 'Elevation':
+                for shard_path in tqdm(elevation_shards, leave=False):
+                    with open(shard_path, 'rb') as f:
+                        data = np.load(f)
+                        band_data.append(np.copy(data[..., i]))
+                
             band_data = np.vstack(band_data)
             data_summary['mean'][band] = band_data.mean()
             data_summary['std'][band] = band_data.std()
-            data_summary['percentile1'][band] = np.percentile(band_data, 1)
-            data_summary['percentile50'][band] = np.percentile(band_data, 50)
-            data_summary['percentile99'][band] = np.percentile(band_data, 99)
         
         return data_summary
 
@@ -76,27 +81,16 @@ class SentinelUtils:
         return selected_labels, data_summary
 
 
-    def normalise_sentinel(self, X, normal_type):
+    def normalise(self, X, normal_type, bands):
         stats = {}
-        for stat in ['mean', 'std', 'percentile1', 'percentile50', 'percentile99']:
+        for stat in ['mean', 'std']:
             stats[stat] = np.array(list(self.data_summary[stat].values()))
  
         match normal_type:
             case None:
                 return X
             case 'zscore':
-                return (X - stats['mean'])/stats['std']
-            case 'zscore_clip':
-                X_normalised = np.clip(X, stats['percentile1'], stats['percentile99'])
-                return (X_normalised - stats['mean'])/stats['std']
-            case 'log':
-                return np.log(np.where(X == 0, stats['percentile1'], X))
-            case 'zscore_p50':
-                return (X - stats['percentile50'])/stats['std']
-            case 'minmax':
-                X_normalised = np.clip(X, stats['percentile1'], stats['percentile99'])
-                X_normalised = (X_normalised - stats['percentile1'])/(stats['percentile99'] - stats['percentile1'])
-                return X_normalised
+                return (X - stats['mean'][bands])/stats['std'][bands]
     
 
     
