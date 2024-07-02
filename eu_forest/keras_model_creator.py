@@ -108,8 +108,7 @@ class KerasModelCreator:
         else:
             print('Building model...')
             model = self.build_model(
-                self.utils.selected_classes.shape[1], (*self.dim, len(self.bands)), metrics,
-                self.architecture, self.loss,
+                self.utils.selected_classes.shape[1], metrics, self.loss,
                 output_bias=self.utils.data_summary['initial_bias'],
             )
         print('Fitting...')
@@ -122,123 +121,87 @@ class KerasModelCreator:
         )
         return model, testing_generator
 
-    def build_vgg(self, input_layer):
-        x = input_layer
-        for filters in [self.base_filters, self.base_filters*2]:
-            for _ in range(2):
-                x = Conv2D(
-                    filters=filters, kernel_size=3, padding='same', activation='relu',
-                )(x)
-            x = MaxPooling2D(pool_size=2,strides=2)(x)
-            x = BatchNormalization()(x)
-
-        for filters in [self.base_filters*4, self.base_filters*8]:
-            for _ in range(3):
-                x = Conv2D(
-                    filters=filters, kernel_size=3, padding='same', activation='relu',
-                )(x)
-            x = MaxPooling2D(pool_size=2,strides=2)(x)
-            x = BatchNormalization()(x)
-
-        x = Flatten()(x)
-
-        for n_layers in range(2):
-            x = Dense(self.base_filters*64, activation='relu')(x)
-            x = Dropout(0.5)(x)
-        
-        return x
-    
-    def res_block(self, x, filters):
-        r = BatchNormalization()(x)
-        r = Activation('relu')(r)
-        r = Conv2D(
-            filters=filters, kernel_size=3, strides=2, padding='same', 
-            kernel_initializer=glorot_uniform(seed=42)
-        )(r)
-        
-        r = BatchNormalization()(r)
-        r = Activation('relu')(r)
-        
-        r = Conv2D(
-            filters=filters, kernel_size=3, strides=1, padding='same', 
-            kernel_initializer=glorot_uniform(seed=42)
-        )(r)
-        
-        r = Conv2D(
-            filters=1, kernel_size=1, strides=1, padding='valid'
-        )(r)
-        
-        x = Conv2D(
-            filters=filters, kernel_size=3, strides=2, padding='same', 
-            kernel_initializer=glorot_uniform(seed=42)
-        )(x)
-        
-        return Add()([x, r])
-
-    def build_simple(self, input_layer):
+    def soil_layers(self, input_layer):
         x = Conv2D(
             filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
         )(input_layer)
+        
         x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
-
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*4, activation='relu')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout*2)(x)
-
         x = Dense(self.base_filters*2, activation='relu')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
 
-    def build_resnet(self, input_layer):
-        x = self.res_block(input_layer, self.base_filters)
-        x = self.res_block(x, self.base_filters*2)
-        x = self.res_block(x, self.base_filters*4)
-        x = self.res_block(x, self.base_filters*8)
+    def elevation_layers(self, input_layer):
+        x = Conv2D(
+            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
+        )(input_layer)
         
-        x = Activation('relu')(x)
+        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        
         x = Flatten()(x)
-
-        x = Dense(self.base_filters*8, activation='relu')(x)
-
+        
+        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout*2)(x)
         return x
 
-    def topless_resnet50(self, input_shape, input_layer):
-        resnet = tf.keras.applications.ResNet50(
-            include_top=False,
-            weights=None,
-            input_shape=input_shape,
-            pooling=None
-        )
-        x = resnet(input_layer)
+    def sentinel_layers(self, input_layer):
+        # x = ConvLSTM2D(
+        #     filters=self.base_filters*4, kernel_size=3, padding='same',
+        #     unroll=True, return_sequences=False
+        # )(input_layer)
+
+        x = Conv3D(
+            filters=self.base_filters*4, kernel_size=3, padding='same',
+            activation='relu',
+        )(input_layer)
+        x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)        
+        
+        # x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        
         x = Flatten()(x)
+        
         x = Dense(self.base_filters*8, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
         return x
 
-    def build_model(self, output_shape, input_shape, metrics, architecture, loss, output_bias=None):
+    def build_model(self, output_shape, metrics, loss, output_bias=None):
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
          
-        input_layer = Input(input_shape)
-
-        match architecture.lower():
-            case 'simple':
-                x = self.build_simple(input_layer)
-            case 'resnet50':
-                x = self.topless_resnet50(input_shape, input_layer)
-            case 'resnet':
-                x = self.build_resnet(input_layer)
-            case 'vgg':
-                x = self.build_vgg(input_layer)
+        sentinel_input = Input((len(self.seasons), 100, 100, 10))
         
+        elevation_input = Input((100, 100, 1))
+
+        soil_input = Input((4, 4, 11))
+
+        x_sentinel = self.sentinel_layers(sentinel_input)
+        
+        x_elevation = self.elevation_layers(elevation_input)
+
+        x_soil = self.soil_layers(soil_input)
+
+        x = concatenate([x_sentinel, x_elevation, x_soil])
+        
+        x = Dense(self.base_filters*8, activation='relu')(x)
+        x = Dropout(self.dropout*2)(x)
+        x = Dense(self.base_filters*4, activation='relu')(x)
+        x = Dropout(self.dropout*2)(x)
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
         
-        m = Model(inputs=input_layer, outputs=outputs)
+        m = Model(inputs=[sentinel_input, elevation_input, soil_input], outputs=outputs)
 
         adam = Adam(
             learning_rate=0.001,
@@ -250,3 +213,5 @@ class KerasModelCreator:
         m.compile(optimizer=adam, loss=loss, metrics=metrics)
         
         return m
+
+

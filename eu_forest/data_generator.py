@@ -22,8 +22,8 @@ class DataGenerator(tf.keras.utils.PyDataset):
         'Get one batch of data.'
         indexes = self.indexes[index*self.batch_size:(index+1)*self.batch_size]
         batch_IDs = [self.all_IDs[k] for k in indexes]
-        (X_sentinel, X_elevation), y = self.data_generation(batch_IDs)
-        return (X_sentinel, X_elevation), y
+        
+        return self.data_generation(batch_IDs)
 
     def on_epoch_end(self):
         'Update and shuffle indexes after each epoch.'
@@ -34,25 +34,36 @@ class DataGenerator(tf.keras.utils.PyDataset):
     def data_generation(self, batch_IDs):
         'Generate batch.'
         sentinel_bands = self.bands[:10]
-        X_sentinel = np.empty((self.batch_size, *self.dim, len(sentinel_bands)))
+        
+        soil_bands = self.bands[11:]
+        
+        X_sentinel = np.empty((self.batch_size, len(self.seasons), 100, 100, len(sentinel_bands)))
 
-        X_elevation = np.empty((self.batch_size, *self.dim))
+        X_elevation = np.empty((self.batch_size, 100, 100))
+
+        X_soil = np.empty((self.batch_size, 4, 4, len(soil_bands)))
 
         y = self.utils.selected_classes.loc[batch_IDs].to_numpy()
 
         for i, ID in enumerate(batch_IDs):
-            sentinel_data = np.load(self.shards_dir.joinpath(
-                f'features_{self.data_tag}').joinpath(f'feature_{ID}.npy'))
-
-            X_sentinel[i,...] = sentinel_data[..., sentinel_bands]
+            for t, s in enumerate(self.seasons):
+                sentinel_data = np.load(self.shards_dir.joinpath(
+                    f'features_{self.year}{s}').joinpath(f'feature_{ID}.npy'))
+                
+                X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
 
             X_elevation[i,...] = np.load(self.shards_dir.joinpath(
                 'elevations').joinpath(f'elevation_{ID}.npy'))
-            
-        X_sentinel = self.utils.normalise(X_sentinel, sentinel_bands)
-        X_elevation = self.utils.normalise(X_sentinel, 10)
+
+            X_soil[i,...] = np.load(self.shards_dir.joinpath(
+                'soil').joinpath(f'soil_{ID}.npy'))
+
         
-        return (X_sentinel, X_elevation), y
+        X_sentinel = self.utils.normalise(X_sentinel, sentinel_bands)
+        X_elevation = self.utils.normalise(X_elevation, 10)
+        X_soil = self.utils.normalise(X_soil, soil_bands)
+        
+        return (X_sentinel, X_elevation, X_soil), y
 
 
 
