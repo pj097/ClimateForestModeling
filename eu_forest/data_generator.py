@@ -1,7 +1,7 @@
-import tensorflow as tf
+from tensorflow.keras.utils import PyDataset
 import numpy as np
 
-class DataGenerator(tf.keras.utils.PyDataset):
+class DataGenerator(PyDataset):
     'Generates data for Keras'
     def __init__(self, all_IDs, shuffle, **kwargs):
         super().__init__()

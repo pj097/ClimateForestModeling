@@ -37,6 +37,7 @@ class SentinelUtils:
         elevation_shards = list(shards_dir.joinpath('elevations').glob('elevation_*.npy'))
         elevation_shards = shuffle(elevation_shards, random_state=42)[:len(sentinel_shards)]
         soil_shards = list(shards_dir.joinpath('soil').glob('soil_*.npy'))
+        soil_shards = shuffle(soil_shards, random_state=42)[:len(sentinel_shards)]
 
         for i, band in enumerate(tqdm(all_bands)):
             band_data = []

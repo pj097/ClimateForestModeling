@@ -1,8 +1,12 @@
 from IPython.display import display, HTML
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import tensorflow as tf
+
 from tensorflow.keras.layers import *
-from tensorflow.keras.optimizers import Adam, RMSprop, Nadam, SGD, AdamW
+from tensorflow.keras.optimizers import *
 from tensorflow.keras.models import load_model, Model
 from tensorflow.keras.initializers import glorot_uniform
 
@@ -16,6 +20,10 @@ from importlib import reload
 reload(data_generator)
 from data_generator import DataGenerator
 
+def brier_score(y_true, y_pred):
+    brier_score = tf.reduce_mean((y_pred - y_true) ** 2, axis=1)
+    return brier_score
+
 class KerasModelCreator:
     def __init__(self, **kwargs):
         vars(self).update(kwargs)
@@ -24,8 +32,10 @@ class KerasModelCreator:
     def display_logger(self, log_file, metrics):
         metric_names = [m if isinstance(m, str) else m.name for m in metrics]
         if log_file.is_file() and log_file.stat().st_size > 0:
+            sort_key = lambda x: x.split('_')[-1]
             val_metrics = ['val_loss'] + ['val_' + x for x in metric_names]
-            df = pd.read_csv(log_file)[['epoch', 'loss'] + metric_names + val_metrics]
+            all_metrics = ['loss'] + metric_names + val_metrics
+            df = pd.read_csv(log_file)[['epoch'] + sorted(all_metrics, key=sort_key)]
             df['epoch'] += 1
             df = df.astype(str)
             df.iloc[df.shape[0] - 1 ] = df.columns
@@ -47,7 +57,7 @@ class KerasModelCreator:
                 verbose=0,
             ),
             tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_recall', factor=0.9, patience=2, min_lr=3e-6,
+                monitor='val_recall', factor=0.5, patience=2, min_lr=1e-7,
                 verbose=1,
             ),
             tf.keras.callbacks.EarlyStopping(
@@ -154,18 +164,17 @@ class KerasModelCreator:
         return x
 
     def sentinel_layers(self, input_layer):
-        # x = ConvLSTM2D(
-        #     filters=self.base_filters*4, kernel_size=3, padding='same',
-        #     unroll=True, return_sequences=False
-        # )(input_layer)
+        x = ConvLSTM2D(
+            filters=self.base_filters*4, kernel_size=3, padding='same',
+            unroll=True, return_sequences=True
+        )(input_layer)
 
         x = Conv3D(
             filters=self.base_filters*4, kernel_size=3, padding='same',
             activation='relu',
-        )(input_layer)
-        x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)        
+        )(x)
         
-        # x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)     
         
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
