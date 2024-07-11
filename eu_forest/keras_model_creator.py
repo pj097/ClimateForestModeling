@@ -38,7 +38,7 @@ class KerasModelCreator:
             df = pd.read_csv(log_file)[['epoch'] + sorted(all_metrics, key=sort_key)]
             df['epoch'] += 1
             df = df.astype(str)
-            df.iloc[df.shape[0] - 1 ] = df.columns
+            df.loc[df.shape[0]] = df.columns
             print('Previous training:')
             display(HTML(df.to_html(index=False)))
     
@@ -131,50 +131,53 @@ class KerasModelCreator:
         )
         return model, testing_generator
 
-    def soil_layers(self, input_layer):
+    def soil_layers(self, x):
         x = Conv2D(
             filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
-        )(input_layer)
-        
-        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
-        
-        x = Flatten()(x)
-        
-        x = Dense(self.base_filters*2, activation='relu')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout*2)(x)
-        return x
-
-    def elevation_layers(self, input_layer):
-        x = Conv2D(
-            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
-        )(input_layer)
-        
-        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
-        
-        x = Flatten()(x)
-        
-        x = Dense(self.base_filters*2, activation='relu')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout*2)(x)
-        return x
-
-    def sentinel_layers(self, input_layer):
-        x = ConvLSTM2D(
-            filters=self.base_filters*4, kernel_size=3, padding='same',
-            unroll=True, return_sequences=True
-        )(input_layer)
-
-        x = Conv3D(
-            filters=self.base_filters*4, kernel_size=3, padding='same',
-            activation='relu',
         )(x)
         
-        x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)     
+        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        
+        x = Flatten()(x)
+        
+        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout*2)(x)
+        return x
+
+    def elevation_layers(self, x):
+        x = Conv2D(
+            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
+        )(x)
+        
+        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        
+        x = Flatten()(x)
+        
+        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout*2)(x)
+        return x
+
+    def sentinel_layers(self, x):
+        x = ConvLSTM2D(
+            filters=self.base_filters*2, kernel_size=3, padding='same',
+            unroll=True, return_sequences=True
+        )(x)
+
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+
+        x = Conv3D(
+            filters=self.base_filters*2, kernel_size=5, padding='same',
+            activation='relu',
+        )(x) 
+        
+        # x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)     
         
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
@@ -204,12 +207,12 @@ class KerasModelCreator:
 
         x = concatenate([x_sentinel, x_elevation, x_soil])
         
-        x = Dense(self.base_filters*8, activation='relu')(x)
-        x = Dropout(self.dropout*2)(x)
         x = Dense(self.base_filters*4, activation='relu')(x)
         x = Dropout(self.dropout*2)(x)
+        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = Dropout(self.dropout*2)(x)
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
-        
+
         m = Model(inputs=[sentinel_input, elevation_input, soil_input], outputs=outputs)
 
         adam = Adam(

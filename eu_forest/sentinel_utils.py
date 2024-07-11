@@ -9,12 +9,12 @@ from sklearn.utils import shuffle
 from concurrent.futures import ThreadPoolExecutor
 
 class SentinelUtils:
-    def __init__(self, all_labels, all_bands, sentinel_shards,
+    def __init__(self, all_labels, all_bands, seasons, sentinel_shards,
                  min_occurrences=0, overwrite_existing=False):
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
-        summary_path = tmp.joinpath('data_summary.json')
+        summary_path = tmp.joinpath(f'data_summary_{"_".join(seasons)}.json')
         selected_classes_path = tmp.joinpath('selected_classes.csv')
         
         if summary_path.is_file() and not overwrite_existing:
@@ -22,7 +22,6 @@ class SentinelUtils:
             self.selected_classes = pd.read_csv(selected_classes_path, index_col='selected_index')
         else:
             data_summary = self.process_features(all_bands, sentinel_shards)
-            
             self.selected_classes, self.data_summary = self.process_labels(
                 all_labels, min_occurrences, data_summary, summary_path, selected_classes_path
             )
@@ -68,17 +67,23 @@ class SentinelUtils:
 
     def process_labels(self, all_labels, min_occurrences, data_summary, 
                        summary_path, selected_classes_path):
-        keep_classes = np.where(all_labels.sum(axis=0) >= min_occurrences)[0]
-        selected_labels = all_labels.iloc[:, keep_classes]
+        
+        grouped_labels = all_labels.T.groupby(
+            all_labels.columns.str.split().str[0],
+        ).max().T
+
+        keep_classes = np.where(grouped_labels.sum(axis=0) >= min_occurrences)[0]
+        selected_labels = grouped_labels.iloc[:, keep_classes]
+
         keep_shards = np.where(selected_labels.sum(axis=1) > 0)[0]
         
         selected_labels = selected_labels.iloc[keep_shards, :]
-
+    
         neg, pos = np.bincount(selected_labels.to_numpy().astype(int).flatten())
+ 
         initial_bias = np.log([pos/neg])
         data_summary['initial_bias'] = initial_bias[0]
         
-
         class_weights = selected_labels.shape[0]/(selected_labels.shape[1]*selected_labels.sum(axis=0))
         class_indices = list(range(selected_labels.shape[1]))
         class_weights = dict(zip(class_indices, class_weights.tolist()))
@@ -89,7 +94,6 @@ class SentinelUtils:
         
         print(f'Dropped {all_labels.shape[1] - selected_labels.shape[1]} columns, '
               f'{all_labels.shape[0] - selected_labels.shape[0]} rows')
-        
         return selected_labels, data_summary
 
 
