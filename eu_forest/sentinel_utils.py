@@ -9,18 +9,19 @@ from sklearn.utils import shuffle
 from concurrent.futures import ThreadPoolExecutor
 
 class SentinelUtils:
-    def __init__(self, all_labels, all_bands, seasons, sentinel_shards,
+    def __init__(self, all_bands, seasons, sentinel_shards,
                  min_occurrences=0, overwrite_existing=False):
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
-        summary_path = tmp.joinpath(f'data_summary_{"_".join(seasons)}.json')
-        selected_classes_path = tmp.joinpath('selected_classes.csv')
+        summary_path = tmp.joinpath(f'data_summary_{"_".join(seasons)}_{min_occurrences}.json')
+        selected_classes_path = tmp.joinpath(f'selected_classes_{min_occurrences}.csv')
         
         if summary_path.is_file() and not overwrite_existing:
             self.data_summary = json.loads(summary_path.read_text())
             self.selected_classes = pd.read_csv(selected_classes_path, index_col='selected_index')
         else:
+            all_labels = pd.read_csv(Path('data').joinpath('full_dummies.csv'))
             data_summary = self.process_features(all_bands, sentinel_shards)
             self.selected_classes, self.data_summary = self.process_labels(
                 all_labels, min_occurrences, data_summary, summary_path, selected_classes_path
@@ -58,7 +59,7 @@ class SentinelUtils:
                     with open(shard_path, 'rb') as f:
                         data = np.load(f)
                         band_data.append(np.copy(data[..., i - 11]))
-                
+
             band_data = np.vstack(band_data)
             data_summary['mean'][band] = band_data.mean()
             data_summary['std'][band] = band_data.std()
@@ -95,13 +96,19 @@ class SentinelUtils:
         print(f'Dropped {all_labels.shape[1] - selected_labels.shape[1]} columns, '
               f'{all_labels.shape[0] - selected_labels.shape[0]} rows')
         return selected_labels, data_summary
-
-
-    def normalise(self, X, bands):
+    
+    def normalise(self, X, bands, outliar_threshold=3):
         stats = {}
         for stat in ['mean', 'std']:
             stats[stat] = np.array(list(self.data_summary[stat].values()))
-        return (X - stats['mean'][bands])/stats['std'][bands]
+            
+        normalised_X = (X - stats['mean'][bands])/stats['std'][bands]
+        return normalised_X
+        # return np.clip(normalised_X, -outliar_threshold, outliar_threshold)
+        # return np.where(
+        #     np.abs(normalised_X) > outliar_threshold, 
+        #     stats['mean'][bands], normalised_X
+        # )
     
 
     

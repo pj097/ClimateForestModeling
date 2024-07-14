@@ -106,11 +106,9 @@ class KerasModelCreator:
         callbacks = self.define_callbacks_and_logger(log_file, metrics)
         
         training_ids, test_ids = train_test_split(self.shard_ids, test_size=10000, random_state=42)
-        validation_ids, test_ids = train_test_split(test_ids, test_size=5000, random_state=42)
 
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
-        validation_generator = DataGenerator(validation_ids, shuffle=False, **self.kwargs)
     
         if self.model_dir.joinpath('model.keras').is_file():
             print('Loading model...')
@@ -124,7 +122,7 @@ class KerasModelCreator:
         print('Fitting...')
         model.fit(
             x=training_generator,
-            validation_data=validation_generator,
+            validation_data=testing_generator,
             epochs=self.epochs,
             callbacks=callbacks,
             class_weight=self.utils.data_summary['class_weights']
@@ -132,58 +130,60 @@ class KerasModelCreator:
         return model, testing_generator
 
     def soil_layers(self, x):
-        x = Conv2D(
-            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
-        )(x)
-        
-        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
+        for filters_scale in [2, 4, 8, 16]:
+            x = Conv2D(
+                filters=self.base_filters*filters_scale, 
+                kernel_size=3, padding='same', activation='relu',
+            )(x)
+            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+            x = BatchNormalization()(x)
+            x = Dropout(self.dropout)(x)
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = Dense(self.base_filters*16, activation='relu')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
 
     def elevation_layers(self, x):
-        x = Conv2D(
-            filters=self.base_filters, kernel_size=3, padding='same', activation='relu',
-        )(x)
-        
-        x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
+        for filters_scale in [2, 4, 8, 16]:
+            x = Conv2D(
+                filters=self.base_filters*filters_scale,
+                kernel_size=3, padding='same', activation='relu',
+            )(x)
+            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+            x = BatchNormalization()(x)
+            x = Dropout(self.dropout)(x)
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = Dense(self.base_filters, activation='relu')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
 
     def sentinel_layers(self, x):
-        x = ConvLSTM2D(
-            filters=self.base_filters*2, kernel_size=3, padding='same',
-            unroll=True, return_sequences=True
-        )(x)
+        # x = ConvLSTM2D(
+        #     filters=self.base_filters*2, kernel_size=3, padding='same',
+        #     return_sequences=True
+        # )(x)
 
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
+        # x = BatchNormalization()(x)
+        # x = Dropout(self.dropout)(x)
 
-        x = Conv3D(
-            filters=self.base_filters*2, kernel_size=5, padding='same',
-            activation='relu',
-        )(x) 
-        
-        # x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)     
-        
-        x = BatchNormalization()(x)
-        x = Dropout(self.dropout)(x)
-        
+        for filters_scale in [2, 4, 8, 16, 32]:
+            x = Conv3D(
+                filters=self.base_filters*filters_scale, 
+                kernel_size=3, padding='same',
+                activation='relu',
+            )(x)
+            x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
+            x = BatchNormalization()(x)
+            x = Dropout(self.dropout)(x)
+            
         x = Flatten()(x)
-        
+
         x = Dense(self.base_filters*8, activation='relu')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
@@ -206,11 +206,11 @@ class KerasModelCreator:
         x_soil = self.soil_layers(soil_input)
 
         x = concatenate([x_sentinel, x_elevation, x_soil])
+
+        for units_scale in [32, 16, 8, 4]:
+            x = Dense(self.base_filters*units_scale, activation='relu')(x)
+            x = Dropout(self.dropout)(x)
         
-        x = Dense(self.base_filters*4, activation='relu')(x)
-        x = Dropout(self.dropout*2)(x)
-        x = Dense(self.base_filters*2, activation='relu')(x)
-        x = Dropout(self.dropout*2)(x)
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
         m = Model(inputs=[sentinel_input, elevation_input, soil_input], outputs=outputs)
