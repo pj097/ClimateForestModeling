@@ -57,13 +57,13 @@ class KerasModelCreator:
                 verbose=0,
             ),
             tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_recall', factor=0.5, patience=2, min_lr=1e-7,
+                monitor='val_recall', factor=0.5, patience=4, min_lr=1e-7,
                 verbose=1,
             ),
             tf.keras.callbacks.EarlyStopping(
                 monitor='val_recall', 
                 verbose=1,
-                patience=10,
+                patience=20,
                 mode='max',
                 restore_best_weights=True
             ),
@@ -119,6 +119,7 @@ class KerasModelCreator:
                 self.utils.selected_classes.shape[1], metrics, self.loss,
                 output_bias=self.utils.data_summary['initial_bias'],
             )
+
         print('Fitting...')
         model.fit(
             x=training_generator,
@@ -164,23 +165,31 @@ class KerasModelCreator:
         return x
 
     def sentinel_layers(self, x):
-        # x = ConvLSTM2D(
-        #     filters=self.base_filters*2, kernel_size=3, padding='same',
-        #     return_sequences=True
-        # )(x)
 
-        # x = BatchNormalization()(x)
-        # x = Dropout(self.dropout)(x)
-
-        for filters_scale in [2, 4, 8, 16, 32]:
-            x = Conv3D(
-                filters=self.base_filters*filters_scale, 
-                kernel_size=3, padding='same',
-                activation='relu',
+        for filters_scale in [2, 4, 8, 16]:
+            x = ConvLSTM2D(
+                filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
+                return_sequences=True
             )(x)
             x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
             x = Dropout(self.dropout)(x)
+
+        x = Conv3D(
+            filters=self.base_filters*32, 
+            kernel_size=3, padding='same',
+            activation='relu',
+        )(x)
+
+        # for filters_scale in [2, 4, 8, 16, 32]:
+        #     x = Conv3D(
+        #         filters=self.base_filters*filters_scale, 
+        #         kernel_size=3, padding='same',
+        #         activation='relu',
+        #     )(x)
+        #     x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
+        #     x = BatchNormalization()(x)
+        #     x = Dropout(self.dropout)(x)
             
         x = Flatten()(x)
 

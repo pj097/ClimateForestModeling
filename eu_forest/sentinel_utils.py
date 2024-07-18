@@ -76,6 +76,9 @@ class SentinelUtils:
         keep_classes = np.where(grouped_labels.sum(axis=0) >= min_occurrences)[0]
         selected_labels = grouped_labels.iloc[:, keep_classes]
 
+        # keep_classes = np.where(all_labels.sum(axis=0) >= min_occurrences)[0]
+        # selected_labels = all_labels.iloc[:, keep_classes]
+
         keep_shards = np.where(selected_labels.sum(axis=1) > 0)[0]
         
         selected_labels = selected_labels.iloc[keep_shards, :]
