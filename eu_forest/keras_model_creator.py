@@ -119,7 +119,6 @@ class KerasModelCreator:
                 self.utils.selected_classes.shape[1], metrics, self.loss,
                 output_bias=self.utils.data_summary['initial_bias'],
             )
-
         print('Fitting...')
         model.fit(
             x=training_generator,
@@ -142,7 +141,7 @@ class KerasModelCreator:
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*16, activation='relu')(x)
+        x = Dense(self.base_filters*2, activation='relu')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
@@ -167,9 +166,14 @@ class KerasModelCreator:
     def sentinel_layers(self, x):
 
         for filters_scale in [2, 4, 8, 16]:
-            x = ConvLSTM2D(
-                filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
-                return_sequences=True
+            # x = ConvLSTM2D(
+            #     filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
+            #     return_sequences=True
+            # )(x)
+            x = Conv3D(
+                filters=self.base_filters*filters_scale, 
+                kernel_size=3, padding='same',
+                activation='relu',
             )(x)
             x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
@@ -180,16 +184,6 @@ class KerasModelCreator:
             kernel_size=3, padding='same',
             activation='relu',
         )(x)
-
-        # for filters_scale in [2, 4, 8, 16, 32]:
-        #     x = Conv3D(
-        #         filters=self.base_filters*filters_scale, 
-        #         kernel_size=3, padding='same',
-        #         activation='relu',
-        #     )(x)
-        #     x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
-        #     x = BatchNormalization()(x)
-        #     x = Dropout(self.dropout)(x)
             
         x = Flatten()(x)
 
@@ -224,14 +218,7 @@ class KerasModelCreator:
 
         m = Model(inputs=[sentinel_input, elevation_input, soil_input], outputs=outputs)
 
-        adam = Adam(
-            learning_rate=0.001,
-            beta_1=0.9,
-            beta_2=0.999,
-            epsilon=1e-07,
-        )
-
-        m.compile(optimizer=adam, loss=loss, metrics=metrics)
+        m.compile(optimizer=self.opt, loss=loss, metrics=metrics)
         
         return m
 

@@ -1,8 +1,11 @@
 import ee
+import geemap
 from tqdm.notebook import tqdm
 import numpy as np
 from time import sleep
 from io import BytesIO
+import geopandas as gpd
+import pandas as pd
 
 class EEDownloader:
     def mask_s2_clouds(self, image):
@@ -121,3 +124,46 @@ class EEDownloader:
                 features_dir.joinpath(f'feature_{shard_id}.npy'), 
                 features[ii, ...]
             )
+    def download_era5(self, gdf, start_date, end_date, weather_dir):
+        # Only interested in one point per sample (ERA5 is 10km resolution)
+        gdf_points = gpd.GeoDataFrame(geometry=gdf.geometry.centroid)
+        # Break up the dataframe, otherwise the request is too big
+        chunk_size = 10000
+        chunks = [gdf_points[i: i + chunk_size] for i in range(0, gdf_points.shape[0], chunk_size)]
+        chunks = [geemap.geopandas_to_ee(c) for c in chunks]
+        
+        start = start_date
+        for year in tqdm(range(start_date.year, end_date.year)):
+            save_file = weather_dir.joinpath(f'era5_{year}.csv')
+            # Check if it has already been downloaded
+            if save_file.is_file():
+                continue
+                
+            dfs = []
+            for point_collection in tqdm(chunks, leave=False):
+                era5_bands = ['temperature_2m', 'total_precipitation_sum']
+                era5_image = (
+                    ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY_AGGR")
+                    .select(era5_bands)
+                    .filterBounds(point_collection)
+                    .filterDate(start.replace(year=year), start.replace(year=year+1))
+                    .mean()
+                )
+                # Convert the image to a feature collection
+                means_collection = era5_image.reduceRegions(
+                    point_collection, ee.Reducer.mean().forEachBand(era5_image)
+                )
+                # Create the download and load the URL as a dataframe
+                params = {
+                    'table': means_collection, 'format': 'CSV',
+                    'filename': f'era5_{year}.csv',
+                    'selectors': era5_bands
+                }
+                tableid = ee.data.getTableDownloadId(params)
+                url = ee.data.makeTableDownloadUrl(tableid)
+                dfs.append(pd.read_csv(url))
+            # Finally, concatenate the chunks back into the original shape
+            pd.concat(dfs, ignore_index=True).to_csv(save_file, index=False)
+
+
+

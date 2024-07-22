@@ -9,8 +9,12 @@ from sklearn.utils import shuffle
 from concurrent.futures import ThreadPoolExecutor
 
 class SentinelUtils:
-    def __init__(self, all_bands, seasons, sentinel_shards,
+    def __init__(self, seasons, sentinel_shards,
                  min_occurrences=0, overwrite_existing=False):
+        sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+        soilgrids_band = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd',
+                          'ocs', 'phh2o', 'sand', 'silt', 'soc']
+        all_bands = sentinel_bands + ['Elevation'] + soilgrids_band
         tmp = Path('tmp')
         tmp.mkdir(exist_ok=True)
         
