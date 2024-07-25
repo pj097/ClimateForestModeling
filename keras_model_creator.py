@@ -113,7 +113,7 @@ class KerasModelCreator:
         
         callbacks = self.define_callbacks_and_logger(log_file, metrics)
 
-        shard_ids = self.utils.selected_classes.index
+        shard_ids = self.selected_classes.index
         training_ids, test_ids = train_test_split(shard_ids, test_size=10000, random_state=42)
 
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
@@ -123,15 +123,15 @@ class KerasModelCreator:
             model = tf.keras.models.load_model(self.model_dir.joinpath('model.keras'))
         else:
             model = self.build_model(
-                self.utils.selected_classes.shape[1], metrics, self.loss,
-                output_bias=self.utils.data_summary['initial_bias'],
+                self.selected_classes.shape[1], metrics, self.loss,
+                output_bias=self.data_summary['initial_bias'],
             )
         model.fit(
             x=training_generator,
             validation_data=testing_generator,
             epochs=self.epochs,
             callbacks=callbacks,
-            class_weight=self.utils.data_summary['class_weights'],
+            class_weight=self.data_summary['class_weights'],
             verbose=self.verbose
         )
         return model, testing_generator

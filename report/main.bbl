@@ -1,0 +1,59 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Ahlswede et~al.]{Ahlswede, Schulz, Gava, Helber, Bischke,
+  F\"orster, Arias, Hees, Demir \harvardand\
+  Kleinschmit}{2023}{copernicus_main}
+Ahlswede, S., Schulz, C., Gava, C., Helber, P., Bischke, B., F\"orster, M.,
+  Arias, F., Hees, J., Demir, B. \harvardand\ Kleinschmit, B.  \harvardyearleft
+  2023\harvardyearright , `\textit{TreeSatAI Benchmark Archive}: a
+  multi-sensor, multi-label dataset for tree species classification in remote
+  sensing', {\em Earth System Science Data} {\bf 15}(2),~681--695.
+\newline\harvardurl{https://essd.copernicus.org/articles/15/681/2023/}
+
+\harvarditem[Bolyn et~al.]{Bolyn, Lejeune, Michez \harvardand\
+  Latte}{2022}{belgium_classification}
+Bolyn, C., Lejeune, P., Michez, A. \harvardand\ Latte, N.  \harvardyearleft
+  2022\harvardyearright , `Mapping tree species proportions from satellite
+  imagery using spectral–spatial deep learning', {\em Remote Sensing of
+  Environment} {\bf 280},~113205.
+\newline\harvardurl{https://www.sciencedirect.com/science/article/pii/S0034425722003145}
+
+\harvarditem{Commission}{2019}{eu_forest_report}
+Commission, E.  \harvardyearleft 2019\harvardyearright , `Communication from
+  the commission to the european parliament, the council, the european economic
+  and social committee and the committee of the regions stepping up eu action
+  to protect and restore the world’s forests', {\em Committee on the
+  Environment, Public Health and Consumer Policy} .
+
+\harvarditem[Furusawa et~al.]{Furusawa, Koera, Siburian, Wicaksono, Matsudaira
+  \harvardand\ Ishioka}{2023}{indonesia}
+Furusawa, T., Koera, T., Siburian, R., Wicaksono, A., Matsudaira, K.
+  \harvardand\ Ishioka, Y.  \harvardyearleft 2023\harvardyearright ,
+  `Time-series analysis of satellite imagery for detecting vegetation cover
+  changes in indonesia', {\em Scientific Reports} {\bf 13}(1).
+
+\harvarditem[Krist et~al.]{Krist, Ellenwood, Woods, McMahan, Cowardin, Ryerson,
+  Sapio, Zweifler \harvardand\ Romero}{2014}{usda}
+Krist, F.~J., Ellenwood, J.~R., Woods, M.~E., McMahan, A.~J., Cowardin, J.~P.,
+  Ryerson, D.~E., Sapio, F.~J., Zweifler, M.~O. \harvardand\ Romero, S.~A.
+  \harvardyearleft 2014\harvardyearright , `2013-2027 national insect and
+  disease forest risk assessment.', {\em Fort Collins, CO: US Forest Service,
+  Forest Health Technology and Enterprise Team} .
+
+\harvarditem[Mehmood et~al.]{Mehmood, Anees, Muhammad, Hussain, Shahzad, Liu,
+  Ansari, Alharbi \harvardand\ Khan}{2024}{pakistan}
+Mehmood, K., Anees, S.~A., Muhammad, S., Hussain, K., Shahzad, F., Liu, Q.,
+  Ansari, M.~J., Alharbi, S.~A. \harvardand\ Khan, W.~R.  \harvardyearleft
+  2024\harvardyearright , `Analyzing vegetation health dynamics across seasons
+  and regions through ndvi and climatic variables', {\em Scientific Reports}
+  {\bf 14}(1),~11775.
+
+\harvarditem[Wessel et~al.]{Wessel, Brandmeier \harvardand\
+  Tiede}{2018}{germany_bavaria}
+Wessel, M., Brandmeier, M. \harvardand\ Tiede, D.  \harvardyearleft
+  2018\harvardyearright , `Evaluation of different machine learning algorithms
+  for scalable classification of tree types and tree species based on
+  sentinel-2 data', {\em Remote Sensing} {\bf 10}(9).
+\newline\harvardurl{https://www.mdpi.com/2072-4292/10/9/1419}
+
+\end{thebibliography}
