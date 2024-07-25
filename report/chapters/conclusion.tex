@@ -1,0 +1,41 @@
+\chapter{Conclusions and Future Work}
+\label{chapter:conclusion}
+\section{Conclusions}
+TODO 
+
+\section{Future work}
+
+Efficiencies:
+\begin{itemize}
+    \item band analysis, e.g. using correlations as the basis could perhaps reduce the model to around 4 Sentinel-2 bands
+    \item anomalies, e.g. long tails after z-score
+    \item avoid upsampling by using functional layering with multi-inputs, could save $50\%$ storage and  processing, e.g. could increase model depth
+    \item consider the shading method, although a shard per sample simplifies the data pipeline, it could present challenges to a system with limited CPUs or slower storage devices such as magnetic disks
+\end{itemize}
+
+Climate:
+\begin{itemize}
+    \item climate analysis currently uses 4 data points (2020, 2021, 2022, 2023), by reducing the date range of the training data to one year and by using next year's Sentinel-2 data, 7 data points would be available to perhaps provide a more statistically significant analysis
+\end{itemize}
+
+Data methods:
+\begin{itemize}
+    \item the class imbalance reflects reality in that European forests are dominated by certain tree genera, currently a simple class weight is applied but there exist other robust methods such as over-sampling the minority classes
+    \item the cut-off of 20,000 genus samples marks a threshold where a recall of 0.7 or above could be obtained, but in the process, dozens of genera were neglected, whereas EU member states have a total of 1.8 million plots (1 km x 1 km) \cite{eu_forest_report}, which represents around 7 times more samples than used here
+\end{itemize}
+
+Labels:
+\begin{itemize}
+    \item forest fires have not been considered despite being a significant concern in climate change, the analysis could be re-run by first excluding samples within regions known to have had forest fires
+    \item commercial vs non-commercial forests, EU member states have 182 million hectares of forest or woodlands, 19 million of which are forests in nature protection areas and could present a better target for understanding climate change effects due to conservation efforts
+    \item species were grouped by genus due to data limitations, consider whether using species rather than genus could benefit the analysis
+\end{itemize}
+
+Analysis:
+\begin{itemize}
+    \item the intent of this research is to facilitate a global analysis, a logical next step would be to add North American (or a similarly well-documented region) labels either by simply combining with existing labels or creating a separate model for each region
+\end{itemize}
+
+
+Summarising:
+Two initial choices for training the model: use the median of two periods in a year, one that captures warmer months and one that captures colder months, or use only warmer months. Avoid upsampling the lower resolution bands in order to nearly half data storage needs. Upsampling could be done later or even in the preprocessing pipeline using multiple methods if required. Applying these efficiency improvements could vastly increase the reach of this analysis to other regions of the world.

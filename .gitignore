@@ -1,10 +1,17 @@
 .*
 !.gitignore
 
-treesatai/*/
-treesatai/earthengine*
-treesatai/bb_60m.GeoJSON
-treesatai/TreeSatBA_v9_60m_multi_labels.json
+previous_sentinel/treesatai/*/
+previous_sentinel/treesatai/earthengine*
+previous_sentinel/treesatai/bb_60m.GeoJSON
+previous_sentinel/treesatai/TreeSatBA_v9_60m_multi_labels.json
 
-eu_forest/*/
-eu_forest/*.csv
+**/*.csv
+**/*.GeoJSON
+**/*.geojson
+**/*.json
+**/*.npy
+
+__pycache__/
+models/
+labels/
