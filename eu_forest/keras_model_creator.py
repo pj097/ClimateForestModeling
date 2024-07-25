@@ -67,6 +67,13 @@ class KerasModelCreator:
                 mode='max',
                 restore_best_weights=True
             ),
+            tf.keras.callbacks.TensorBoard(
+                log_dir=self.model_dir.joinpath('tensorboard_logs'),
+                histogram_freq=0,
+                write_graph=True,
+                update_freq='epoch',
+                embeddings_freq=0,
+            )
         ]
         return callbacks
 
@@ -98,8 +105,8 @@ class KerasModelCreator:
         metrics = self.get_metrics()
 
         if self.overwrite:
-            for f in self.model_dir.glob('*'):
-                f.unlink(missing_ok=True)
+            for f in self.model_dir.rglob('*'):
+                if f.is_file(): f.unlink()
                 
         self.display_logger(log_file, metrics)
         
@@ -111,15 +118,12 @@ class KerasModelCreator:
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
     
         if self.model_dir.joinpath('model.keras').is_file():
-            print('Loading model...')
             model = load_model(self.model_dir.joinpath('model.keras'))
         else:
-            print('Building model...')
             model = self.build_model(
                 self.utils.selected_classes.shape[1], metrics, self.loss,
                 output_bias=self.utils.data_summary['initial_bias'],
             )
-        print('Fitting...')
         model.fit(
             x=training_generator,
             validation_data=testing_generator,
@@ -164,7 +168,6 @@ class KerasModelCreator:
         return x
 
     def sentinel_layers(self, x):
-
         for filters_scale in [2, 4, 8, 16]:
             # x = ConvLSTM2D(
             #     filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
@@ -195,20 +198,24 @@ class KerasModelCreator:
     def build_model(self, output_shape, metrics, loss, output_bias=None):
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
-         
-        sentinel_input = Input((len(self.seasons), 100, 100, 10))
+
+        sentinel_input = Input((len(self.seasons), 100, 100, 
+                                len([b for b in self.bands if b < 10])))
+       
+        x = self.sentinel_layers(sentinel_input)
         
-        elevation_input = Input((100, 100, 1))
-
-        soil_input = Input((4, 4, 11))
-
-        x_sentinel = self.sentinel_layers(sentinel_input)
+        inputs = [sentinel_input]
         
-        x_elevation = self.elevation_layers(elevation_input)
+        if 10 in self.bands:
+            elevation_input = Input((100, 100, 1))
+            inputs += [elevation_input]
+            x = concatenate(self.elevation_layers(elevation_input))
 
-        x_soil = self.soil_layers(soil_input)
-
-        x = concatenate([x_sentinel, x_elevation, x_soil])
+        n_soil_bands = len([b for b in self.bands if b > 10])
+        if n_soil_bands:
+            soil_input = Input((4, 4, n_soil_bands))
+            inputs += [sentinel_input]
+            x = concatenate(self.soil_layers(soil_input))
 
         for units_scale in [32, 16, 8, 4]:
             x = Dense(self.base_filters*units_scale, activation='relu')(x)
@@ -216,7 +223,7 @@ class KerasModelCreator:
         
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
-        m = Model(inputs=[sentinel_input, elevation_input, soil_input], outputs=outputs)
+        m = Model(inputs=inputs, outputs=outputs)
 
         m.compile(optimizer=self.opt, loss=loss, metrics=metrics)
         
