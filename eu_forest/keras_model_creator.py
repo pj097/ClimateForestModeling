@@ -209,13 +209,13 @@ class KerasModelCreator:
         if 10 in self.bands:
             elevation_input = Input((100, 100, 1))
             inputs += [elevation_input]
-            x = concatenate(self.elevation_layers(elevation_input))
+            x = concatenate([x, self.elevation_layers(elevation_input)])
 
         n_soil_bands = len([b for b in self.bands if b > 10])
         if n_soil_bands:
             soil_input = Input((4, 4, n_soil_bands))
-            inputs += [sentinel_input]
-            x = concatenate(self.soil_layers(soil_input))
+            inputs += [soil_input]
+            x = concatenate([x, self.soil_layers(soil_input)])
 
         for units_scale in [32, 16, 8, 4]:
             x = Dense(self.base_filters*units_scale, activation='relu')(x)
