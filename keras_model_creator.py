@@ -52,10 +52,10 @@ class KerasModelCreator:
             ),
             tf.keras.callbacks.CSVLogger(log_file, append=True),
             tf.keras.callbacks.ModelCheckpoint(
-                self.model_dir.joinpath('model.keras'), 
-                monitor='val_recall', save_best_only=True, 
-                save_freq='epoch', initial_value_threshold=0.1,
-                verbose=0,
+                self.model_dir.joinpath('model.keras'), mode='max',
+                monitor='val_recall', save_best_only=True,
+                save_freq='epoch', initial_value_threshold=0.5,
+                verbose=self.verbose,
             ),
             tf.keras.callbacks.ReduceLROnPlateau(
                 monitor='val_recall', factor=0.5, patience=4, min_lr=1e-7,
