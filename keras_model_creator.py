@@ -119,13 +119,13 @@ class KerasModelCreator:
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
     
-        if self.model_dir.joinpath('model.keras').is_file():
-            model = tf.keras.models.load_model(self.model_dir.joinpath('model.keras'))
-        else:
-            model = self.build_model(
-                self.selected_classes.shape[1], metrics, self.loss,
-                output_bias=self.data_summary['initial_bias'],
-            )
+        # if self.model_dir.joinpath('model.keras').is_file():
+        #     model = tf.keras.models.load_model(self.model_dir.joinpath('model.keras'))
+        # else:
+        model = self.build_model(
+            self.selected_classes.shape[1], metrics, self.loss,
+            output_bias=self.data_summary['initial_bias'],
+        )
         model.fit(
             x=training_generator,
             validation_data=testing_generator,
@@ -202,19 +202,21 @@ class KerasModelCreator:
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
 
-        sentinel_input = Input((len(self.seasons), 100, 100, 
-                                len([b for b in self.bands if b < 10])))
+        sentinel_input = Input((
+            len(self.seasons), 100, 100, 
+            len([b for b in self.band_indices if b < 10])
+        ))
        
         x = self.sentinel_layers(sentinel_input)
         
         inputs = [sentinel_input]
         
-        if 10 in self.bands:
+        if 10 in self.band_indices:
             elevation_input = Input((100, 100, 1))
             inputs += [elevation_input]
             x = concatenate([x, self.elevation_layers(elevation_input)])
 
-        n_soil_bands = len([b for b in self.bands if b > 10])
+        n_soil_bands = len([b for b in self.band_indices if b > 10])
         if n_soil_bands:
             soil_input = Input((4, 4, n_soil_bands))
             inputs += [soil_input]

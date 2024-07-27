@@ -34,7 +34,7 @@ class DataGenerator(PyDataset):
                 
     def data_generation(self, batch_IDs):
         'Generate batch.'
-        sentinel_bands = [b for b in self.bands if b < 10]
+        sentinel_bands = [b for b in self.band_indices if b < 10]
         X_sentinel = np.empty((self.batch_size, len(self.seasons), 100, 100, len(sentinel_bands)))
         for i, ID in enumerate(batch_IDs):
             for t, s in enumerate(self.seasons):
@@ -43,7 +43,7 @@ class DataGenerator(PyDataset):
                 X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
         X = [self.normalise(X_sentinel, sentinel_bands, self.data_summary)]
 
-        if 10 in self.bands:
+        if 10 in self.band_indices:
             X_elevation = np.empty((self.batch_size, 100, 100))
             for i, ID in enumerate(batch_IDs):
                 X_elevation[i,...] = np.load(self.shards_dir.joinpath(
@@ -52,7 +52,7 @@ class DataGenerator(PyDataset):
             X += [X_elevation]
 
         
-        soil_bands = [b for b in self.bands if b > 10]
+        soil_bands = [b for b in self.band_indices if b > 10]
         if len(soil_bands):
             X_soil = np.empty((self.batch_size, 4, 4, len(soil_bands)))
             for i, ID in enumerate(batch_IDs):
