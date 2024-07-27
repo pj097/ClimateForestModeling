@@ -14,6 +14,10 @@ class SentinelUtils:
         self.tmp.mkdir(exist_ok=True)
         self.min_occurrences = min_occurrences
         self.all_labels_path = all_labels_path
+        sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+        soilgrids_band = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd',
+                          'ocs', 'phh2o', 'sand', 'silt', 'soc']
+        self.all_bands = sentinel_bands + ['Elevation'] + soilgrids_band
 
     def get_processed_labels(self, overwrite_existing=False):
         selected_classes_path = self.tmp.joinpath(f'selected_classes_{self.min_occurrences}.csv')
@@ -23,7 +27,7 @@ class SentinelUtils:
         else:
             return self.process_labels(selected_classes_path)
 
-    def get_data_summary(self, shards_dir, seasons, all_bands, selected_classes,
+    def get_data_summary(self, shards_dir, seasons, selected_classes,
                          sample_shards=40000, overwrite_existing=False):
         
         summary_path = self.tmp.joinpath(f'data_summary_{"_".join(seasons)}_{self.min_occurrences}.json')
@@ -37,7 +41,7 @@ class SentinelUtils:
             sentinel_shards.extend(path_list)
             
         sentinel_shards = shuffle(sentinel_shards, random_state=42)[:sample_shards]
-        data_summary = self.process_features(all_bands, sentinel_shards)
+        data_summary = self.process_features(self.all_bands, sentinel_shards)
 
         data_summary['initial_bias'] = self.calculate_initial_bias(selected_classes)
         data_summary['class_weights'] = self.calculate_class_weights(selected_classes)
@@ -46,7 +50,7 @@ class SentinelUtils:
 
         return data_summary
     
-    def process_features(self, all_bands, sentinel_shards):
+    def process_features(self, sentinel_shards):
         data_summary = {}
         for stat in ['std', 'mean']:
             data_summary[stat] = OrderedDict()
@@ -57,7 +61,7 @@ class SentinelUtils:
         soil_shards = list(shards_dir.joinpath('soil').glob('soil_*.npy'))
         soil_shards = shuffle(soil_shards, random_state=42)[:len(sentinel_shards)]
 
-        for i, band in enumerate(tqdm(all_bands, leave=False)):
+        for i, band in enumerate(tqdm(self.all_bands, leave=False)):
             band_data = []
             if i < 10:
                 for shard_path in (pbar := tqdm(sentinel_shards, leave=False)):

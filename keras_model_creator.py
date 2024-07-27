@@ -1,7 +1,8 @@
 from IPython.display import display, HTML
 
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+import logging, os
+logging.disable(logging.WARNING)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 import tensorflow as tf
 
@@ -29,7 +30,7 @@ class KerasModelCreator:
     def display_logger(self, log_file, metrics):
         metric_names = [m if isinstance(m, str) else m.name for m in metrics]
         
-        if not self.verbose:
+        if not self.print_log:
             return
             
         if log_file.is_file() and log_file.stat().st_size > 0:
