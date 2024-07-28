@@ -22,8 +22,7 @@ class EEDownloader:
       )
       return image.updateMask(mask)
 
-    def get_sentinel_image(self, start_date, end_date):
-        selected_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+    def get_sentinel_image(self, start_date, end_date, selected_bands):
         image = (
             ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
             .filterDate(start_date, end_date)
@@ -87,7 +86,9 @@ class EEDownloader:
             
             np.save(shard_path, data)
 
-    def download_sentinel_shards(self, ith_chunk, chunk, chunk_size, features_dir, start_date, end_date):
+    def download_sentinel_shards(
+        self, ith_chunk, chunk, chunk_size, 
+        features_dir, start_date, end_date, pixels, selected_bands):
         # Check if it has already been downloaded
         if features_dir.joinpath(f'feature_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
             return
@@ -95,7 +96,7 @@ class EEDownloader:
         sleep_time = ith_chunk%10
         sleep(sleep_time)
     
-        sentinel_image = self.get_sentinel_image(start_date, end_date)
+        sentinel_image = self.get_sentinel_image(start_date, end_date, selected_bands)
             
         # For further options, see
         # https://developers.google.com/earth-engine/apidocs/ee-data-computepixels
@@ -107,7 +108,7 @@ class EEDownloader:
 
             this_bbox = ee.Geometry.BBox(*geometry.bounds)
             params['expression'] = sentinel_image.clipToBoundsAndScale(
-                this_bbox, width=100, height=100)
+                this_bbox, width=pixels, height=pixels)
 
             pixels = ee.data.computePixels(params)
             data = np.load(BytesIO(pixels))
