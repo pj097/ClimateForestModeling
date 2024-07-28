@@ -33,6 +33,8 @@
 \newtheorem{mydef}{Definition}
 \newtheorem{mytherm}{Theorem}
 
+% \usepackage{subcaption}
+
 \usepackage{makecell}
 
 %%-------------------------------------
@@ -80,6 +82,8 @@
 \usepackage{subfigure}
 \usepackage{caption}
 \usepackage{lipsum}
+
+\usepackage{pgffor}
 
 %%-------------------------------------
 %% Table environment settings
@@ -129,21 +133,6 @@
     \input{chapters/title}
     \input{chapters/declaration}
     \input{chapters/abstract.tex}
-     
-    % -------------------------------------------------------------------
-    % Abstract and Acknowledgement
-    % -------------------------------------------------------------------
-    
-    
-    % -------------------------------------------------------------------
-	% Acknowledgement
-	% -------------------------------------------------------------------
-   
-    % \input{chapters/acknowledgments.tex}   
-    
-    % -------------------------------------------------------------------
-    % Contents, list of figures, list of tables
-    % -------------------------------------------------------------------
     
     \tableofcontents
     \listoffigures
@@ -157,9 +146,9 @@
     %%                                                                    %%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \mainmatter
-    % Read for preparation of document in LaTex 
-    % Lamport, L. (1986), LATEX: A Document Preparation System, Addison-Wesley.
+   
     \input{chapters/data}
+    \input{chapters/analysis}
     % \input{chapters/intro}
     % \input{chapters/frame}
     % \input{chapters/method}

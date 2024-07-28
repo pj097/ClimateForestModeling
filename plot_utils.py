@@ -55,7 +55,8 @@ class PlotUtils:
                 facet_col=0, facet_col_wrap=2,
                 x=corrs[0].index,
                 y=corrs[0].columns,
-                text_auto=True, aspect='auto', zmin=0, height=500
+                text_auto=True, aspect='auto', zmin=0,
+                height=500, width=700,
             )
             
             for ann in fig.layout['annotations']:
@@ -83,13 +84,7 @@ class PlotUtils:
                 name=band, 
                 marker_color=color
             )
-            fig.add_vline(
-                x=data_summary['mean'][band], 
-                line_dash='dash', 
-                line_color=color,
-                opacity=0.75,
-                row=1, col=1,
-            )
+            fig.append_trace(hist1, row=1, col=1)
             hist2 = go.Histogram(
                 x=self.zscore(
                     samples[band],
@@ -99,13 +94,21 @@ class PlotUtils:
                 showlegend=False,
                 marker_color=color
             )
-            fig.append_trace(hist1, row=1, col=1)
             fig.append_trace(hist2, row=1, col=2)
+
+            fig.add_vline(
+                x=data_summary['mean'][band], 
+                line_dash='dash', 
+                line_color=color,
+                opacity=0.75,
+                row=1, col=1,
+            )
     
         fig.update_layout(
             layout_params,
-            yaxis_title='Count',
             barmode='overlay',
+            yaxis_title='Count',
+            height=350, width=700,
             legend=dict(
                 orientation='h',
                 xanchor='right', yanchor='bottom',

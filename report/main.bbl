@@ -5,5 +5,14 @@
 Mauri, A., Strona, G. \harvardand\ San-Miguel-Ayanz, J.  \harvardyearleft
   2017\harvardyearright , `{EU-Forest, a high-resolution tree occurrence
   dataset for Europe}', {\em Scientific Data} {\bf 4}(1),~160123.
+\newline\harvardurl{https://doi.org/10.1038/sdata.2016.123}
+
+\harvarditem[Poggio et~al.]{Poggio, de~Sousa, Batjes, Heuvelink, Kempen,
+  Ribeiro \harvardand\ Rossiter}{2021}{soil_report}
+Poggio, L., de~Sousa, L.~M., Batjes, N.~H., Heuvelink, G. B.~M., Kempen, B.,
+  Ribeiro, E. \harvardand\ Rossiter, D.  \harvardyearleft 2021\harvardyearright
+  , `Soilgrids 2.0: producing soil information for the globe with quantified
+  spatial uncertainty', {\em SOIL} {\bf 7}(1),~217--240.
+\newline\harvardurl{https://soil.copernicus.org/articles/7/217/2021/}
 
 \end{thebibliography}
