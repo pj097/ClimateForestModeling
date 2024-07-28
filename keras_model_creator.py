@@ -173,15 +173,15 @@ class KerasModelCreator:
 
     def sentinel_layers(self, x):
         for filters_scale in [2, 4, 8, 16]:
-            # x = ConvLSTM2D(
-            #     filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
-            #     return_sequences=True
-            # )(x)
-            x = Conv3D(
-                filters=self.base_filters*filters_scale, 
-                kernel_size=3, padding='same',
-                activation='relu',
+            x = ConvLSTM2D(
+                filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
+                return_sequences=True
             )(x)
+            # x = Conv3D(
+            #     filters=self.base_filters*filters_scale, 
+            #     kernel_size=3, padding='same',
+            #     activation='relu',
+            # )(x)
             x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
             x = Dropout(self.dropout)(x)
