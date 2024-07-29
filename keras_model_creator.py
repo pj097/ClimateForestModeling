@@ -119,10 +119,7 @@ class KerasModelCreator:
 
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
-    
-        # if self.model_dir.joinpath('model.keras').is_file():
-        #     model = tf.keras.models.load_model(self.model_dir.joinpath('model.keras'))
-        # else:
+        
         model = self.build_model(
             self.selected_classes.shape[1], metrics, self.loss,
             output_bias=self.data_summary['initial_bias'],
@@ -173,15 +170,11 @@ class KerasModelCreator:
 
     def sentinel_layers(self, x):
         for filters_scale in [2, 4, 8, 16]:
-            x = ConvLSTM2D(
-                filters=self.base_filters*filters_scale, kernel_size=3, padding='same',
-                return_sequences=True
+            x = Conv3D(
+                filters=self.base_filters*filters_scale, 
+                kernel_size=3, padding='same',
+                activation='relu',
             )(x)
-            # x = Conv3D(
-            #     filters=self.base_filters*filters_scale, 
-            #     kernel_size=3, padding='same',
-            #     activation='relu',
-            # )(x)
             x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
             x = Dropout(self.dropout)(x)

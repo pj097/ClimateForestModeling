@@ -4,4 +4,5 @@
 \contentsline {section}{\numberline {1.3}Copernicus DEM GLO-30}{6}{section.1.3}%
 \contentsline {section}{\numberline {1.4}SoilGrids}{7}{section.1.4}%
 \contentsline {chapter}{\numberline {2}Analysis and Discussion}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Seasonal Analysis of CNN Results}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.1}Seasonal Analysis}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Sentinel-2 Band Analysis}{10}{section.2.2}%
