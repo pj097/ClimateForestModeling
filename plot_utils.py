@@ -119,7 +119,7 @@ class PlotUtils:
     
         return fig
     
-    def line_heatmap(self, df, heatmap_cols, row_width):
+    def line_heatmap(self, df, heatmap_cols):
         line_cols = ['recall', 'precision', 'weightedf1score']
         line_cols += ['prc', 'auc']
         
@@ -128,36 +128,34 @@ class PlotUtils:
         line_df.columns = line_cols
         line_fig = px.line(
             line_df, y=line_cols, 
-            line_dash='variable',
+            line_dash='variable'
         )
         
         fig = make_subplots(
-            rows=2, cols=1,
-            vertical_spacing=0,
-            row_width=row_width
+            specs=[[{'secondary_y': True}]]
         ) 
         
         for trace in line_fig['data']:
-            fig.append_trace(trace, row=1, col=1)
+            fig.add_trace(trace, secondary_y=True)
         
-        fig.append_trace(
+        fig.add_trace(
             go.Heatmap(
                 z=df[heatmap_cols].T.to_numpy(),
                 y=heatmap_cols,
-                colorscale=['lavender', 'cornflowerblue', 'tomato'],
+                colorscale=['lavender', 'tomato', 'cornflowerblue'],
                 xgap=2, ygap=2, 
                 showscale=False,
-            ), row=2, col=1
+                opacity=0.5
+            ),
+            secondary_y=False
         )
                 
         fig.update_xaxes(
             range=(line_df.index.min()-0.5, line_df.index.max()+0.5),
-            tickmode = 'linear',
-            tick0 = 0.5,
-            dtick = 1,
+            showgrid=False,
             zeroline=False,
             showticklabels=False,
-            title=None,
+            title='Combinations',
         ).update_layout(
             legend_title_text=None,
             legend=dict(
@@ -166,5 +164,11 @@ class PlotUtils:
                 x=1, y=1.02   
             ),
             height=500, width=700,
+        ).update_yaxes(
+            showgrid=False
         )
+
+        fig.update_yaxes(title_text='Seasons' if 'spring' in heatmap_cols else 'Bands',
+                         secondary_y=False)
+        fig.update_yaxes(title_text='Metrics', secondary_y=True)
         return fig

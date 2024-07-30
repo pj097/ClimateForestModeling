@@ -14,10 +14,11 @@ class SentinelUtils:
         self.tmp.mkdir(exist_ok=True)
         self.min_occurrences = min_occurrences
         self.all_labels_path = all_labels_path
-        sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
-        soilgrids_band = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd',
+        self.sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
+        self.soilgrids_bands = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd',
                           'ocs', 'phh2o', 'sand', 'silt', 'soc']
-        self.all_bands = sentinel_bands + ['Elevation'] + soilgrids_band
+        self.elevation_band = ['Elevation']
+        self.all_bands = self.sentinel_bands + self.elevation_band + self.soilgrids_bands
 
     def get_processed_labels(self, overwrite_existing=False):
         selected_classes_path = self.tmp.joinpath(f'selected_classes_{self.min_occurrences}.csv')

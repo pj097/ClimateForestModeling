@@ -146,7 +146,7 @@ class KerasModelCreator:
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*2, activation='relu')(x)
+        x = Dense(self.base_filters*8, activation='relu', name='soil')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
@@ -163,7 +163,7 @@ class KerasModelCreator:
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters, activation='relu')(x)
+        x = Dense(self.base_filters*4, activation='relu', name='elevation')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout*2)(x)
         return x
@@ -187,7 +187,7 @@ class KerasModelCreator:
             
         x = Flatten()(x)
 
-        x = Dense(self.base_filters*8, activation='relu')(x)
+        x = Dense(self.base_filters*8, activation='relu', name='sentinel')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
         return x

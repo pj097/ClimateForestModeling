@@ -26,7 +26,6 @@ class EEDownloader:
         image = (
             ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
             .filterDate(start_date, end_date)
-            .filter(ee.Filter.calendarRange(start_date.month, end_date.month, 'month'))
             # Pre-filter to get less cloudy granules.
             .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
             .map(self.mask_s2_clouds)
@@ -88,7 +87,7 @@ class EEDownloader:
 
     def download_sentinel_shards(
         self, ith_chunk, chunk, chunk_size, 
-        features_dir, start_date, end_date, pixels, selected_bands):
+        features_dir, start_date, end_date, pixel_size, selected_bands):
         # Check if it has already been downloaded
         if features_dir.joinpath(f'feature_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
             return
@@ -108,11 +107,9 @@ class EEDownloader:
 
             this_bbox = ee.Geometry.BBox(*geometry.bounds)
             params['expression'] = sentinel_image.clipToBoundsAndScale(
-                this_bbox, width=pixels, height=pixels)
-
+                this_bbox, width=pixel_size, height=pixel_size)
             pixels = ee.data.computePixels(params)
             data = np.load(BytesIO(pixels))
-
             all_data.append(data)
                     
         raw_features = np.array(all_data)
