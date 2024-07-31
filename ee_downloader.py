@@ -91,9 +91,6 @@ class EEDownloader:
     def download_sentinel_shards(
         self, ith_chunk, chunk, chunk_size, 
         features_dir, start_date, end_date, pixel_size, selected_bands):
-        # Check if it has already been downloaded
-        if features_dir.joinpath(f'feature_{ith_chunk*chunk_size + chunk_size - 1}.npy').is_file():
-            return
 
         sleep_time = ith_chunk%10
         sleep(sleep_time)
@@ -104,27 +101,26 @@ class EEDownloader:
         # https://developers.google.com/earth-engine/apidocs/ee-data-computepixels
         params = {'fileFormat': 'NPY'}
         
-        all_data = []
-        for geometry in (pbar := tqdm(chunk, leave=False)):
+        for ii, geometry in enumerate((pbar := tqdm(chunk, leave=False))):
             pbar.set_description(f'Chunk {ith_chunk}')
+            
+            shard_id = ith_chunk*chunk_size + ii
+            shard_path = features_dir.joinpath(f'feature_{shard_id}.npy')
+            if shard_path.is_file():
+                continue
 
             this_bbox = ee.Geometry.BBox(*geometry.bounds)
             params['expression'] = sentinel_image.clipToBoundsAndScale(
                 this_bbox, width=pixel_size, height=pixel_size)
+    
             pixels = ee.data.computePixels(params)
             data = np.load(BytesIO(pixels))
-            all_data.append(data)
-                    
-        raw_features = np.array(all_data)
-        features = raw_features.view((float, len(raw_features.dtype.names)))
-        features = features/10000
-        
-        for ii in range(chunk.shape[0]):
-            shard_id = ith_chunk*chunk_size + ii
+            
             np.save(
                 features_dir.joinpath(f'feature_{shard_id}.npy'), 
-                features[ii, ...]
+                data.view((float, len(data.dtype.names)))/10000
             )
+            
     def download_era5(self, gdf, start_date, end_date, weather_dir):
         # Only interested in one point per sample (ERA5 is 10km resolution)
         gdf_points = gpd.GeoDataFrame(geometry=gdf.geometry.centroid)
