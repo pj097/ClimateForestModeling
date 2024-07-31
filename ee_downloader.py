@@ -7,6 +7,9 @@ from io import BytesIO
 import geopandas as gpd
 import pandas as pd
 
+ee.Authenticate()
+ee.Initialize(project='sentinel-treeclassification')
+
 class EEDownloader:
     def mask_s2_clouds(self, image):
       # Quality assessment with resolution in meters

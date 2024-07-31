@@ -146,9 +146,15 @@ class KerasModelCreator:
         
         x = Flatten()(x)
         
-        x = Dense(self.base_filters*8, activation='relu', name='soil')(x)
+        x = Dense(self.base_filters*16, activation='relu')(x)
         x = BatchNormalization()(x)
-        x = Dropout(self.dropout*2)(x)
+        x = Dropout(self.dropout)(x)
+        x = Dense(self.base_filters*8, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        x = Dense(self.base_filters*4, activation='relu', name='soil')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
         return x
 
     def elevation_layers(self, x):
@@ -163,9 +169,15 @@ class KerasModelCreator:
         
         x = Flatten()(x)
         
+        x = Dense(self.base_filters*16, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
+        x = Dense(self.base_filters*8, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
         x = Dense(self.base_filters*4, activation='relu', name='elevation')(x)
         x = BatchNormalization()(x)
-        x = Dropout(self.dropout*2)(x)
+        x = Dropout(self.dropout)(x)
         return x
 
     def sentinel_layers(self, x):
@@ -196,25 +208,31 @@ class KerasModelCreator:
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
 
-        sentinel_input = Input((
-            len(self.seasons), 100, 100, 
-            len([b for b in self.band_indices if b < 10])
-        ))
-       
-        x = self.sentinel_layers(sentinel_input)
+        inputs = []
+        co_outputs = []
         
-        inputs = [sentinel_input]
+        n_sentinel_bands = len([b for b in self.band_indices if b < 10])
+        if n_sentinel_bands:
+            sentinel_input = Input((
+                len(self.seasons), 100, 100, 
+                len([b for b in self.band_indices if b < 10])
+            ))
+       
+            co_outputs.append(self.sentinel_layers(sentinel_input))
+            inputs.append(sentinel_input)
         
         if 10 in self.band_indices:
             elevation_input = Input((100, 100, 1))
-            inputs += [elevation_input]
-            x = concatenate([x, self.elevation_layers(elevation_input)])
+            inputs.append(elevation_input)
+            co_outputs.append(self.elevation_layers(elevation_input))
 
         n_soil_bands = len([b for b in self.band_indices if b > 10])
         if n_soil_bands:
             soil_input = Input((4, 4, n_soil_bands))
-            inputs += [soil_input]
-            x = concatenate([x, self.soil_layers(soil_input)])
+            inputs.append(soil_input)
+            co_outputs.append(self.soil_layers(soil_input))
+
+        x = concatenate(co_outputs)
 
         for units_scale in [32, 16, 8, 4]:
             x = Dense(self.base_filters*units_scale, activation='relu')(x)

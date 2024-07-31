@@ -34,22 +34,23 @@ class DataGenerator(PyDataset):
                 
     def data_generation(self, batch_IDs):
         'Generate batch.'
+        X = []
         sentinel_bands = [b for b in self.band_indices if b < 10]
-        X_sentinel = np.empty((self.batch_size, len(self.seasons), 100, 100, len(sentinel_bands)))
-        for i, ID in enumerate(batch_IDs):
-            for t, s in enumerate(self.seasons):
-                sentinel_data = np.load(self.shards_dir.joinpath(
-                    f'features_{self.year}{s}').joinpath(f'feature_{ID}.npy'))
-                X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
-        X = [self.normalise(X_sentinel, sentinel_bands, self.data_summary)]
+        if sentinel_bands:
+            X_sentinel = np.empty((self.batch_size, len(self.seasons), 100, 100, len(sentinel_bands)))
+            for i, ID in enumerate(batch_IDs):
+                for t, s in enumerate(self.seasons):
+                    sentinel_data = np.load(self.shards_dir.joinpath(
+                        f'features_{self.year}{s}').joinpath(f'feature_{ID}.npy'))
+                    X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
+            X.append(self.normalise(X_sentinel, sentinel_bands, self.data_summary))
 
         if 10 in self.band_indices:
             X_elevation = np.empty((self.batch_size, 100, 100))
             for i, ID in enumerate(batch_IDs):
                 X_elevation[i,...] = np.load(self.shards_dir.joinpath(
                     'elevations').joinpath(f'elevation_{ID}.npy'))
-            X_elevation = self.normalise(X_elevation, 10, self.data_summary)
-            X += [X_elevation]
+            X.append(self.normalise(X_elevation, 10, self.data_summary))
 
         
         soil_bands = [b for b in self.band_indices if b > 10]
@@ -58,8 +59,7 @@ class DataGenerator(PyDataset):
             for i, ID in enumerate(batch_IDs):
                 X_soil[i,...] = np.load(self.shards_dir.joinpath(
                     'soil').joinpath(f'soil_{ID}.npy'))[..., np.array(soil_bands)-11]
-            X_soil = self.normalise(X_soil, soil_bands, self.data_summary)
-            X += [X_soil]
+            X.append(self.normalise(X_soil, soil_bands, self.data_summary))
         
         y = self.selected_classes.loc[batch_IDs].to_numpy()
         return tuple(X), y

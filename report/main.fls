@@ -985,13 +985,10 @@ INPUT ./main.lot
 INPUT main.lot
 INPUT main.lot
 OUTPUT main.lot
-INPUT ./chapters/data.tex
-INPUT ./chapters/data.tex
-INPUT ./chapters/data.tex
-INPUT chapters/data.tex
-INPUT ./chapters/data.tex
-INPUT ./chapters/data.tex
-INPUT chapters/data.tex
+INPUT ./chapters/class_data.tex
+INPUT chapters/class_data.tex
+INPUT ./chapters/class_data.tex
+INPUT chapters/class_data.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT ./figures/figures_labels/genus_cutoff_map.png
 INPUT ./figures/figures_labels/genus_cutoff_map.png
