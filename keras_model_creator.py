@@ -134,9 +134,19 @@ class KerasModelCreator:
         )
         return model, testing_generator
 
+    def build_model(self, output_shape, metrics, loss, output_bias=None):
+        if output_bias is not None:
+            output_bias = tf.keras.initializers.Constant(output_bias)
 
-    def sentinel_layers(self, x):
-        for filters_scale in [2, 4, 8, 16]:
+        sentinel_10m_input = Input((100, 100, 4))
+        x = sentinel_10m_input
+        # sentinel_20m_input = Input((50, 50, 2))
+        
+        # x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+        
+        # x = concatenate([MaxPooling2D(2)(sentinel_10m_input), sentinel_20m_input])
+        
+        for filters_scale in [2, 4, 8, 16, 32]:
             x = Conv2D(
                 filters=self.base_filters*filters_scale, 
                 kernel_size=3, padding='same',
@@ -144,45 +154,24 @@ class KerasModelCreator:
             )(x)
             x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
-            x = Dropout(self.dropout)(x)
-
-        x = Conv2D(
-            filters=self.base_filters*32, 
-            kernel_size=3, padding='same',
-            activation='relu',
-        )(x)
+            x = Dropout(self.dropout/2)(x)
             
         x = Flatten()(x)
-        return x
 
-    def build_model(self, output_shape, metrics, loss, output_bias=None):
-        if output_bias is not None:
-            output_bias = tf.keras.initializers.Constant(output_bias)
-
-        inputs = []
-        co_outputs = []
-        
-        sentinel_10m_input = Input((100, 100, 2))
-        sentinel_20m_input = Input((50, 50, 2))
-       
-        sentinel_10m = self.sentinel_layers(sentinel_10m_input)
-        sentinel_20m = self.sentinel_layers(sentinel_20m_input)
-
-        x = concatenate([sentinel_10m, sentinel_20m])
-
-        for units_scale in [32, 16, 8, 4]:
+        for units_scale in [16, 8, 4, 2, 1]:
             x = Dense(self.base_filters*units_scale, activation='relu')(x)
             x = Dropout(self.dropout)(x)
+            x = BatchNormalization()(x)
         
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
         m = tf.keras.models.Model(
-            inputs=[sentinel_10m_input, sentinel_20m_input], 
+            inputs=[sentinel_10m_input], 
             outputs=outputs
         )
 
         opt = tf.keras.optimizers.Adam(
-            learning_rate=1e-4,
+            learning_rate=1e-3,
             beta_1=0.9,
             beta_2=0.999,
         )

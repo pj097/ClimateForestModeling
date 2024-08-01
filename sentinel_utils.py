@@ -46,23 +46,24 @@ class SentinelUtils:
         for stat in ['std', 'mean']:
             data_summary[stat] = OrderedDict()
 
-        for band_group in tqdm(self.sentinel_band_groups):
-            dirname = shards_dir.joinpath(
-                f'features_{"_".join(band_group)}_2017'
-            )
-            shard_list = list(dirname.glob('feature_*.npy'))
-            shard_list = shuffle(shard_list, random_state=42)[:n_samples]
+        # for band_group in tqdm(self.sentinel_band_groups):
+            # dirname = shards_dir.joinpath(
+            #     f'features_{"_".join(band_group)}_2017'
+            # )
+        dirname = shards_dir.joinpath('features_2017')
+        shard_list = list(dirname.glob('feature_*.npy'))
+        shard_list = shuffle(shard_list, random_state=42)[:n_samples]
 
-            for i, band in enumerate(tqdm(band_group, leave=False)):
-                band_data = []
-                for shard in (pbar := tqdm(shard_list, leave=False)):
-                    pbar.set_description(band)
-                    data = np.load(shard)
-                    band_data.append(np.copy(data[..., i]))
-    
-                band_data = np.vstack(band_data)
-                data_summary['mean'][band] = band_data.mean()
-                data_summary['std'][band] = band_data.std()
+        for i, band in enumerate(tqdm(['B3', 'B8', 'B6', 'B11'], leave=False)):
+            band_data = []
+            for shard in (pbar := tqdm(shard_list, leave=False)):
+                pbar.set_description(band)
+                data = np.load(shard)
+                band_data.append(np.copy(data[..., i]))
+
+            band_data = np.vstack(band_data)
+            data_summary['mean'][band] = band_data.mean()
+            data_summary['std'][band] = band_data.std()
             
         return data_summary
 
