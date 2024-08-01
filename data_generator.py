@@ -44,22 +44,6 @@ class DataGenerator(PyDataset):
                         f'features_{self.year}{s}').joinpath(f'feature_{ID}.npy'))
                     X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
             X.append(self.normalise(X_sentinel, sentinel_bands, self.data_summary))
-
-        if 10 in self.band_indices:
-            X_elevation = np.empty((self.batch_size, 100, 100))
-            for i, ID in enumerate(batch_IDs):
-                X_elevation[i,...] = np.load(self.shards_dir.joinpath(
-                    'elevations').joinpath(f'elevation_{ID}.npy'))
-            X.append(self.normalise(X_elevation, 10, self.data_summary))
-
-        
-        soil_bands = [b for b in self.band_indices if b > 10]
-        if len(soil_bands):
-            X_soil = np.empty((self.batch_size, 4, 4, len(soil_bands)))
-            for i, ID in enumerate(batch_IDs):
-                X_soil[i,...] = np.load(self.shards_dir.joinpath(
-                    'soil').joinpath(f'soil_{ID}.npy'))[..., np.array(soil_bands)-11]
-            X.append(self.normalise(X_soil, soil_bands, self.data_summary))
         
         y = self.selected_classes.loc[batch_IDs].to_numpy()
         return tuple(X), y
