@@ -35,8 +35,8 @@ class DataGenerator(PyDataset):
     def data_generation(self, batch_IDs):
         'Generate batch.'
         
-        sentinel_10m = np.empty((self.batch_size, len(self.seasons), 100, 100, 2))
-        sentinel_20m = np.empty((self.batch_size, len(self.seasons), 50, 50, 2))
+        sentinel_10m = np.empty((self.batch_size, 100, 100, 2))
+        sentinel_20m = np.empty((self.batch_size, 50, 50, 2))
 
         bands_groups = [
             [['B3', 'B8'], sentinel_10m],
