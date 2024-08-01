@@ -14,11 +14,7 @@ class SentinelUtils:
         self.tmp.mkdir(exist_ok=True)
         self.min_occurrences = min_occurrences
         self.all_labels_path = all_labels_path
-        self.sentinel_bands = [f'B{x}' for x in range(2, 9)] + ['B8A', 'B11', 'B12']
-        self.soilgrids_bands = ['bdod', 'cec', 'cfvo', 'clay', 'nitrogen', 'ocd',
-                          'ocs', 'phh2o', 'sand', 'silt', 'soc']
-        self.elevation_band = ['Elevation']
-        self.all_bands = self.sentinel_bands + self.elevation_band + self.soilgrids_bands
+        self.sentinel_band_groups = [['B3', 'B8'], ['B6', 'B11']]
 
     def get_processed_labels(self, overwrite_existing=False):
         selected_classes_path = self.tmp.joinpath(f'selected_classes_{self.min_occurrences}.csv')
@@ -28,21 +24,15 @@ class SentinelUtils:
         else:
             return self.process_labels(selected_classes_path)
 
-    def get_data_summary(self, shards_dir, seasons, selected_classes,
-                         sample_shards=40000, overwrite_existing=False):
+    def get_data_summary(self, shards_dir, selected_classes,
+                         n_samples=40000, overwrite_existing=False):
         
-        summary_path = self.tmp.joinpath(f'data_summary_{"_".join(seasons)}_{self.min_occurrences}.json')
+        summary_path = self.tmp.joinpath(f'data_summary_{self.min_occurrences}.json')
         
         if summary_path.is_file() and not overwrite_existing:
             return json.loads(summary_path.read_text())
-            
-        sentinel_shards = []
-        for s in seasons:
-            path_list = list(shards_dir.joinpath(f'features_2017{s}').glob('feature_*.npy'))
-            sentinel_shards.extend(path_list)
-            
-        sentinel_shards = shuffle(sentinel_shards, random_state=42)[:sample_shards]
-        data_summary = self.process_features(self.all_bands, sentinel_shards)
+
+        data_summary = self.process_features(shards_dir, n_samples)
 
         data_summary['initial_bias'] = self.calculate_initial_bias(selected_classes)
         data_summary['class_weights'] = self.calculate_class_weights(selected_classes)
@@ -51,42 +41,29 @@ class SentinelUtils:
 
         return data_summary
     
-    def process_features(self, sentinel_shards):
+    def process_features(self, shards_dir, n_samples):
         data_summary = {}
         for stat in ['std', 'mean']:
             data_summary[stat] = OrderedDict()
 
-        shards_dir = sentinel_shards[0].parent.parent
-        elevation_shards = list(shards_dir.joinpath('elevations').glob('elevation_*.npy'))
-        elevation_shards = shuffle(elevation_shards, random_state=42)[:len(sentinel_shards)]
-        soil_shards = list(shards_dir.joinpath('soil').glob('soil_*.npy'))
-        soil_shards = shuffle(soil_shards, random_state=42)[:len(sentinel_shards)]
+        for band_group in tqdm(self.sentinel_band_groups):
+            dirname = shards_dir.joinpath(
+                f'features_{"_".join(band_group)}_2017'
+            )
+            shard_list = list(dirname.glob('feature_*.npy'))
+            shard_list = shuffle(shard_list, random_state=42)[:n_samples]
 
-        for i, band in enumerate(tqdm(self.all_bands, leave=False)):
-            band_data = []
-            if i < 10:
-                for shard_path in (pbar := tqdm(sentinel_shards, leave=False)):
+            for i, band in enumerate(tqdm(band_group, leave=False)):
+                band_data = []
+                for shard in (pbar := tqdm(shard_list, leave=False)):
                     pbar.set_description(band)
-                    with open(shard_path, 'rb') as f:
-                        data = np.load(f)
-                        band_data.append(np.copy(data[..., i]))
-            elif i == 10:
-                for shard_path in (pbar := tqdm(elevation_shards, leave=False)):
-                    pbar.set_description(f'Soil {band}')
-                    with open(shard_path, 'rb') as f:
-                        data = np.load(f)
-                        band_data.append(np.copy(data))
-            else:
-                for shard_path in (pbar := tqdm(soil_shards, leave=False)):
-                    pbar.set_description(band)
-                    with open(shard_path, 'rb') as f:
-                        data = np.load(f)
-                        band_data.append(np.copy(data[..., i - 11]))
-
-            band_data = np.vstack(band_data)
-            data_summary['mean'][band] = band_data.mean()
-            data_summary['std'][band] = band_data.std()
-        
+                    data = np.load(shard)
+                    band_data.append(np.copy(data[..., i]))
+    
+                band_data = np.vstack(band_data)
+                data_summary['mean'][band] = band_data.mean()
+                data_summary['std'][band] = band_data.std()
+            
         return data_summary
 
     def calculate_initial_bias(self, selected_labels):

@@ -34,19 +34,24 @@ class DataGenerator(PyDataset):
                 
     def data_generation(self, batch_IDs):
         'Generate batch.'
-        X = []
-        sentinel_bands = [b for b in self.band_indices if b < 10]
-        if sentinel_bands:
-            X_sentinel = np.empty((self.batch_size, len(self.seasons), 100, 100, len(sentinel_bands)))
+        
+        sentinel_10m = np.empty((self.batch_size, len(self.seasons), 100, 100, 2))
+        sentinel_20m = np.empty((self.batch_size, len(self.seasons), 50, 50, 2))
+
+        bands_groups = [
+            [['B3', 'B8'], sentinel_10m],
+            [['B6', 'B11'], sentinel_20m]
+        ]
+        for bands, X_sentinel in band_groups:
+            dirname = self.shards_dir.joinpath(
+                f'features_{"_".join(bands)}_{start_date.year}'
+            )
             for i, ID in enumerate(batch_IDs):
-                for t, s in enumerate(self.seasons):
-                    sentinel_data = np.load(self.shards_dir.joinpath(
-                        f'features_{self.year}{s}').joinpath(f'feature_{ID}.npy'))
-                    X_sentinel[i, t, ...] = sentinel_data[..., sentinel_bands]
-            X.append(self.normalise(X_sentinel, sentinel_bands, self.data_summary))
+                data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
+                X_sentinel[i, ...] = self.normalise(data, sentinel_bands, self.data_summary)
         
         y = self.selected_classes.loc[batch_IDs].to_numpy()
-        return tuple(X), y
+        return tuple(sentinel_10m, sentinel_20m), y
 
     def normalise(self, X, bands, data_summary):
         stats = {}
