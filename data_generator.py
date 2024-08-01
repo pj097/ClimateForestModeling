@@ -38,20 +38,22 @@ class DataGenerator(PyDataset):
         sentinel_10m = np.empty((self.batch_size, 100, 100, 2))
         sentinel_20m = np.empty((self.batch_size, 50, 50, 2))
 
-        bands_groups = [
+        band_groups = [
             [['B3', 'B8'], sentinel_10m],
             [['B6', 'B11'], sentinel_20m]
         ]
-        for bands, X_sentinel in band_groups:
+        for i, (bands, X_sentinel) in enumerate(band_groups):
             dirname = self.shards_dir.joinpath(
-                f'features_{"_".join(bands)}_{start_date.year}'
+                f'features_{"_".join(bands)}_{self.year}'
             )
-            for i, ID in enumerate(batch_IDs):
+            for ii, ID in enumerate(batch_IDs):
                 data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
-                X_sentinel[i, ...] = self.normalise(data, sentinel_bands, self.data_summary)
+                X_sentinel[ii, ...] = self.normalise(
+                    data, [i*len(bands), i*len(bands)+1], self.data_summary
+                )
         
         y = self.selected_classes.loc[batch_IDs].to_numpy()
-        return tuple(sentinel_10m, sentinel_20m), y
+        return (sentinel_10m, sentinel_20m), y
 
     def normalise(self, X, bands, data_summary):
         stats = {}

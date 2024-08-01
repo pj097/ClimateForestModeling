@@ -137,29 +137,22 @@ class KerasModelCreator:
 
     def sentinel_layers(self, x):
         for filters_scale in [2, 4, 8, 16]:
-            x = Conv3D(
+            x = Conv2D(
                 filters=self.base_filters*filters_scale, 
                 kernel_size=3, padding='same',
                 activation='relu',
             )(x)
-            x = MaxPooling3D(pool_size=2, strides=2, padding='same')(x)
+            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
             x = BatchNormalization()(x)
             x = Dropout(self.dropout)(x)
 
-        x = Conv3D(
+        x = Conv2D(
             filters=self.base_filters*32, 
             kernel_size=3, padding='same',
             activation='relu',
         )(x)
             
         x = Flatten()(x)
-
-        # x = Dense(self.base_filters*16, activation='relu')(x)
-        # x = BatchNormalization()(x)
-        # x = Dropout(self.dropout)(x)
-        # x = Dense(self.base_filters*8, activation='relu', name='sentinel')(x)
-        # x = BatchNormalization()(x)
-        # x = Dropout(self.dropout)(x)
         return x
 
     def build_model(self, output_shape, metrics, loss, output_bias=None):
@@ -169,8 +162,8 @@ class KerasModelCreator:
         inputs = []
         co_outputs = []
         
-        sentinel_10m_input = Input((100, 100, 2)))
-        sentinel_20m_input = Input((50, 50, 2)))
+        sentinel_10m_input = Input((100, 100, 2))
+        sentinel_20m_input = Input((50, 50, 2))
        
         sentinel_10m = self.sentinel_layers(sentinel_10m_input)
         sentinel_20m = self.sentinel_layers(sentinel_20m_input)
