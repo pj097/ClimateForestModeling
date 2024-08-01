@@ -199,6 +199,9 @@ class KerasModelCreator:
             
         x = Flatten()(x)
 
+        x = Dense(self.base_filters*16, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Dropout(self.dropout)(x)
         x = Dense(self.base_filters*8, activation='relu', name='sentinel')(x)
         x = BatchNormalization()(x)
         x = Dropout(self.dropout)(x)
