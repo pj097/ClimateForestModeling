@@ -34,42 +34,28 @@ class DataGenerator(PyDataset):
                 
     def data_generation(self, batch_IDs):
         'Generate batch.'
-        X = np.empty((self.batch_size, 100, 100, 4))
-        # sentinel_10m = np.zeros((self.batch_size, 100, 100, 2))
-        # sentinel_20m = np.zeros((self.batch_size, 50, 50, 2))
+        sentinel_10m = np.empty((self.batch_size, 100, 100, 2))
+        sentinel_20m = np.empty((self.batch_size, 50, 50, 2))
 
-        # band_groups = [
-        #     [['B3', 'B8'], sentinel_10m],
-        #     [['B6', 'B11'], sentinel_20m]
-        # ]
+        band_groups = [
+            [['B3', 'B8'], sentinel_10m],
+            [['B6', 'B11'], sentinel_20m]
+        ]
         
-        # for i, (bands, X_sentinel) in enumerate(band_groups):
-        #     for year in self.years:
-        #         dirname = self.shards_dir.joinpath(
-        #             f'features_{"_".join(bands)}_{year}'
-        #         )
-        #         for ii, ID in enumerate(batch_IDs):
-        #             data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
-        #             X_sentinel[ii, ...] += data
+        for i, (bands, X_sentinel) in enumerate(band_groups):
+            dirname = self.shards_dir.joinpath(
+                f'features_{"_".join(bands)}_{self.year}'
+            )
+            for ii, ID in enumerate(batch_IDs):
+                data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
+                X_sentinel[ii, ...] = data
                     
-        #     X_sentinel = self.normalise(
-        #         X_sentinel/len(self.years), [i*len(bands), i*len(bands)+1], self.data_summary
-        #     )
+            X_sentinel = self.normalise(
+                X_sentinel, [i*len(bands), i*len(bands)+1], self.data_summary
+            )
 
-        dirname = self.shards_dir.joinpath(
-            f'features_{self.year}'
-        )
-        for ii, ID in enumerate(batch_IDs):
-            data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
-            X[ii, ...] = data
-            
-        bands = ['B3', 'B8', 'B6', 'B11']
-        X = self.normalise(
-            X, range(len(bands)), self.data_summary
-        )
-        
         y = self.selected_classes.loc[batch_IDs].to_numpy()
-        return X, y
+        return (sentinel_10m, sentinel_20m), y
 
     def normalise(self, X, bands, data_summary):
         stats = {}

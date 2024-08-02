@@ -138,13 +138,10 @@ class KerasModelCreator:
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
 
-        sentinel_10m_input = Input((100, 100, 4))
-        x = sentinel_10m_input
-        # sentinel_20m_input = Input((50, 50, 2))
+        sentinel_10m_input = Input((100, 100, 2))
+        sentinel_20m_input = Input((50, 50, 2))
         
-        # x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
-        
-        # x = concatenate([MaxPooling2D(2)(sentinel_10m_input), sentinel_20m_input])
+        x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         
         for filters_scale in [2, 4, 8, 16, 32]:
             x = Conv2D(
@@ -152,13 +149,12 @@ class KerasModelCreator:
                 kernel_size=3, padding='same',
                 activation='relu',
             )(x)
-            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
+            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)    
             x = BatchNormalization()(x)
-            x = Dropout(self.dropout/2)(x)
             
         x = Flatten()(x)
 
-        for units_scale in [16, 8, 4, 2, 1]:
+        for units_scale in [32, 16, 8, 4]:
             x = Dense(self.base_filters*units_scale, activation='relu')(x)
             x = Dropout(self.dropout)(x)
             x = BatchNormalization()(x)
@@ -166,18 +162,10 @@ class KerasModelCreator:
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
         m = tf.keras.models.Model(
-            inputs=[sentinel_10m_input], 
+            inputs=[sentinel_10m_input, sentinel_20m_input], 
             outputs=outputs
         )
 
-        opt = tf.keras.optimizers.Adam(
-            learning_rate=1e-3,
-            beta_1=0.9,
-            beta_2=0.999,
-        )
-
-        m.compile(optimizer=opt, loss=loss, metrics=metrics)
+        m.compile(optimizer=self.opt, loss=loss, metrics=metrics)
         
         return m
-
-
