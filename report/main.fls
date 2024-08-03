@@ -1077,10 +1077,10 @@ INPUT ./figures/figures_features/soil_hist.pdf
 INPUT figures/figures_features/soil_hist.pdf
 INPUT ./figures/figures_features/soil_hist.pdf
 INPUT ./figures/figures_features/soil_hist.pdf
-INPUT ./chapters/class_analysis.tex
-INPUT chapters/class_analysis.tex
-INPUT ./chapters/class_analysis.tex
-INPUT chapters/class_analysis.tex
+INPUT ./chapters/feature_selection.tex
+INPUT chapters/feature_selection.tex
+INPUT ./chapters/feature_selection.tex
+INPUT chapters/feature_selection.tex
 INPUT ./figures/figures_analysis/seasonal_selection.pdf
 INPUT ./figures/figures_analysis/seasonal_selection.pdf
 INPUT figures/figures_analysis/seasonal_selection.pdf
@@ -1096,6 +1096,11 @@ INPUT ./figures/figures_analysis/band_selection_further.pdf
 INPUT figures/figures_analysis/band_selection_further.pdf
 INPUT ./figures/figures_analysis/band_selection_further.pdf
 INPUT ./figures/figures_analysis/band_selection_further.pdf
+INPUT ./figures/figures_analysis/soil_elevation_analysis.pdf
+INPUT ./figures/figures_analysis/soil_elevation_analysis.pdf
+INPUT figures/figures_analysis/soil_elevation_analysis.pdf
+INPUT ./figures/figures_analysis/soil_elevation_analysis.pdf
+INPUT ./figures/figures_analysis/soil_elevation_analysis.pdf
 INPUT ./main.bbl
 INPUT main.bbl
 INPUT ./main.bbl
