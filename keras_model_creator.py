@@ -7,16 +7,11 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 
 from tensorflow.keras.layers import *
-from tensorflow.keras.initializers import *
-
-import keras_tuner as kt
 
 from sklearn.model_selection import train_test_split
 
 import pandas as pd
 import numpy as np
-
-from pathlib import Path
 
 import data_generator
 from importlib import reload
@@ -53,16 +48,16 @@ class KerasModelCreator:
         metric_names = [m if isinstance(m, str) else m.name for m in metrics]
 
         callbacks = [
-            # tf.keras.callbacks.BackupAndRestore(
-            #     self.model_dir, save_freq='epoch', delete_checkpoint=False
-            # ),
-            # tf.keras.callbacks.CSVLogger(log_file, append=True),
-            # tf.keras.callbacks.ModelCheckpoint(
-            #     self.model_dir.joinpath('model.keras'), mode='max',
-            #     monitor='val_recall', save_best_only=True,
-            #     save_freq='epoch', initial_value_threshold=0.5,
-            #     verbose=self.verbose,
-            # ),
+            tf.keras.callbacks.BackupAndRestore(
+                self.model_dir, save_freq='epoch', delete_checkpoint=False
+            ),
+            tf.keras.callbacks.CSVLogger(log_file, append=True),
+            tf.keras.callbacks.ModelCheckpoint(
+                self.model_dir.joinpath('model.keras'), mode='max',
+                monitor='val_recall', save_best_only=True,
+                save_freq='epoch', initial_value_threshold=0.5,
+                verbose=self.verbose,
+            ),
             tf.keras.callbacks.ReduceLROnPlateau(
                 monitor='val_recall', factor=0.5, patience=4, min_lr=1e-7,
                 verbose=self.verbose,
@@ -73,23 +68,32 @@ class KerasModelCreator:
                 patience=20,
                 mode='max',
                 restore_best_weights=True
+            ),
+            tf.keras.callbacks.TensorBoard(
+                log_dir=self.model_dir.joinpath('tensorboard_logs'),
+                histogram_freq=0,
+                write_graph=True,
+                update_freq='epoch',
+                embeddings_freq=0,
             )
         ]
         return callbacks
 
     def get_metrics(self):
         prc = tf.keras.metrics.AUC(name='prc', curve='PR')
+    
+        f1_score = tf.keras.metrics.FBetaScore(
+            average='weighted', beta=1.0, threshold=0.5, name=f'weightedf1score'
+        )
+        f2_score = tf.keras.metrics.FBetaScore(
+            average='weighted', beta=2.0, threshold=0.5, name=f'weightedf2score'
+        )
 
-        f1_scores = []
-        for average in ['micro', 'macro', 'weighted']:
-            f1_scores.append(
-                tf.keras.metrics.F1Score(
-                    average=average, threshold=0.5, name=f'{average}f1score')
-            )
+        
         metrics = [
-            'accuracy', 'recall', 'precision', 'auc', prc
-        ] + f1_scores
-
+            'accuracy', 'recall', 'precision', 'auc', prc, f1_score, f2_score
+        ] 
+    
         return metrics
         
     def run(self):
@@ -117,24 +121,12 @@ class KerasModelCreator:
 
         training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
         testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
-
-        hypermodel = self.BuildHyperModel(**dict(
-            base_filters=self.base_filters,
-            output_shape=self.selected_classes.shape[1], 
-            metrics=metrics, 
-            loss=self.loss,
-            output_bias=self.data_summary['initial_bias']
-        ))
-
-        tuner = kt.Hyperband(
-            hypermodel,
-            objective=kt.Objective('val_recall', direction='max'),
-            directory=Path('trials'),
-            project_name='hyperband',
-            overwrite=self.overwrite
+        
+        model = self.build_model(
+            self.selected_classes.shape[1], metrics,
+            output_bias=self.data_summary['initial_bias'],
         )
-             
-        tuner.search(
+        model.fit(
             x=training_generator,
             validation_data=testing_generator,
             epochs=self.epochs,
@@ -142,63 +134,41 @@ class KerasModelCreator:
             class_weight=self.data_summary['class_weights'],
             verbose=self.verbose
         )
-        return tuner, testing_generator
+        return model, testing_generator
 
-    class BuildHyperModel(kt.HyperModel):
-        def __init__(self, **kwargs):
-            super().__init__()
-            vars(self).update(kwargs)
-            
-        def build(self, hp):
-            sentinel_10m_input = Input((100, 100, 2))
-            sentinel_20m_input = Input((50, 50, 2))
-            
-            x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
-            filter_power = hp.Int(
-                'filters_scale', min_value=0, max_value=7, step=1
-            )
-            for filters_scale in [2**x for x in range(filter_power+1)]:
-                x = Conv2D(
-                    filters=filters_scale,
-                    kernel_size=hp.Int('kernel_size', min_value=3, max_value=7, step=2),
-                    padding='same',
-                    activation='relu',
-                )(x)
-                x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)    
-                x = BatchNormalization()(x)
-            
-            x = Flatten()(x)
+    def build_model(self, output_shape, metrics, output_bias=None):
+        if output_bias is not None:
+            output_bias = tf.keras.initializers.Constant(output_bias)
 
-            units_power = hp.Int(
-                'units_power', min_value=0, max_value=8, step=1
-            )
-            for units_scale in reversed([2**x for x in range(filter_power+1)]):
-                x = Dense(units_scale, activation='relu')(x)
-                x = BatchNormalization()(x)
-    
-            x = Dropout(hp.Float('dropout_rate', min_value=0.0, max_value=0.8, step=0.1))(x)
-
-            if self.output_bias:
-                output_bias = tf.keras.initializers.Constant(self.output_bias)
-            else:
-                output_bias = None
-
-            outputs = Dense(
-                self.output_shape,
-                bias_initializer=output_bias,
-                activation='sigmoid',   
+        sentinel_10m_input = Input((100, 100, 2))
+        sentinel_20m_input = Input((50, 50, 2))
+        
+        x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+        
+        for filters in [2**p for p in range(3, 6)]:
+            x = Conv2D(
+                filters=filters, 
+                kernel_size=5, padding='same',
+                activation='relu',
             )(x)
-    
-            m = tf.keras.models.Model(
-                inputs=[sentinel_10m_input, sentinel_20m_input], 
-                outputs=outputs
-            )
-    
-            m.compile(
-                optimizer=hp.Choice('optimizer', ['adam', 'sgd']), 
-                loss=self.loss, metrics=self.metrics)
+            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)    
+            x = BatchNormalization()(x)
             
-            return m
+        x = Flatten()(x)
 
+        for units in reversed([2**p for p in range(4, 10)]):
+            x = Dense(units, activation='relu')(x)
+            x = BatchNormalization()(x)
 
+        x = Dropout(0.2)(x)
+        
+        outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
+        m = tf.keras.models.Model(
+            inputs=[sentinel_10m_input, sentinel_20m_input], 
+            outputs=outputs
+        )
+
+        m.compile(optimizer='adam', loss='binary_crossentropy', metrics=metrics)
+        
+        return m

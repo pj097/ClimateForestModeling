@@ -1,3 +1,4 @@
+
 import ee
 import geemap
 from tqdm.notebook import tqdm
@@ -121,46 +122,48 @@ class EEDownloader:
                 data.view((float, len(data.dtype.names)))/10000
             )
             
-    def download_era5(self, gdf, start_date, end_date, weather_dir):
-        # Only interested in one point per sample (ERA5 is 10km resolution)
-        gdf_points = gpd.GeoDataFrame(geometry=gdf.geometry.centroid)
+    def download_era5(self, weather_dir, points, start_date, end_date):
         # Break up the dataframe, otherwise the request is too big
-        chunk_size = 10000
-        chunks = [gdf_points[i: i + chunk_size] for i in range(0, gdf_points.shape[0], chunk_size)]
+        chunk_size = 1000
+        chunks = [points[i: i + chunk_size] for i in range(0, points.shape[0], chunk_size)]
         chunks = [geemap.geopandas_to_ee(c) for c in chunks]
         
-        start = start_date
-        for year in tqdm(range(start_date.year, end_date.year)):
-            save_file = weather_dir.joinpath(f'era5_{year}.csv')
-            # Check if it has already been downloaded
-            if save_file.is_file():
-                continue
-                
-            dfs = []
-            for point_collection in tqdm(chunks, leave=False):
-                era5_bands = ['temperature_2m', 'total_precipitation_sum']
-                era5_image = (
-                    ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY_AGGR")
-                    .select(era5_bands)
-                    .filterBounds(point_collection)
-                    .filterDate(start.replace(year=year), start.replace(year=year+1))
-                    .mean()
-                )
-                # Convert the image to a feature collection
-                means_collection = era5_image.reduceRegions(
-                    point_collection, ee.Reducer.mean().forEachBand(era5_image)
-                )
-                # Create the download and load the URL as a dataframe
-                params = {
-                    'table': means_collection, 'format': 'CSV',
-                    'filename': f'era5_{year}.csv',
-                    'selectors': era5_bands
-                }
-                tableid = ee.data.getTableDownloadId(params)
-                url = ee.data.makeTableDownloadUrl(tableid)
-                dfs.append(pd.read_csv(url))
-            # Finally, concatenate the chunks back into the original shape
-            pd.concat(dfs, ignore_index=True).to_csv(save_file, index=False)
+        era5_bands = []
+        for m in ['min', 'max']:
+            for b in ['temperature_2m', 'total_precipitation', 'dewpoint_temperature_2m']:
+                era5_bands.append(f'{b}_{m}')
+            for i in range(1, 5):
+                era5_bands.append(f'volumetric_soil_water_layer_{i}_{m}')
+        
+        save_file = weather_dir.joinpath(f'era5_{end_date.year}.csv')
+        # Check if it has already been downloaded
+        if save_file.is_file():
+            return
+            
+        dfs = []
+        for point_collection in tqdm(chunks, leave=False):
+            era5_image = (
+                ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY_AGGR")
+                .select(era5_bands)
+                .filterBounds(point_collection)
+                .filterDate(start_date, end_date)
+                .median()
+            )
+            # Convert the image to a feature collection
+            means_collection = era5_image.reduceRegions(
+                point_collection, ee.Reducer.median().forEachBand(era5_image)
+            )
+            # Create the download and load the URL as a dataframe
+            params = {
+                'table': means_collection, 'format': 'CSV',
+                'filename': f'era5_{end_date.year}.csv',
+                'selectors': era5_bands
+            }
+            tableid = ee.data.getTableDownloadId(params)
+            url = ee.data.makeTableDownloadUrl(tableid)
+            dfs.append(pd.read_csv(url))
+        # Finally, concatenate the chunks back into the original shape
+        pd.concat(dfs, ignore_index=True).to_csv(save_file, index=False)
 
 
 
