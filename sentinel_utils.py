@@ -9,12 +9,14 @@ from sklearn.utils import shuffle
 class SentinelUtils:
     def __init__(
         self, tmp=Path('tmp'), min_occurrences=0,
-        all_labels_path=Path('labels', 'full_dummies.csv')):
+        all_labels_path=Path('labels', 'full_dummies.csv')
+    ):
         self.tmp = tmp
         self.tmp.mkdir(exist_ok=True)
         self.min_occurrences = min_occurrences
         self.all_labels_path = all_labels_path
         self.sentinel_band_groups = [['B3', 'B8'], ['B6', 'B11']]
+        self.shards_dir = Path.home().joinpath('sentinel_data', 'shards')
 
     def get_processed_labels(self, overwrite_existing=False):
         selected_classes_path = self.tmp.joinpath(f'selected_classes_{self.min_occurrences}.csv')
@@ -24,15 +26,16 @@ class SentinelUtils:
         else:
             return self.process_labels(selected_classes_path)
 
-    def get_data_summary(self, shards_dir, selected_classes,
-                         n_samples=40000, overwrite_existing=False):
+    def get_data_summary(self, selected_classes,
+                         n_samples=40000, overwrite_existing=False,
+                         training_years='2017_2018_2019'):
         
-        summary_path = self.tmp.joinpath(f'data_summary_{self.min_occurrences}.json')
+        summary_path = self.tmp.joinpath(f'data_summary_{self.min_occurrences}_{training_years}.json')
         
         if summary_path.is_file() and not overwrite_existing:
             return json.loads(summary_path.read_text())
 
-        data_summary = self.process_features(shards_dir, n_samples)
+        data_summary = self.process_features(n_samples, training_years)
 
         data_summary['initial_bias'] = self.calculate_initial_bias(selected_classes)
         data_summary['class_weights'] = self.calculate_class_weights(selected_classes)
@@ -41,29 +44,28 @@ class SentinelUtils:
 
         return data_summary
     
-    def process_features(self, shards_dir, n_samples):
+    def process_features(self, n_samples, training_years):
         data_summary = {}
         for stat in ['std', 'mean']:
             data_summary[stat] = OrderedDict()
 
-        # for band_group in tqdm(self.sentinel_band_groups):
-            # dirname = shards_dir.joinpath(
-            #     f'features_{"_".join(band_group)}_2017'
-            # )
-        dirname = shards_dir.joinpath('features_2017')
-        shard_list = list(dirname.glob('feature_*.npy'))
-        shard_list = shuffle(shard_list, random_state=42)[:n_samples]
-
-        for i, band in enumerate(tqdm(['B3', 'B8', 'B6', 'B11'], leave=False)):
-            band_data = []
-            for shard in (pbar := tqdm(shard_list, leave=False)):
-                pbar.set_description(band)
-                data = np.load(shard)
-                band_data.append(np.copy(data[..., i]))
-
-            band_data = np.vstack(band_data)
-            data_summary['mean'][band] = band_data.mean()
-            data_summary['std'][band] = band_data.std()
+        for band_group in tqdm(self.sentinel_band_groups):
+            dirname = self.shards_dir.joinpath(
+                f'features_{"_".join(band_group)}_{training_years}'
+            )
+            shard_list = list(dirname.glob('feature_*.npy'))
+            shard_list = shuffle(shard_list, random_state=42)[:n_samples]
+    
+            for i, band in enumerate(tqdm(band_group, leave=False)):
+                band_data = []
+                for shard in (pbar := tqdm(shard_list, leave=False)):
+                    pbar.set_description(band)
+                    data = np.load(shard)
+                    band_data.append(np.copy(data[..., i]))
+    
+                band_data = np.vstack(band_data)
+                data_summary['mean'][band] = band_data.mean()
+                data_summary['std'][band] = band_data.std()
             
         return data_summary
 

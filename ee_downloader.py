@@ -123,6 +123,10 @@ class EEDownloader:
             )
             
     def download_era5(self, weather_dir, points, start_date, end_date):
+        save_file = weather_dir.joinpath(f'era5_{end_date.year}.csv')
+        # Check if it has already been downloaded
+        if save_file.is_file():
+            return
         # Break up the dataframe, otherwise the request is too big
         chunk_size = 1000
         chunks = [points[i: i + chunk_size] for i in range(0, points.shape[0], chunk_size)]
@@ -134,11 +138,6 @@ class EEDownloader:
                 era5_bands.append(f'{b}_{m}')
             for i in range(1, 5):
                 era5_bands.append(f'volumetric_soil_water_layer_{i}_{m}')
-        
-        save_file = weather_dir.joinpath(f'era5_{end_date.year}.csv')
-        # Check if it has already been downloaded
-        if save_file.is_file():
-            return
             
         dfs = []
         for point_collection in tqdm(chunks, leave=False):

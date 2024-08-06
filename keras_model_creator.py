@@ -168,7 +168,9 @@ class KerasModelCreator:
             inputs=[sentinel_10m_input, sentinel_20m_input], 
             outputs=outputs
         )
-
-        m.compile(optimizer='adam', loss='binary_crossentropy', metrics=metrics)
+    
+        m.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), 
+                  loss='binary_focal_crossentropy',
+                  metrics=metrics)
         
         return m

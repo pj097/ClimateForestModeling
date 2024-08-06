@@ -1,19 +1,21 @@
 from tensorflow.keras.utils import PyDataset
 import numpy as np
+from pathlib import Path
 
 class DataGenerator(PyDataset):
     'Generates data for Keras'
-    def __init__(self, all_IDs, shuffle, year=2017, **kwargs):
+    def __init__(self, all_IDs, shuffle=False, **kwargs):
         super().__init__()
         vars(self).update(kwargs)
         self.all_IDs = all_IDs
         self.shuffle = shuffle
-        self.year = year
         
         self.use_multiprocessing = True
         self.workers = 4
         self.max_queue_size = 10
         self.on_epoch_end()
+
+        self.shards_dir = Path.home().joinpath('sentinel_data', 'shards')
 
     def __len__(self):
         'Number of batches per epoch.'
@@ -44,7 +46,7 @@ class DataGenerator(PyDataset):
         
         for i, (bands, X_sentinel) in enumerate(band_groups):
             dirname = self.shards_dir.joinpath(
-                f'features_{"_".join(bands)}_{self.year}'
+                f'features_{"_".join(bands)}_{self.years}'
             )
             for ii, ID in enumerate(batch_IDs):
                 data = np.load(dirname.joinpath(f'feature_{ID}.npy'))
