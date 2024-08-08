@@ -89,7 +89,6 @@ class KerasModelCreator:
             average='weighted', beta=2.0, threshold=0.5, name=f'weightedf2score'
         )
 
-        
         metrics = [
             'accuracy', 'recall', 'precision', 'auc', prc, f1_score, f2_score
         ] 
@@ -145,7 +144,7 @@ class KerasModelCreator:
         
         x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         
-        for filters in [2**p for p in range(3, 6)]:
+        for filters in [32, 64]:
             x = Conv2D(
                 filters=filters, 
                 kernel_size=5, padding='same',
@@ -156,7 +155,7 @@ class KerasModelCreator:
             
         x = Flatten()(x)
 
-        for units in reversed([2**p for p in range(4, 10)]):
+        for units in [128, 64, 32]:
             x = Dense(units, activation='relu')(x)
             x = BatchNormalization()(x)
 
@@ -169,8 +168,10 @@ class KerasModelCreator:
             outputs=outputs
         )
     
-        m.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), 
-                  loss='binary_focal_crossentropy',
-                  metrics=metrics)
+        m.compile(
+            optimizer=tf.keras.optimizers.Adam(learning_rate=1e-2), 
+            loss='binary_focal_crossentropy',
+            metrics=metrics
+        )
         
         return m
