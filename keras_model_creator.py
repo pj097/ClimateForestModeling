@@ -16,7 +16,6 @@ import numpy as np
 import data_generator
 from importlib import reload
 reload(data_generator)
-from data_generator import DataGenerator
 
 def brier_score(y_true, y_pred):
     brier_score = tf.reduce_mean((y_pred - y_true) ** 2, axis=1)
@@ -118,8 +117,8 @@ class KerasModelCreator:
         shard_ids = self.selected_classes.index
         training_ids, test_ids = train_test_split(shard_ids, test_size=10000, random_state=42)
 
-        training_generator = DataGenerator(training_ids, shuffle=True, **self.kwargs)
-        testing_generator = DataGenerator(test_ids, shuffle=False, **self.kwargs)
+        training_generator = data_generator.DataGenerator(training_ids, shuffle=True, **self.kwargs)
+        testing_generator = data_generator.DataGenerator(test_ids, shuffle=False, **self.kwargs)
         
         model = self.build_model(
             self.selected_classes.shape[1], metrics,
@@ -143,23 +142,25 @@ class KerasModelCreator:
         sentinel_20m_input = Input((50, 50, 2))
         
         x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
-        
-        for filters in [32, 64]:
+
+        for filters in [16, 32, 64, 128]:
             x = Conv2D(
                 filters=filters, 
-                kernel_size=5, padding='same',
-                activation='relu',
+                kernel_size=3, padding='same',
+                activation='leaky_relu',
+                kernel_regularizer='l1l2'
             )(x)
             x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)    
             x = BatchNormalization()(x)
-            
+
+        x = SpatialDropout2D(0.1)(x)
         x = Flatten()(x)
 
-        for units in [128, 64, 32]:
-            x = Dense(units, activation='relu')(x)
+        for units in [256, 128, 64, 32]:
+            x = Dense(units, activation='leaky_relu', kernel_regularizer='l1l2')(x)
             x = BatchNormalization()(x)
 
-        x = Dropout(0.2)(x)
+        x = Dropout(0.1)(x)
         
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
@@ -169,7 +170,7 @@ class KerasModelCreator:
         )
     
         m.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=1e-2), 
+            optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4), 
             loss='binary_focal_crossentropy',
             metrics=metrics
         )

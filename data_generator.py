@@ -4,7 +4,9 @@ from pathlib import Path
 
 class DataGenerator(PyDataset):
     'Generates data for Keras'
-    def __init__(self, all_IDs, shuffle=False, **kwargs):
+    def __init__(self, all_IDs, shuffle=False,
+                 shards_dir=Path.home().joinpath('sentinel_data', 'shards'),
+                 **kwargs):
         super().__init__()
         vars(self).update(kwargs)
         self.all_IDs = all_IDs
@@ -15,7 +17,7 @@ class DataGenerator(PyDataset):
         self.max_queue_size = 10
         self.on_epoch_end()
 
-        self.shards_dir = Path.home().joinpath('sentinel_data', 'shards')
+        self.shards_dir = shards_dir
 
     def __len__(self):
         'Number of batches per epoch.'

@@ -9,14 +9,15 @@ from sklearn.utils import shuffle
 class SentinelUtils:
     def __init__(
         self, tmp=Path('tmp'), min_occurrences=0,
-        all_labels_path=Path('labels', 'full_dummies.csv')
+        all_labels_path=Path('labels', 'full_dummies.csv'),
+        shards_dir=Path.home().joinpath('sentinel_data', 'shards')
     ):
         self.tmp = tmp
         self.tmp.mkdir(exist_ok=True)
         self.min_occurrences = min_occurrences
         self.all_labels_path = all_labels_path
         self.sentinel_band_groups = [['B3', 'B8'], ['B6', 'B11']]
-        self.shards_dir = Path.home().joinpath('sentinel_data', 'shards')
+        self.shards_dir = shards_dir
 
     def get_processed_labels(self, overwrite_existing=False):
         selected_classes_path = self.tmp.joinpath(f'selected_classes_{self.min_occurrences}.csv')

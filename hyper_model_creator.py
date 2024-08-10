@@ -95,7 +95,7 @@ class BuildHyperModel(kt.HyperModel):
             inputs=[sentinel_10m_input, sentinel_20m_input], 
             outputs=outputs
         )
-        initial_lr = hp.Choice('dropout_rate', [1e-4, 1e-3], default=1e-4)
+        initial_lr = hp.Choice('learning_rate', [1e-4, 1e-3, 1e-2], default=1e-4)
         m.compile(
             optimizer=Adam(learning_rate=initial_lr),
             loss=hp.Choice('loss', ['binary_crossentropy', 'binary_focal_crossentropy']), 
