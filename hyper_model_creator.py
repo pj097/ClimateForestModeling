@@ -34,67 +34,92 @@ class BuildHyperModel(kt.HyperModel):
         return metrics
 
     def initialise_vars(self, hp):
-        batch_choice = hp.Choice('batch_size', [8, 16, 32, 64])
-        use_weights = hp.Boolean('class_weight')
+        use_weights = hp.Boolean('class_weight', default=True)
         
         training_years_choice = hp.Choice(
-            'training_years', ['2017_2018_2019', '2017']
+            'training_years', ['2017_2018_2019', '2017'], 
+            default='2017_2018_2019'
         )
+        
         utils = sentinel_utils.SentinelUtils(min_occurrences=20000)
         self.selected_classes = utils.get_processed_labels()
         self.data_summary = utils.get_data_summary(
             self.selected_classes, training_years=training_years_choice
         )
+
+    def residual_block(self, hp, x, filters):
+        r = BatchNormalization()(x)
+        r = Conv2D(
+            filters=filters, kernel_size=3, strides=2, padding='same',
+            activation=hp.get('activation'), 
+            kernel_regularizer=hp.get('kernel_regularizer')
+        )(r)
+        r = BatchNormalization()(r)
+        r = Conv2D(
+            filters=filters, kernel_size=3, padding='same',
+            activation=hp.get('activation'), 
+            kernel_regularizer=hp.get('kernel_regularizer')
+        )(r)
+        r = Conv2D(
+            filters=1, kernel_size=1,
+            activation=hp.get('activation'), 
+            kernel_regularizer=hp.get('kernel_regularizer')
+        )(r)
+        x = Conv2D(
+            filters=filters, kernel_size=3, strides=2, padding='same',
+            activation=hp.get('activation'), 
+            kernel_regularizer=hp.get('kernel_regularizer')
+        )(x)
+        
+        return Add()([x, r])
         
     def build(self, hp):
         self.initialise_vars(hp)
         
         sentinel_10m_input = Input((100, 100, 2))
         sentinel_20m_input = Input((50, 50, 2))
-        x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+
+        kernel_regularizer = hp.Choice(
+            'kernel_regularizer', ['l1', 'l2', 'l1l2'], default='l1l2'
+        )
+        spatial_dropout = hp.Float(
+            'spatial_dropout', min_value=0.1, max_value=0.5, step=0.2, default=0.3
+        )
+        activation = hp.Choice(
+            'activation', ['relu', 'leaky_relu'], default='leaky_relu'
+        )
+        x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+        x = BatchNormalization()(x0)
+        
+        for filter_size in [128, 256, 512]:
+            x = self.residual_block(hp, x, filter_size)
+            x = SpatialDropout2D(spatial_dropout)(x)
 
         x = MaxPooling2D(
-            pool_size=hp.Choice('pool_size', [2, 4]), padding='same'
-        )(x) 
-        
-        kernel_regularizer = hp.Choice('kernel_regularizer', ['l1', 'l2', 'l1l2'])
-
-        # filter_power = hp.Int('filters_power', min_value=5, max_value=8, step=1)
-        # for filter_size in [2**x for x in range(filter_power, filter_power+3)]:
-        for filter_size in [256, 512, 1024]:
-            x = Conv2D(
-                filters=filter_size,
-                kernel_size=hp.Choice('kernel_size', [3, 5]),
-                padding='same',
-                activation=hp.Choice('activation', ['relu', 'leaky_relu']),
-                kernel_regularizer=kernel_regularizer,
-            )(x)
-            x = MaxPooling2D(
-                pool_size=hp.get('pool_size'), padding='same'
-            )(x)    
-            x = BatchNormalization()(x)
-            # x = SpatialDropout2D(
-            #     hp.Float('spatial_dropout', min_value=0.1, max_value=0.5, step=0.2)
-            # )(x)
+            pool_size=hp.Choice('pool_size', [2, 4], default=4), 
+            padding='same'
+        )(x)    
+        x = BatchNormalization()(x)
         
         x = Flatten()(x)
 
-        # units_power = hp.Int('units_power', min_value=9, max_value=12, step=1)
-        # for units in reversed([2**x for x in range(6, filter_power+1)]):
+        dropout = hp.Float(
+            'dropout', min_value=0.1, max_value=0.5, step=0.2, default=0.3
+        )
         for units in [1024, 512, 256]:
             x = Dense(
                 units, 
-                activation=hp.get('activation'),
+                activation=activation,
                 kernel_regularizer=kernel_regularizer
             )(x)
             x = BatchNormalization()(x)
-            # x = Dropout(hp.Float('dropout', min_value=0.1, max_value=0.5, step=0.2))(x)
+            x = Dropout(dropout)(x)
             
         outputs = Dense(
             self.selected_classes.shape[1],
             bias_initializer=(
                 tf.keras.initializers.Constant(self.data_summary['initial_bias']) 
-                if hp.Boolean('bias_initializer') else None
+                if hp.Boolean('bias_initializer', default=True) else None
             ),
             activation='sigmoid',   
         )(x)
@@ -104,9 +129,15 @@ class BuildHyperModel(kt.HyperModel):
         )
         m.compile(
             optimizer=Adam(
-                learning_rate=hp.Choice('learning_rate', [1e-4, 1e-3, 1e-2])
+                learning_rate=hp.Choice(
+                    'learning_rate', [1e-4, 1e-3, 1e-2], default=1e-3
+                )
             ),
-            loss=hp.Choice('loss_function', ['binary_crossentropy', 'binary_focal_crossentropy']), 
+            loss=hp.Choice(
+                'loss_function', 
+                ['binary_crossentropy', 'binary_focal_crossentropy'],
+                default='binary_focal_crossentropy'
+            ), 
             metrics=self.get_metrics()
         )
         return m
@@ -119,7 +150,7 @@ class BuildHyperModel(kt.HyperModel):
             selected_classes=self.selected_classes,
             data_summary=self.data_summary,
             years=hp.get('training_years'),
-            batch_size=hp.get('batch_size'),
+            batch_size=32,
         )
         training_generator = data_generator.DataGenerator(
             training_ids, **gen_params)

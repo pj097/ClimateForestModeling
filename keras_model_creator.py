@@ -154,8 +154,8 @@ class KerasModelCreator:
             filters=filters, kernel_size=3, strides=2, padding='same',
             activation='leaky_relu', kernel_regularizer='l1l2'
         )(x)
-        out = Add()([x, r])
-        return out
+        
+        return Add()([x, r])
 
     def build_model(self, output_shape, metrics, output_bias=None):
         if output_bias is not None:
