@@ -53,16 +53,16 @@ class KerasModelCreator:
             tf.keras.callbacks.CSVLogger(log_file, append=True),
             tf.keras.callbacks.ModelCheckpoint(
                 self.model_dir.joinpath('model.keras'), mode='max',
-                monitor='val_recall', save_best_only=True,
+                monitor='weightedf2score', save_best_only=True,
                 save_freq='epoch', initial_value_threshold=0.5,
                 verbose=self.verbose,
             ),
             tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_recall', factor=0.5, patience=4, min_lr=1e-7,
+                monitor='weightedf2score', factor=0.5, patience=10, min_lr=1e-7,
                 verbose=self.verbose,
             ),
             tf.keras.callbacks.EarlyStopping(
-                monitor='val_recall', 
+                monitor='weightedf2score', 
                 verbose=self.verbose,
                 patience=20,
                 mode='max',
@@ -124,6 +124,7 @@ class KerasModelCreator:
             self.selected_classes.shape[1], metrics,
             output_bias=self.data_summary['initial_bias'],
         )
+        
         model.fit(
             x=training_generator,
             validation_data=testing_generator,
@@ -134,6 +135,28 @@ class KerasModelCreator:
         )
         return model, testing_generator
 
+    def residual_block(self, x, filters):
+        r = BatchNormalization()(x)
+        r = Conv2D(
+            filters=filters, kernel_size=3, strides=2, padding='same',
+            activation='leaky_relu', kernel_regularizer='l1l2'
+        )(r)
+        r = BatchNormalization()(r)
+        r = Conv2D(
+            filters=filters, kernel_size=3, padding='same',
+            activation='leaky_relu', kernel_regularizer='l1l2'
+        )(r)
+        r = Conv2D(
+            filters=1, kernel_size=1,
+            activation='leaky_relu', kernel_regularizer='l1l2'
+        )(r)
+        x = Conv2D(
+            filters=filters, kernel_size=3, strides=2, padding='same',
+            activation='leaky_relu', kernel_regularizer='l1l2'
+        )(x)
+        out = Add()([x, r])
+        return out
+
     def build_model(self, output_shape, metrics, output_bias=None):
         if output_bias is not None:
             output_bias = tf.keras.initializers.Constant(output_bias)
@@ -141,26 +164,22 @@ class KerasModelCreator:
         sentinel_10m_input = Input((100, 100, 2))
         sentinel_20m_input = Input((50, 50, 2))
         
-        x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+        x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+        
+        x = BatchNormalization()(x0)
+        
+        for filter_size in [128, 256, 512]:
+            x = self.residual_block(x, filter_size)
+            x = SpatialDropout2D(0.3)(x)
 
-        for filters in [16, 32, 64, 128]:
-            x = Conv2D(
-                filters=filters, 
-                kernel_size=3, padding='same',
-                activation='leaky_relu',
-                kernel_regularizer='l1l2'
-            )(x)
-            x = MaxPooling2D(pool_size=2, strides=2, padding='same')(x)    
-            x = BatchNormalization()(x)
-
-        x = SpatialDropout2D(0.1)(x)
+        x = MaxPooling2D(pool_size=4, padding='same')(x)    
+        x = BatchNormalization()(x)
         x = Flatten()(x)
 
-        for units in [256, 128, 64, 32]:
+        for units in [512, 256]:
             x = Dense(units, activation='leaky_relu', kernel_regularizer='l1l2')(x)
             x = BatchNormalization()(x)
-
-        x = Dropout(0.1)(x)
+            x = Dropout(0.3)(x)
         
         outputs = Dense(output_shape, activation='sigmoid', bias_initializer=output_bias)(x)
 
@@ -168,9 +187,9 @@ class KerasModelCreator:
             inputs=[sentinel_10m_input, sentinel_20m_input], 
             outputs=outputs
         )
-    
+        
         m.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4), 
+            optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3), 
             loss='binary_focal_crossentropy',
             metrics=metrics
         )

@@ -34,11 +34,11 @@ class BuildHyperModel(kt.HyperModel):
         return metrics
 
     def initialise_vars(self, hp):
-        batch_choice = hp.Choice('batch_size', [8, 16, 32, 64, 128], default=64)
-        use_weights = hp.Boolean('class_weight', default=True)
+        batch_choice = hp.Choice('batch_size', [8, 16, 32, 64])
+        use_weights = hp.Boolean('class_weight')
         
         training_years_choice = hp.Choice(
-            'training_years', ['2017_2018_2019', '2017'], default='2017'
+            'training_years', ['2017_2018_2019', '2017']
         )
         utils = sentinel_utils.SentinelUtils(min_occurrences=20000)
         self.selected_classes = utils.get_processed_labels()
@@ -52,42 +52,49 @@ class BuildHyperModel(kt.HyperModel):
         sentinel_10m_input = Input((100, 100, 2))
         sentinel_20m_input = Input((50, 50, 2))
         x = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
+
+        x = MaxPooling2D(
+            pool_size=hp.Choice('pool_size', [2, 4]), padding='same'
+        )(x) 
         
-        filter_power = hp.Int('filters_power', min_value=4, max_value=7, step=1)
         kernel_regularizer = hp.Choice('kernel_regularizer', ['l1', 'l2', 'l1l2'])
-        
-        for filters_scale in [2**x for x in range(3, filter_power+1)]:
+
+        # filter_power = hp.Int('filters_power', min_value=5, max_value=8, step=1)
+        # for filter_size in [2**x for x in range(filter_power, filter_power+3)]:
+        for filter_size in [256, 512, 1024]:
             x = Conv2D(
-                filters=filters_scale,
+                filters=filter_size,
                 kernel_size=hp.Choice('kernel_size', [3, 5]),
                 padding='same',
                 activation=hp.Choice('activation', ['relu', 'leaky_relu']),
                 kernel_regularizer=kernel_regularizer,
             )(x)
             x = MaxPooling2D(
-                pool_size=hp.Choice('pool_size', [2, 4]), padding='same'
+                pool_size=hp.get('pool_size'), padding='same'
             )(x)    
             x = BatchNormalization()(x)
-
-        x = SpatialDropout2D(hp.Float('spatial_dropout', min_value=0.0, max_value=0.2, step=0.1))(x)
+            # x = SpatialDropout2D(
+            #     hp.Float('spatial_dropout', min_value=0.1, max_value=0.5, step=0.2)
+            # )(x)
         
         x = Flatten()(x)
 
-        units_power = hp.Int('units_power', min_value=4, max_value=8, step=1)
-        for units_scale in reversed([2**x for x in range(4, filter_power+1)]):
+        # units_power = hp.Int('units_power', min_value=9, max_value=12, step=1)
+        # for units in reversed([2**x for x in range(6, filter_power+1)]):
+        for units in [1024, 512, 256]:
             x = Dense(
-                units_scale, activation=hp.get('activation'),
+                units, 
+                activation=hp.get('activation'),
                 kernel_regularizer=kernel_regularizer
             )(x)
             x = BatchNormalization()(x)
-
-        x = Dropout(hp.Float('dropout', min_value=0.1, max_value=0.3, step=0.1))(x)
+            # x = Dropout(hp.Float('dropout', min_value=0.1, max_value=0.5, step=0.2))(x)
             
         outputs = Dense(
             self.selected_classes.shape[1],
             bias_initializer=(
                 tf.keras.initializers.Constant(self.data_summary['initial_bias']) 
-                if hp.Boolean('output_bias') else None
+                if hp.Boolean('bias_initializer') else None
             ),
             activation='sigmoid',   
         )(x)
@@ -95,10 +102,11 @@ class BuildHyperModel(kt.HyperModel):
             inputs=[sentinel_10m_input, sentinel_20m_input], 
             outputs=outputs
         )
-        initial_lr = hp.Choice('learning_rate', [1e-4, 1e-3, 1e-2], default=1e-4)
         m.compile(
-            optimizer=Adam(learning_rate=initial_lr),
-            loss=hp.Choice('loss', ['binary_crossentropy', 'binary_focal_crossentropy']), 
+            optimizer=Adam(
+                learning_rate=hp.Choice('learning_rate', [1e-4, 1e-3, 1e-2])
+            ),
+            loss=hp.Choice('loss_function', ['binary_crossentropy', 'binary_focal_crossentropy']), 
             metrics=self.get_metrics()
         )
         return m
