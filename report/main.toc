@@ -7,5 +7,5 @@
 \contentsline {section}{\numberline {2.1}Sentinel-2 Seasons}{10}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Sentinel-2 Bands}{11}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Soil and Elevation}{13}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Neural Network}{14}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Neural Network Configuration}{14}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Hyperparameter Optimisation}{14}{section.3.1}%

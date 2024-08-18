@@ -26,6 +26,19 @@ class EEDownloader:
       )
       return image.updateMask(mask)
 
+    # def get_sentinel_image(self, start_date, end_date, selected_bands):
+    #     image = (
+    #         ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+    #         .filterDate(start_date, end_date)
+    #         .filter(ee.Filter.calendarRange(start_date.month, end_date.month, 'month'))
+    #         # Pre-filter to get less cloudy granules.
+    #         .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
+    #         .map(self.mask_s2_clouds)
+    #         .select(selected_bands)
+    #         .median()
+    #     )
+    #     return image
+
     def get_sentinel_image(self, start_date, end_date, selected_bands):
         image = (
             ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')

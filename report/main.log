@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.7.25)  18 AUG 2024 16:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.7.25)  18 AUG 2024 19:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -481,7 +481,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip72
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 116.
+Package hyperref Info: Option `colorlinks' set `true' on input line 117.
  (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip73
@@ -496,24 +496,24 @@ Package: appendix 2020/02/08 v1.2c extra appendix facilities
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -579,7 +579,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 127.
+Package hyperref Info: Link coloring ON on input line 128.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -653,7 +653,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] (./chapters/class_data.tex
 Chapter 1.
-<figures/figures_labels/genus_cutoff_map.png, id=141, 1409.265pt x 950.55125pt>
+<figures/figures_labels/genus_cutoff_map.png, id=144, 1409.265pt x 950.55125pt>
 File: figures/figures_labels/genus_cutoff_map.png Graphic file (type png)
 <use figures/figures_labels/genus_cutoff_map.png>
 Package pdftex.def Info: figures/figures_labels/genus_cutoff_map.png  used on input line 7.
@@ -662,12 +662,12 @@ LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 1
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 File: ts1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-<figures/figures_labels/genus_cutoff.pdf, id=145, 527.08919pt x 376.52669pt>
+<figures/figures_labels/genus_cutoff.pdf, id=148, 527.08919pt x 376.52669pt>
 File: figures/figures_labels/genus_cutoff.pdf Graphic file (type pdf)
 <use figures/figures_labels/genus_cutoff.pdf>
 Package pdftex.def Info: figures/figures_labels/genus_cutoff.pdf  used on input line 20.
 (pdftex.def)             Requested size: 203.54713pt x 163.00067pt.
-<figures/figures_labels/species_cutoff.pdf, id=146, 527.08919pt x 376.52669pt>
+<figures/figures_labels/species_cutoff.pdf, id=149, 527.08919pt x 376.52669pt>
 File: figures/figures_labels/species_cutoff.pdf Graphic file (type pdf)
 <use figures/figures_labels/species_cutoff.pdf>
 Package pdftex.def Info: figures/figures_labels/species_cutoff.pdf  used on input line 21.
@@ -676,12 +676,12 @@ Package pdftex.def Info: figures/figures_labels/species_cutoff.pdf  used on inpu
 
 
  <./figures/figures_labels/genus_cutoff_map.png>]
-<figures/figures_labels/grouped_genus.pdf, id=158, 527.08919pt x 376.52669pt>
+<figures/figures_labels/grouped_genus.pdf, id=161, 527.08919pt x 376.52669pt>
 File: figures/figures_labels/grouped_genus.pdf Graphic file (type pdf)
 <use figures/figures_labels/grouped_genus.pdf>
 Package pdftex.def Info: figures/figures_labels/grouped_genus.pdf  used on input line 34.
 (pdftex.def)             Requested size: 203.54713pt x 163.00067pt.
-<figures/figures_labels/grouped_species.pdf, id=159, 527.08919pt x 376.52669pt>
+<figures/figures_labels/grouped_species.pdf, id=162, 527.08919pt x 376.52669pt>
 File: figures/figures_labels/grouped_species.pdf Graphic file (type pdf)
 <use figures/figures_labels/grouped_species.pdf>
 Package pdftex.def Info: figures/figures_labels/grouped_species.pdf  used on input line 35.
@@ -689,69 +689,69 @@ Package pdftex.def Info: figures/figures_labels/grouped_species.pdf  used on inp
 
 
 pdfTeX warning: pdflatex (file ./figures/figures_sentinel/Sentinel-2-infographic.pdf): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<figures/figures_sentinel/Sentinel-2-infographic.pdf, id=162, 845.0471pt x 597.50829pt>
+<figures/figures_sentinel/Sentinel-2-infographic.pdf, id=165, 845.0471pt x 597.50829pt>
 File: figures/figures_sentinel/Sentinel-2-infographic.pdf Graphic file (type pdf)
 <use figures/figures_sentinel/Sentinel-2-infographic.pdf>
 Package pdftex.def Info: figures/figures_sentinel/Sentinel-2-infographic.pdf  used on input line 48.
 (pdftex.def)             Requested size: 381.6517pt x 269.85178pt.
 [2 <./figures/figures_labels/genus_cutoff.pdf> <./figures/figures_labels/species_cutoff.pdf> <./figures/figures_labels/grouped_genus.pdf> <./figures/figures_labels/grouped_species.pdf>]
-<figures/figures_sentinel/sample_area_earth.png, id=212, 697.10437pt x 575.14874pt>
+<figures/figures_sentinel/sample_area_earth.png, id=215, 697.10437pt x 575.14874pt>
 File: figures/figures_sentinel/sample_area_earth.png Graphic file (type png)
 <use figures/figures_sentinel/sample_area_earth.png>
 Package pdftex.def Info: figures/figures_sentinel/sample_area_earth.png  used on input line 65.
 (pdftex.def)             Requested size: 203.54713pt x 167.93852pt.
-<figures/figures_sentinel/sample_area_sentinel.png, id=213, 695.59875pt x 576.65437pt>
+<figures/figures_sentinel/sample_area_sentinel.png, id=216, 695.59875pt x 576.65437pt>
 File: figures/figures_sentinel/sample_area_sentinel.png Graphic file (type png)
 <use figures/figures_sentinel/sample_area_sentinel.png>
 Package pdftex.def Info: figures/figures_sentinel/sample_area_sentinel.png  used on input line 66.
 (pdftex.def)             Requested size: 203.54713pt x 168.7389pt.
  [3 <./figures/figures_sentinel/Sentinel-2-infographic.pdf>]
-<figures/figures_sentinel/sample_earth.png, id=713, 947.79094pt x 818.30719pt>
+<figures/figures_sentinel/sample_earth.png, id=716, 947.79094pt x 818.30719pt>
 File: figures/figures_sentinel/sample_earth.png Graphic file (type png)
 <use figures/figures_sentinel/sample_earth.png>
 Package pdftex.def Info: figures/figures_sentinel/sample_earth.png  used on input line 79.
 (pdftex.def)             Requested size: 203.54713pt x 175.73283pt.
-<figures/figures_sentinel/sample_sentinel.png, id=714, 952.30782pt x 824.32968pt>
+<figures/figures_sentinel/sample_sentinel.png, id=717, 952.30782pt x 824.32968pt>
 File: figures/figures_sentinel/sample_sentinel.png Graphic file (type png)
 <use figures/figures_sentinel/sample_sentinel.png>
 Package pdftex.def Info: figures/figures_sentinel/sample_sentinel.png  used on input line 80.
 (pdftex.def)             Requested size: 203.54713pt x 176.18343pt.
-<figures/figures_features/bgr_hist.pdf, id=717, 527.08919pt x 264.02641pt>
+<figures/figures_features/bgr_hist.pdf, id=720, 527.08919pt x 264.02641pt>
 File: figures/figures_features/bgr_hist.pdf Graphic file (type pdf)
 <use figures/figures_features/bgr_hist.pdf>
 Package pdftex.def Info: figures/figures_features/bgr_hist.pdf  used on input line 91.
 (pdftex.def)             Requested size: 415.5773pt x 156.46211pt.
-<figures/figures_features/nir_hist.pdf, id=719, 527.08919pt x 264.02641pt>
+<figures/figures_features/nir_hist.pdf, id=722, 527.08919pt x 264.02641pt>
 File: figures/figures_features/nir_hist.pdf Graphic file (type pdf)
 <use figures/figures_features/nir_hist.pdf>
 Package pdftex.def Info: figures/figures_features/nir_hist.pdf  used on input line 99.
 (pdftex.def)             Requested size: 415.5773pt x 156.46211pt.
-<figures/figures_features/swir_hist.pdf, id=721, 527.08919pt x 264.02641pt>
+<figures/figures_features/swir_hist.pdf, id=724, 527.08919pt x 264.02641pt>
 File: figures/figures_features/swir_hist.pdf Graphic file (type pdf)
 <use figures/figures_features/swir_hist.pdf>
 Package pdftex.def Info: figures/figures_features/swir_hist.pdf  used on input line 107.
 (pdftex.def)             Requested size: 415.5773pt x 156.46211pt.
  [4 <./figures/figures_sentinel/sample_area_earth.png> <./figures/figures_sentinel/sample_area_sentinel.png> <./figures/figures_sentinel/sample_earth.png> <./figures/figures_sentinel/sample_sentinel.png>]
-<figures/figures_features/season_correlation.pdf, id=737, 527.08919pt x 376.52669pt>
+<figures/figures_features/season_correlation.pdf, id=740, 527.08919pt x 376.52669pt>
 File: figures/figures_features/season_correlation.pdf Graphic file (type pdf)
 <use figures/figures_features/season_correlation.pdf>
 Package pdftex.def Info: figures/figures_features/season_correlation.pdf  used on input line 124.
 (pdftex.def)             Requested size: 381.6517pt x 245.22168pt.
  [5 <./figures/figures_features/bgr_hist.pdf> <./figures/figures_features/nir_hist.pdf>] [6 <./figures/figures_features/swir_hist.pdf>]
-<figures/figures_features/elevation_hist.pdf, id=822, 527.08919pt x 264.02641pt>
+<figures/figures_features/elevation_hist.pdf, id=826, 527.08919pt x 264.02641pt>
 File: figures/figures_features/elevation_hist.pdf Graphic file (type pdf)
 <use figures/figures_features/elevation_hist.pdf>
 Package pdftex.def Info: figures/figures_features/elevation_hist.pdf  used on input line 147.
 (pdftex.def)             Requested size: 415.5773pt x 156.46211pt.
  [7 <./figures/figures_features/season_correlation.pdf>]
-<figures/figures_features/soil_hist.pdf, id=846, 527.08919pt x 264.02641pt>
+<figures/figures_features/soil_hist.pdf, id=849, 527.08919pt x 264.02641pt>
 File: figures/figures_features/soil_hist.pdf Graphic file (type pdf)
 <use figures/figures_features/soil_hist.pdf>
 Package pdftex.def Info: figures/figures_features/soil_hist.pdf  used on input line 161.
 (pdftex.def)             Requested size: 415.5773pt x 181.29388pt.
  [8 <./figures/figures_features/elevation_hist.pdf> <./figures/figures_features/soil_hist.pdf>]) (./chapters/feature_selection.tex [9]
 Chapter 2.
-<figures/figures_analysis/seasonal_selection.pdf, id=928, 527.08919pt x 376.52669pt>
+<figures/figures_analysis/seasonal_selection.pdf, id=931, 527.08919pt x 376.52669pt>
 File: figures/figures_analysis/seasonal_selection.pdf Graphic file (type pdf)
 <use figures/figures_analysis/seasonal_selection.pdf>
 Package pdftex.def Info: figures/figures_analysis/seasonal_selection.pdf  used on input line 11.
@@ -759,18 +759,18 @@ Package pdftex.def Info: figures/figures_analysis/seasonal_selection.pdf  used o
 [10
 
  <./figures/figures_analysis/seasonal_selection.pdf>]
-<figures/figures_analysis/band_selection.pdf, id=955, 527.08919pt x 376.52669pt>
+<figures/figures_analysis/band_selection.pdf, id=958, 527.08919pt x 376.52669pt>
 File: figures/figures_analysis/band_selection.pdf Graphic file (type pdf)
 <use figures/figures_analysis/band_selection.pdf>
 Package pdftex.def Info: figures/figures_analysis/band_selection.pdf  used on input line 32.
 (pdftex.def)             Requested size: 381.6517pt x 235.35275pt.
-<figures/figures_analysis/band_selection_further.pdf, id=960, 527.08919pt x 376.52669pt>
+<figures/figures_analysis/band_selection_further.pdf, id=963, 527.08919pt x 376.52669pt>
 File: figures/figures_analysis/band_selection_further.pdf Graphic file (type pdf)
 <use figures/figures_analysis/band_selection_further.pdf>
 Package pdftex.def Info: figures/figures_analysis/band_selection_further.pdf  used on input line 43.
 (pdftex.def)             Requested size: 381.6517pt x 235.35275pt.
  [11] [12 <./figures/figures_analysis/band_selection.pdf> <./figures/figures_analysis/band_selection_further.pdf>]
-<figures/figures_analysis/soil_elevation_analysis.pdf, id=1010, 527.08919pt x 376.52669pt>
+<figures/figures_analysis/soil_elevation_analysis.pdf, id=1013, 527.08919pt x 376.52669pt>
 File: figures/figures_analysis/soil_elevation_analysis.pdf Graphic file (type pdf)
 <use figures/figures_analysis/soil_elevation_analysis.pdf>
 Package pdftex.def Info: figures/figures_analysis/soil_elevation_analysis.pdf  used on input line 54.
@@ -779,40 +779,36 @@ Package pdftex.def Info: figures/figures_analysis/soil_elevation_analysis.pdf  u
 
  <./figures/figures_analysis/soil_elevation_analysis.pdf>]
 Chapter 3.
-<figures/figures_tuner/fixed_layers.pdf, id=1031, 527.08919pt x 376.52669pt>
+(./figures/figures_tuner/fixed_layers.tex)
+<figures/figures_tuner/fixed_layers.pdf, id=1035, 527.08919pt x 376.52669pt>
 File: figures/figures_tuner/fixed_layers.pdf Graphic file (type pdf)
 <use figures/figures_tuner/fixed_layers.pdf>
-Package pdftex.def Info: figures/figures_tuner/fixed_layers.pdf  used on input line 7.
+Package pdftex.def Info: figures/figures_tuner/fixed_layers.pdf  used on input line 32.
 (pdftex.def)             Requested size: 381.6517pt x 261.2217pt.
-) (./main.bbl [14
+) [14
 
- <./figures/figures_tuner/fixed_layers.pdf>]
+] (./main.bbl [15 <./figures/figures_tuner/fixed_layers.pdf>]
 LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <10.95> not available
 (Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 7.
-)
-
-Package caption Warning: Unused \captionsetup[table] on input line 130.
-See the caption package documentation for explanation.
-
-[15
+) [16
 
 ] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 249FAAD3B02ADB36D3CA186F3C95F855;1554.
+(rerunfilecheck)             Checksum: 0F56BD84E334A4D93172AEA73B5B5E9F;1627.
  ) 
 Here is how much of TeX's memory you used:
- 21180 strings out of 476091
- 368901 string characters out of 5794081
+ 21189 strings out of 476091
+ 369144 string characters out of 5794081
  1861330 words of memory out of 5000000
- 41141 multiletter control sequences out of 15000+600000
+ 41146 multiletter control sequences out of 15000+600000
  521313 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,77p,1035b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,77p,1035b,458s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1095.pfb>
-Output written on main.pdf (21 pages, 11332478 bytes).
+Output written on main.pdf (22 pages, 11335812 bytes).
 PDF statistics:
- 1130 PDF objects out of 1200 (max. 8388607)
- 701 compressed objects within 8 object streams
- 57 named destinations out of 1000 (max. 500000)
+ 1139 PDF objects out of 1200 (max. 8388607)
+ 709 compressed objects within 8 object streams
+ 59 named destinations out of 1000 (max. 500000)
  265 words of extra memory for PDF output out of 10000 (max. 10000000)
 

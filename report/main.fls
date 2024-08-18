@@ -516,6 +516,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/rotating.sty
@@ -1116,6 +1117,10 @@ INPUT ./chapters/hyper.tex
 INPUT chapters/hyper.tex
 INPUT ./chapters/hyper.tex
 INPUT chapters/hyper.tex
+INPUT ./figures/figures_tuner/fixed_layers.tex
+INPUT figures/figures_tuner/fixed_layers.tex
+INPUT ./figures/figures_tuner/fixed_layers.tex
+INPUT figures/figures_tuner/fixed_layers.tex
 INPUT ./figures/figures_tuner/fixed_layers.pdf
 INPUT ./figures/figures_tuner/fixed_layers.pdf
 INPUT figures/figures_tuner/fixed_layers.pdf
