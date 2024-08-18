@@ -37,8 +37,7 @@ class BuildHyperModel(kt.HyperModel):
         use_weights = hp.Boolean('class_weight', default=True)
         
         training_years_choice = hp.Choice(
-            'training_years', ['2017_2018_2019', '2017'], 
-            default='2017_2018_2019'
+            'training_years', ['2017_2018_2019', '2017']
         )
         
         utils = sentinel_utils.SentinelUtils(min_occurrences=20000)
@@ -79,15 +78,12 @@ class BuildHyperModel(kt.HyperModel):
         sentinel_10m_input = Input((100, 100, 2))
         sentinel_20m_input = Input((50, 50, 2))
 
-        kernel_regularizer = hp.Choice(
-            'kernel_regularizer', ['l1', 'l2', 'l1l2'], default='l1l2'
-        )
-        spatial_dropout = hp.Float(
-            'spatial_dropout', min_value=0.1, max_value=0.5, step=0.2, default=0.3
-        )
-        activation = hp.Choice(
-            'activation', ['relu', 'leaky_relu'], default='leaky_relu'
-        )
+        kernel_regularizer = hp.Choice('kernel_regularizer', ['l1l2', 'l1', 'l2'])
+        
+        spatial_dropout = hp.Choice('spatial_dropout', [0.3, 0.1, 0.5])
+        
+        activation = hp.Choice('activation', ['leaky_relu', 'relu'])
+        
         x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         x = BatchNormalization()(x0)
         
@@ -96,17 +92,16 @@ class BuildHyperModel(kt.HyperModel):
             x = SpatialDropout2D(spatial_dropout)(x)
 
         x = MaxPooling2D(
-            pool_size=hp.Choice('pool_size', [2, 4], default=4), 
+            pool_size=hp.Choice('pool_size', [4, 2]), 
             padding='same'
         )(x)    
         x = BatchNormalization()(x)
         
         x = Flatten()(x)
 
-        dropout = hp.Float(
-            'dropout', min_value=0.1, max_value=0.5, step=0.2, default=0.3
-        )
-        for units in [1024, 512, 256]:
+        dropout = hp.Choice('dropout', [0.3, 0.1, 0.5])
+        
+        for units in [512, 256]:
             x = Dense(
                 units, 
                 activation=activation,
@@ -129,14 +124,11 @@ class BuildHyperModel(kt.HyperModel):
         )
         m.compile(
             optimizer=Adam(
-                learning_rate=hp.Choice(
-                    'learning_rate', [1e-4, 1e-3, 1e-2], default=1e-3
-                )
+                learning_rate=hp.Choice('learning_rate', [1e-3, 1e-4, 1e-2])
             ),
             loss=hp.Choice(
                 'loss_function', 
-                ['binary_crossentropy', 'binary_focal_crossentropy'],
-                default='binary_focal_crossentropy'
+                ['binary_focal_crossentropy', 'binary_crossentropy'],
             ), 
             metrics=self.get_metrics()
         )
@@ -150,7 +142,7 @@ class BuildHyperModel(kt.HyperModel):
             selected_classes=self.selected_classes,
             data_summary=self.data_summary,
             years=hp.get('training_years'),
-            batch_size=32,
+            batch_size=64,
         )
         training_generator = data_generator.DataGenerator(
             training_ids, **gen_params)
@@ -160,7 +152,8 @@ class BuildHyperModel(kt.HyperModel):
         return model.fit(
             x=training_generator,
             validation_data=testing_generator,
-            class_weight=(self.data_summary['class_weights'] 
-                          if hp.get('class_weight') else None),
+            class_weight=(
+                self.data_summary['class_weights'] if hp.get('class_weight') else None
+            ),
             **kwargs,
         )

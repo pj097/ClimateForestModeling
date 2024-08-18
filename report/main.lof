@@ -9,10 +9,12 @@
 \contentsline {figure}{\numberline {1.8}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalisation (right) for NIR.\relax }}{5}{figure.caption.13}%
 \contentsline {figure}{\numberline {1.9}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalisation (right) for SWIR.\relax }}{6}{figure.caption.14}%
 \contentsline {figure}{\numberline {1.10}{\ignorespaces Seasonal Sentinel-2 band correlations.\relax }}{7}{figure.caption.15}%
-\contentsline {figure}{\numberline {1.11}{\ignorespaces Distributions for elevation (left), including a sample means as a dotted line, and z-score normalisation (right) for the Copernicus DEM GLO-30 dataset.\relax }}{7}{figure.caption.16}%
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Distributions for elevation (left), including a sample means as a dotted line, and z-score normalisation (right) for the Copernicus DEM GLO-30 dataset.\relax }}{8}{figure.caption.16}%
 \contentsline {figure}{\numberline {1.12}{\ignorespaces Distributions for elevation (left), including a sample means as a dotted line, and z-score normalisation (right) for the Copernicus DEM GLO-30 dataset.\relax }}{8}{figure.caption.17}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }}{9}{figure.caption.18}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{11}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }}{10}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{12}{figure.caption.19}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{12}{figure.caption.20}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{12}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{13}{figure.caption.21}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }}{14}{figure.caption.22}%

@@ -85,6 +85,8 @@
 
 \usepackage{pgffor}
 
+\usepackage[section]{placeins}
+
 %%-------------------------------------
 %% Table environment settings
 %%-------------------------------------
@@ -148,7 +150,11 @@
     \mainmatter
    
     \input{chapters/class_data.tex}
+    \FloatBarrier
     \input{chapters/feature_selection.tex}
+    \FloatBarrier
+    \input{chapters/hyper.tex}
+    \FloatBarrier
     % \input{chapters/intro}
     % \input{chapters/frame}
     % \input{chapters/method}
