@@ -30,6 +30,11 @@ class EEDownloader:
         image = (
             ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
             .filterDate(start_date, end_date)
+        )
+        if end_date.year - start_date.year > 0:
+            image = image.filter(ee.Filter.calendarRange(start_date.month, end_date.month, 'month'))
+
+        image = (image
             # Pre-filter to get less cloudy granules.
             .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 20))
             .map(self.mask_s2_clouds)
@@ -91,7 +96,8 @@ class EEDownloader:
 
     def download_sentinel_shards(
         self, ith_chunk, chunk, chunk_size, 
-        features_dir, start_date, end_date, pixel_size, selected_bands):
+        features_dir, start_date, end_date, pixel_size, selected_bands
+    ):
 
         sleep_time = ith_chunk%10
         sleep(sleep_time)
