@@ -44,7 +44,7 @@ class PlotUtils:
                 x=corrs[0].index,
                 y=corrs[0].columns,
                 title='Seasonal correlation heatmap',
-                text_auto=True, aspect='auto', zmin=0, height=500
+                text_auto=True, aspect='auto', zmin=-1, zmax=1, height=500
             )
             fig.layout.sliders[0]['currentvalue']['prefix'] = ''
             for step in fig.layout.sliders[0].steps:
@@ -55,7 +55,7 @@ class PlotUtils:
                 facet_col=0, facet_col_wrap=2,
                 x=corrs[0].index,
                 y=corrs[0].columns,
-                text_auto=True, aspect='auto', zmin=0,
+                text_auto=True, aspect='auto', zmin=-1, zmax=1,
                 height=500, width=700,
             )
             
