@@ -2,26 +2,7 @@
 \label{chapter:hyper}
 \section{Hyperparameter Optimisation}
 
-% \begin{table}[h!]
-%     \centering
-%     \begin{tabular}{|l|l|l|}
-%     \hline
-%     \textbf{Parameter} & \textbf{Type} & \textbf{Possible Values} \\ \hline
-%     class\_weight & Boolean & True, False \\ \hline
-%     training\_years & Choice & 2017\_2018\_2019, 2017 \\ \hline
-%     kernel\_regularizer & Choice & l1l2, l1, l2 \\ \hline
-%     spatial\_dropout & Choice & 0.3, 0.1, 0.5 \\ \hline
-%     activation\_function & Choice & leaky\_relu, relu \\ \hline
-%     pool\_size & Choice & 4, 2 \\ \hline
-%     dropout & Choice & 0.3, 0.1, 0.5 \\ \hline
-%     bias\_initializer & Boolean & True, False \\ \hline
-%     learning\_rate & Choice & 0.001, 0.0001, 0.01 \\ \hline
-%     loss\_function & Choice & binary\_focal\_crossentropy, binary\_crossentropy \\ \hline
-%     \end{tabular}
-%     \caption{Summary of initial hyperparameter search space.}
-%     \label{tab:fixed_layers}
-% \end{table}
-
+\centering
 \input{figures/figures_tuner/fixed_layers.tex}
 
 
@@ -37,3 +18,11 @@ Table\,\ref{tab:fixed_layers} provides a summary of the search space for the ini
 In the most successful trial, the model utilised training data from the medians of 2017, 2018, and 2019, applied L1L2 kernel regularization, used a spatial dropout rate of 0.5, and employed Leaky ReLU activation. The pool size was set to 4, dropout to 0.1, and bias initialization was disabled. The learning rate was 0.01, and the loss function was binary crossentropy, resulting in a score of 0.69.
 
 While some of the initial trial's hyperparameters do not show significant overall improvement, some parameters do stand out. This is illustrated in Fig\,\ref{tab:fixed_layers}, particularly regarding training years, kernel regularization, activation function, and learning rate.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/figures_tuner/model_layered_view.png}
+    \caption{The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using \cite{visualkeras}.}
+    \label{fig:model_layered_view}
+\end{figure}

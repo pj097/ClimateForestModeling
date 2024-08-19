@@ -9,3 +9,5 @@
 \contentsline {section}{\numberline {2.3}Soil and Elevation}{13}{section.2.3}%
 \contentsline {chapter}{\numberline {3}Neural Network Configuration}{14}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Hyperparameter Optimisation}{14}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Climate Analysis}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}ERA5 Data}{16}{section.4.1}%

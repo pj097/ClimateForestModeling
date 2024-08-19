@@ -18,3 +18,5 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{13}{figure.caption.21}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{15}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using \cite {visualkeras}.\relax }}{15}{figure.caption.24}%
+\addvspace {10\p@ }
