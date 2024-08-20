@@ -9,6 +9,25 @@ He, K., Zhang, X., Ren, S. \harvardand\ Sun, J.  \harvardyearleft
   2015\harvardyearright , `Deep residual learning for image recognition'.
 \newline\harvardurl{https://arxiv.org/abs/1512.03385}
 
+\harvarditem[Hersbach et~al.]{Hersbach, Bell, Berrisford, Hirahara, Horányi,
+  Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla,
+  Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren,
+  Dee, Diamantakis, Dragani, Flemming, Forbes, Fuentes, Geer, Haimberger,
+  Healy, Hogan, Hólm, Janisková, Keeley, Laloyaux, Lopez, Lupu, Radnoti,
+  de~Rosnay, Rozum, Vamborg, Villaume \harvardand\ Thépaut}{2020}{era5}
+Hersbach, H., Bell, B., Berrisford, P., Hirahara, S., Horányi, A.,
+  Muñoz-Sabater, J., Nicolas, J., Peubey, C., Radu, R., Schepers, D., Simmons,
+  A., Soci, C., Abdalla, S., Abellan, X., Balsamo, G., Bechtold, P., Biavati,
+  G., Bidlot, J., Bonavita, M., De~Chiara, G., Dahlgren, P., Dee, D.,
+  Diamantakis, M., Dragani, R., Flemming, J., Forbes, R., Fuentes, M., Geer,
+  A., Haimberger, L., Healy, S., Hogan, R.~J., Hólm, E., Janisková, M.,
+  Keeley, S., Laloyaux, P., Lopez, P., Lupu, C., Radnoti, G., de~Rosnay, P.,
+  Rozum, I., Vamborg, F., Villaume, S. \harvardand\ Thépaut, J.-N.
+  \harvardyearleft 2020\harvardyearright , `The era5 global reanalysis', {\em
+  Quarterly Journal of the Royal Meteorological Society} {\bf
+  146}(730),~1999--2049.
+\newline\harvardurl{https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.3803}
+
 \harvarditem[Mauri et~al.]{Mauri, Strona \harvardand\
   San-Miguel-Ayanz}{2017}{eu_forest_data}
 Mauri, A., Strona, G. \harvardand\ San-Miguel-Ayanz, J.  \harvardyearleft
