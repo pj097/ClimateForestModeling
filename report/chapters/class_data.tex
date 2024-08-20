@@ -38,7 +38,7 @@ The plots in Fig.\,\ref{fig:cutoff_barplots} underscore the prevalence of certai
     \label{fig:grouped_histograms}
 \end{figure}
  
-The plots in Fig.\,\ref{fig:grouped_histograms} reveal a common pattern in biodiversity studies: most locations are characterized by a limited number of dominant genera and species, with a smaller number of locations exhibiting higher diversity. This pattern is important for training a CNN classifier, as it indicates that the classifier will often encounter locations with limited genera and species. However, it must also be capable of handling the less common, more diverse locations. The high-frequency, low-diversity areas will likely dominate the training process, influencing the classifier's ability to generalise across different forest types.
+The plots in Fig.\,\ref{fig:grouped_histograms} reveal a common pattern in biodiversity studies: most locations are characterized by a limited number of dominant genera and species, with a smaller number of locations exhibiting higher diversity. This pattern is important for training a CNN classifier, as it indicates that the classifier will often encounter locations with limited genera and species. However, it must also be capable of handling the less common, more diverse locations. The high-frequency, low-diversity areas will likely dominate the training process, influencing the classifier's ability to generalize across different forest types.
 
 \section{Sentinel-2 Features}
 
@@ -83,14 +83,14 @@ Additionally, Sentinel-2 data is freely available through the European Space Age
     \label{fig:label_sample}
 \end{figure}
 
-Figs.\,\ref{fig:label_sample_area} and \ref{fig:label_sample} illustrate the integration of high-resolution geographical context with Sentinel-2 satellite data for detailed environmental analysis. The grid overlay in the images represents areas for data collection and analysis. The left images provide a more detailed geographical context, while the right images show how Sentinel-2 bands B2, B3, and B4 (blue, green, and red respectively) are structured and utilised for spectral analysis.
+Figs.\,\ref{fig:label_sample_area} and \ref{fig:label_sample} illustrate the integration of high-resolution geographical context with Sentinel-2 satellite data for detailed environmental analysis. The grid overlay in the images represents areas for data collection and analysis. The left images provide a more detailed geographical context, while the right images show how Sentinel-2 bands B2, B3, and B4 (blue, green, and red respectively) are structured and utilized for spectral analysis.
 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.98\linewidth, trim={15pt 25pt 10pt 50pt}, clip]{figures/figures_features/bgr_hist.pdf}
     \caption{Distributions for surface reflectance (left), including a sample means as a dotted line, 
-    and z-score normalisation (right) for RGB.}
+    and z-score normalization (right) for RGB.}
     \label{fig:bgr_hist}
 \end{figure}
 
@@ -98,7 +98,7 @@ Figs.\,\ref{fig:label_sample_area} and \ref{fig:label_sample} illustrate the int
     \centering
     \includegraphics[width=0.98\linewidth, trim={15pt 25pt 10pt 50pt}, clip]{figures/figures_features/nir_hist.pdf}
     \caption{Distributions for surface reflectance (left), including a sample means as a dotted line, 
-    and z-score normalisation (right) for NIR.}
+    and z-score normalization (right) for NIR.}
     \label{fig:nir_hist}
 \end{figure}
 
@@ -106,17 +106,17 @@ Figs.\,\ref{fig:label_sample_area} and \ref{fig:label_sample} illustrate the int
     \centering
     \includegraphics[width=0.98\linewidth, trim={15pt 25pt 10pt 50pt}, clip]{figures/figures_features/swir_hist.pdf}
     \caption{Distributions for surface reflectance (left), including a sample means as a dotted line, 
-    and z-score normalisation (right) for SWIR.}
+    and z-score normalization (right) for SWIR.}
     \label{fig:swir_hist}
 \end{figure}
 
-Figs.\,\ref{fig:bgr_hist}, \ref{fig:nir_hist}, and\,\ref{fig:swir_hist} provide a detailed look at the distribution of surface reflectance values and their z-scores for various Sentinel-2 spectral bands, a normalisation method which is crucial for many classification tasks using CNNs. These figures use medians taken over the summer months (June, July, and August) between 2017, 2018, and 2019.
+Figs.\,\ref{fig:bgr_hist}, \ref{fig:nir_hist}, and\,\ref{fig:swir_hist} provide a detailed look at the distribution of surface reflectance values and their z-scores for various Sentinel-2 spectral bands, a normalization method which is crucial for many classification tasks using CNNs. These figures use medians taken over the summer months (June, July, and August) between 2017, 2018, and 2019.
 
-Fig.\,\ref{fig:bgr_hist} shows that the reflectance values for the bands B2, B3, and B4 generally follow a log-normal distribution. The z-scores for these bands peak near zero, demonstrating that the reflectance values have been normalized effectively. This normalisation is essential for ensuring that the values from different bands are on the same scale, which is particularly important when using CNN for classification.
+Fig.\,\ref{fig:bgr_hist} shows that the reflectance values for the bands B2, B3, and B4 generally follow a log-normal distribution. The z-scores for these bands peak near zero, demonstrating that the reflectance values have been normalized effectively. This normalization is essential for ensuring that the values from different bands are on the same scale, which is particularly important when using CNN for classification.
 
-Fig.\,\ref{fig:nir_hist} presents the distribution for the NIR bands B5, B6, B7, B8, and B8A. The reflectance values for these bands display a central tendency, with a significant number of pixels having values around the mean. The z-score distributions, peaking near zero, indicate successful normalisation of the reflectance values. Normalising the data in this way ensures that the CNN can process and compare these values more effectively, enhancing the model's ability to classify different types of tree genera accurately.
+Fig.\,\ref{fig:nir_hist} presents the distribution for the NIR bands B5, B6, B7, B8, and B8A. The reflectance values for these bands display a central tendency, with a significant number of pixels having values around the mean. The z-score distributions, peaking near zero, indicate successful normalization of the reflectance values. Normalizing the data in this way ensures that the CNN can process and compare these values more effectively, enhancing the model's ability to classify different types of tree genera accurately.
 
-Fig.\,\ref{fig:swir_hist} shows histograms for the SWIR bands B11 and B12. The bands display a similar pattern, with the majority of reflectance values clustering on the left of the mean and tailing off to the right of the mean. The z-scores for these bands also peak at zero, confirming that the data has been normalised successfully. 
+Fig.\,\ref{fig:swir_hist} shows histograms for the SWIR bands B11 and B12. The bands display a similar pattern, with the majority of reflectance values clustering on the left of the mean and tailing off to the right of the mean. The z-scores for these bands also peak at zero, confirming that the data has been normalized successfully. 
 
 
 \begin{figure}[ht]
@@ -134,19 +134,19 @@ In spring, the correlations remain high within the NIR and RGB groups but to a s
 
 During summer and autumn, while there are still strong correlations within the NIR and RGB groups, the correlation between these groups is notably lower. This reduced correlation can be attributed to the varying phenological stages of the trees, including differences in leaf development and moisture content. These seasonal changes affect the reflectance properties differently in the NIR and RGB bands. The distinct spectral responses during these seasons offer complementary information that can enhance the classification of tree genera by providing a more diverse set of data points that capture the variability in tree characteristics.
 
-Overall, the varying correlations across seasons underscore the robustness of using Sentinel-2 data for tree genus classification. The normalisation of data using z-scores is crucial for bringing the values of different bands to the same scale, which is particularly important for CNNs. This normalisation ensures that the model can effectively process and compare the multi-band data, leading to more accurate classification results.
+Overall, the varying correlations across seasons underscore the robustness of using Sentinel-2 data for tree genus classification. The normalization of data using z-scores is crucial for bringing the values of different bands to the same scale, which is particularly important for CNNs. This normalization ensures that the model can effectively process and compare the multi-band data, leading to more accurate classification results.
 
 \section{Copernicus DEM GLO-30}
 
-Integrating the Copernicus Global 30m Digital Elevation Model (DEM) data into the classification model can significantly enhance its performance for tree genus classification. Elevation data provides critical information about the terrain, which influences various ecological factors such as temperature, moisture availability, and soil type. These factors, in turn, affect vegetation types and distribution. By incorporating elevation data, the model can better understand the environmental context of each location, leading to more accurate predictions. For example, certain tree genera may be more prevalent at specific elevation ranges due to their adaptation to particular climatic conditions or soil properties. Therefore, integrating elevation data can help in distinguishing between tree genera that occupy different ecological niches.
+Integrating the Copernicus Global 30\,m Digital Elevation Model (DEM) data into the classification model can significantly enhance its performance for tree genus classification. Elevation data provides critical information about the terrain, which influences various ecological factors such as temperature, moisture availability, and soil type. These factors, in turn, affect vegetation types and distribution. By incorporating elevation data, the model can better understand the environmental context of each location, leading to more accurate predictions. For example, certain tree genera may be more prevalent at specific elevation ranges due to their adaptation to particular climatic conditions or soil properties. Therefore, integrating elevation data can help in distinguishing between tree genera that occupy different ecological niches.
 
-Fig.\,\ref{fig:elevation_hist} presents the distribution of elevation values in meters, as well as the z-scores, which standardise these values. The elevation values range from 0 to around 2500 meters, with most data points clustered below 500 meters. This suggests that the majority of the study area is relatively low-lying. Standardising elevation values using z-scores is beneficial for integrating elevation data with spectral data, as it ensures that elevation values are on a comparable scale to the reflectance values from Sentinel-2 bands. 
+Fig.\,\ref{fig:elevation_hist} presents the distribution of elevation values in meters, as well as the z-scores, which standardize these values. The elevation values range from 0 to around 2500 meters, with most data points clustered below 500 meters. This suggests that the majority of the study area is relatively low-lying. Standardizing elevation values using z-scores is beneficial for integrating elevation data with spectral data, as it ensures that elevation values are on a comparable scale to the reflectance values from Sentinel-2 bands. 
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.98\linewidth, trim={15pt 25pt 10pt 50pt}, clip]{figures/figures_features/elevation_hist.pdf}
     \caption{Distributions for elevation (left), including a sample means as a dotted line, 
-    and z-score normalisation (right) for the Copernicus DEM GLO-30 dataset.}
+    and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.}
     \label{fig:elevation_hist}
 \end{figure}
 
@@ -160,10 +160,10 @@ Integrating SoilGrids data into the tree genus classification model can signific
     \centering
     \includegraphics[width=0.98\linewidth, trim={15pt 25pt 10pt 20pt}, clip]{figures/figures_features/soil_hist.pdf}
     \caption{Distributions for elevation (left), including a sample means as a dotted line, 
-    and z-score normalisation (right) for the Copernicus DEM GLO-30 dataset.}
+    and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.}
     \label{fig:soil_hist}
 \end{figure}
 
-Fig.\,\ref{fig:soil_hist} displays the distribution of various soil properties present in the SoilGrids dataset. The x-axis represents the value of these properties in multiple units, while the y-axis represents the count of observations. Additionally, the z-score distribution is shown to standardise these values.
+Fig.\,\ref{fig:soil_hist} displays the distribution of various soil properties present in the SoilGrids dataset. The x-axis represents the value of these properties in multiple units, while the y-axis represents the count of observations. Additionally, the z-score distribution is shown to standardize these values.
 
-The distribution of soil properties varies, reflecting the diversity of soil types across the study area. The z-score distribution standardises these values, bringing them onto a common scale, which is essential for integrating soil data with spectral and elevation data in the classification model.
+The distribution of soil properties varies, reflecting the diversity of soil types across the study area. The z-score distribution standardizes these values, bringing them onto a common scale, which is essential for integrating soil data with spectral and elevation data in the classification model.

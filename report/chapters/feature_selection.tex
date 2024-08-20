@@ -23,7 +23,7 @@ For individual seasons, the model performs best in summer and autumn overall acr
 
 Based on the weighted f1-scores shown in Fig.\,\ref{fig:seasonal_selection}, adding more seasons does not seem to offer significant benefits. For instance, some two-season combinations, such as summer and autumn, performed on par with the more complex four-season models. Additionally, single-season models were only a few percentage points below the top-performing models.
 
-Based on these results, further analysis focused solely on summer seasons. This approach benefits from faster model training and reduced storage requirements, as adding an extra season nearly doubles the storage needs, a challenge that intensifies with the extension of the analysis over additional years. Despite these adjustments, a complete Sentinel-2 dataset for a single season still requires nearly 200GB, or approximately  1MB per location.
+Based on these results, further analysis focused solely on summer seasons. This approach benefits from faster model training and reduced storage requirements, as adding an extra season nearly doubles the storage needs, a challenge that intensifies with the extension of the analysis over additional years. Despite these adjustments, a complete Sentinel-2 dataset for a single season still requires nearly 200\,GB, or approximately 1\,MB per location.
 
 \section{Sentinel-2 Bands}
 
@@ -45,7 +45,7 @@ The resulting analysis, shown in Fig.\,\ref{fig:band_selection}, indicates that 
     \label{fig:band_selection_further}
 \end{figure}
 
-Fig.\,\ref{fig:band_selection_further} shows that most selected combinations performed relatively well, as indicated by their proximity to the weighted f1-score for all bands. Based on these results, the most reasonable choices appear to be B3, B8, and B11, or the same but with B6 in addition. As the B6 combination displays better recall, precision, and weighted f1-score, as well as taking a fraction of storage compared to 10m bands due to being 20m. For the 250,000 samples, this combination shoulld take roughly 50 GB of storage. As such, the combination B3, B6, B8, and B11, was used for the remainder of this study.
+Fig.\,\ref{fig:band_selection_further} shows that most selected combinations performed relatively well, as indicated by their proximity to the weighted f1-score for all bands. Based on these results, the most reasonable choices appear to be B3, B8, and B11, or the same but with B6 in addition. As the B6 combination displays better recall, precision, and weighted f1-score, as well as taking a fraction of storage compared to 10\,m bands due to being 20\,m. For the 250,000 samples, this combination should take roughly 50 GB of storage. As such, the combination B3, B6, B8, and B11, was used for the remainder of this study.
 
 \section{Soil and Elevation}
 
@@ -58,4 +58,4 @@ Fig.\,\ref{fig:band_selection_further} shows that most selected combinations per
 
 Fig.\,\ref{fig:soil_elevation_analysis} demonstrates the performance metrics for different combinations of Sentinel-2, SoilGrids, and elevation data in tree genus classification. Sentinel-2 data alone provides a solid baseline, attributed to its high resolution and rich spectral information. When considering SoilGrids data alone, the metrics are lower than those for Sentinel-2, reflecting the coarse resolution and potentially limited predictive power for this specific task. Similarly, elevation data alone shows lower performance metrics, indicating that while elevation is a relevant feature, it does not provide sufficient information by itself for accurate classification of tree genera. The combined use of these datasets shows marginal improvements, suggesting that while additional data may contribute some value, Sentinel-2's high-resolution spectral data is the most significant factor in the model's performance.
 
-Given that Sentinel-2 data alone provides strong results, further enhancements and optimisations were solely focused on this dataset. 
+Given that Sentinel-2 data alone provides strong results, further enhancements and optimizations were solely focused on this dataset. 

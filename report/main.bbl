@@ -4,6 +4,11 @@
 Gavrikov, P.  \harvardyearleft 2020\harvardyearright , `visualkeras',
   \url{https://github.com/paulgavrikov/visualkeras}.
 
+\harvarditem[He et~al.]{He, Zhang, Ren \harvardand\ Sun}{2015}{resnet}
+He, K., Zhang, X., Ren, S. \harvardand\ Sun, J.  \harvardyearleft
+  2015\harvardyearright , `Deep residual learning for image recognition'.
+\newline\harvardurl{https://arxiv.org/abs/1512.03385}
+
 \harvarditem[Mauri et~al.]{Mauri, Strona \harvardand\
   San-Miguel-Ayanz}{2017}{eu_forest_data}
 Mauri, A., Strona, G. \harvardand\ San-Miguel-Ayanz, J.  \harvardyearleft
