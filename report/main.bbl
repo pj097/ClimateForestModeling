@@ -1,8 +1,8 @@
 \begin{thebibliography}{xx}
 
 \harvarditem{ECMWF}{1950-Present}{era5_dataset}
-ECMWF  \harvardyearleft 1950-Present\harvardyearright , `Era5-land monthly
-  aggregated \- ecmwf climate reanalysis',
+ECMWF  \harvardyearleft 1950-Present\harvardyearright , `{ERA5-Land Monthly
+  Aggregated \- ECMWF Climate Reanalysis}',
   \url{https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR}.
 
 \harvarditem{Gavrikov}{2020}{visualkeras}
@@ -12,7 +12,6 @@ Gavrikov, P.  \harvardyearleft 2020\harvardyearright , `visualkeras',
 \harvarditem[He et~al.]{He, Zhang, Ren \harvardand\ Sun}{2015}{resnet}
 He, K., Zhang, X., Ren, S. \harvardand\ Sun, J.  \harvardyearleft
   2015\harvardyearright , `Deep residual learning for image recognition'.
-\newline\harvardurl{https://arxiv.org/abs/1512.03385}
 
 \harvarditem[Hersbach et~al.]{Hersbach, Bell, Berrisford, Hirahara, Horányi,
   Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla,
@@ -28,25 +27,22 @@ Hersbach, H., Bell, B., Berrisford, P., Hirahara, S., Horányi, A.,
   A., Haimberger, L., Healy, S., Hogan, R.~J., Hólm, E., Janisková, M.,
   Keeley, S., Laloyaux, P., Lopez, P., Lupu, C., Radnoti, G., de~Rosnay, P.,
   Rozum, I., Vamborg, F., Villaume, S. \harvardand\ Thépaut, J.-N.
-  \harvardyearleft 2020\harvardyearright , `The era5 global reanalysis', {\em
+  \harvardyearleft 2020\harvardyearright , `{The ERA5 global reanalysis}', {\em
   Quarterly Journal of the Royal Meteorological Society} {\bf
   146}(730),~1999--2049.
-\newline\harvardurl{https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/qj.3803}
 
 \harvarditem[Mauri et~al.]{Mauri, Strona \harvardand\
   San-Miguel-Ayanz}{2017}{eu_forest_data}
 Mauri, A., Strona, G. \harvardand\ San-Miguel-Ayanz, J.  \harvardyearleft
   2017\harvardyearright , `{EU-Forest, a high-resolution tree occurrence
   dataset for Europe}', {\em Scientific Data} {\bf 4}(1),~160123.
-\newline\harvardurl{https://doi.org/10.1038/sdata.2016.123}
 
 \harvarditem[Poggio et~al.]{Poggio, de~Sousa, Batjes, Heuvelink, Kempen,
   Ribeiro \harvardand\ Rossiter}{2021}{soil_report}
 Poggio, L., de~Sousa, L.~M., Batjes, N.~H., Heuvelink, G. B.~M., Kempen, B.,
   Ribeiro, E. \harvardand\ Rossiter, D.  \harvardyearleft 2021\harvardyearright
-  , `Soilgrids 2.0: producing soil information for the globe with quantified
-  spatial uncertainty', {\em SOIL} {\bf 7}(1),~217--240.
-\newline\harvardurl{https://soil.copernicus.org/articles/7/217/2021/}
+  , `{SoilGrids 2.0: producing soil information for the globe with quantified
+  spatial uncertainty}', {\em SOIL} {\bf 7}(1),~217--240.
 
 \harvarditem[Toledo et~al.]{Toledo, Poorter, Peña-Claros, Alarcón, Balcázar,
   Leaño, Licona, Llanque, Vroomans, Zuidema \harvardand\
@@ -56,6 +52,5 @@ Toledo, M., Poorter, L., Peña-Claros, M., Alarcón, A., Balcázar, J., Leaño,
   Bongers, F.  \harvardyearleft 2011\harvardyearright , `Climate is a stronger
   driver of tree and forest growth rates than soil and disturbance', {\em
   Journal of Ecology} {\bf 99}(1),~254--264.
-\newline\harvardurl{https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-2745.2010.01741.x}
 
 \end{thebibliography}
