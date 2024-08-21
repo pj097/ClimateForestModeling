@@ -14,6 +14,7 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{visualkeras}
+\citation{era5_dataset}
 \citation{eu_forest_data}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Data Exploration}{1}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -81,16 +82,27 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite  {visualkeras}).\relax }}{16}{figure.caption.24}\protected@file@percent }
 \newlabel{fig:model_layered_view}{{3.2}{16}{The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }{figure.caption.24}{}}
 \citation{era5}
-\bibstyle{agsm}
-\bibdata{bib}
+\citation{era5_dataset}
+\citation{era5_dataset}
+\citation{climate_choice}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Climate Analysis}{17}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{chapter:climate}{{4}{17}{Climate Analysis}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}ECMWF Reanalysis v5 Data}{17}{section.4.1}\protected@file@percent }
-\bibcite{visualkeras}{{1}{2020}{{Gavrikov}}{{}}}
-\bibcite{resnet}{{2}{2015}{{He et~al.}}{{He, Zhang, Ren and\ Sun}}}
-\bibcite{era5}{{3}{2020}{{Hersbach et~al.}}{{Hersbach, Bell, Berrisford, Hirahara, Horányi, Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla, Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren, Dee, Diamantakis, Dragani, Flemming, Forbes, Fuentes, Geer, Haimberger, Healy, Hogan, Hólm, Janisková, Keeley, Laloyaux, Lopez, Lupu, Radnoti, de~Rosnay, Rozum, Vamborg, Villaume and\ Thépaut}}}
-\bibcite{eu_forest_data}{{4}{2017}{{Mauri et~al.}}{{Mauri, Strona and\ San-Miguel-Ayanz}}}
-\bibcite{soil_report}{{5}{2021}{{Poggio et~al.}}{{Poggio, de~Sousa, Batjes, Heuvelink, Kempen, Ribeiro and\ Rossiter}}}
-\gdef \@abspage@last{24}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}ECMWF Reanalysis v5 Dataset}{17}{section.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite  {era5_dataset}, where detailed information is available.\relax }}{17}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:selected_variables_stats}{{4.1}{17}{Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{18}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:genus_corr}{{4.2}{18}{Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }{figure.caption.26}{}}
+\bibstyle{agsm}
+\bibdata{bib}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }}{19}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:regression_results}{{4.3}{19}{R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }{figure.caption.27}{}}
+\bibcite{era5_dataset}{{1}{1950-Present}{{ECMWF}}{{}}}
+\bibcite{visualkeras}{{2}{2020}{{Gavrikov}}{{}}}
+\bibcite{resnet}{{3}{2015}{{He et~al.}}{{He, Zhang, Ren and\ Sun}}}
+\bibcite{era5}{{4}{2020}{{Hersbach et~al.}}{{Hersbach, Bell, Berrisford, Hirahara, Horányi, Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla, Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren, Dee, Diamantakis, Dragani, Flemming, Forbes, Fuentes, Geer, Haimberger, Healy, Hogan, Hólm, Janisková, Keeley, Laloyaux, Lopez, Lupu, Radnoti, de~Rosnay, Rozum, Vamborg, Villaume and\ Thépaut}}}
+\bibcite{eu_forest_data}{{5}{2017}{{Mauri et~al.}}{{Mauri, Strona and\ San-Miguel-Ayanz}}}
+\bibcite{soil_report}{{6}{2021}{{Poggio et~al.}}{{Poggio, de~Sousa, Batjes, Heuvelink, Kempen, Ribeiro and\ Rossiter}}}
+\bibcite{climate_choice}{{7}{2011}{{Toledo et~al.}}{{Toledo, Poorter, Peña-Claros, Alarcón, Balcázar, Leaño, Licona, Llanque, Vroomans, Zuidema and\ Bongers}}}
+\gdef \@abspage@last{27}

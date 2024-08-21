@@ -20,3 +20,6 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{15}{figure.caption.23}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }}{16}{figure.caption.24}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{17}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{18}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }}{19}{figure.caption.27}%

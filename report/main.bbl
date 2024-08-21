@@ -1,5 +1,10 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{ECMWF}{1950-Present}{era5_dataset}
+ECMWF  \harvardyearleft 1950-Present\harvardyearright , `Era5-land monthly
+  aggregated \- ecmwf climate reanalysis',
+  \url{https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_LAND_MONTHLY_AGGR}.
+
 \harvarditem{Gavrikov}{2020}{visualkeras}
 Gavrikov, P.  \harvardyearleft 2020\harvardyearright , `visualkeras',
   \url{https://github.com/paulgavrikov/visualkeras}.
@@ -42,5 +47,15 @@ Poggio, L., de~Sousa, L.~M., Batjes, N.~H., Heuvelink, G. B.~M., Kempen, B.,
   , `Soilgrids 2.0: producing soil information for the globe with quantified
   spatial uncertainty', {\em SOIL} {\bf 7}(1),~217--240.
 \newline\harvardurl{https://soil.copernicus.org/articles/7/217/2021/}
+
+\harvarditem[Toledo et~al.]{Toledo, Poorter, Peña-Claros, Alarcón, Balcázar,
+  Leaño, Licona, Llanque, Vroomans, Zuidema \harvardand\
+  Bongers}{2011}{climate_choice}
+Toledo, M., Poorter, L., Peña-Claros, M., Alarcón, A., Balcázar, J., Leaño,
+  C., Licona, J.~C., Llanque, O., Vroomans, V., Zuidema, P. \harvardand\
+  Bongers, F.  \harvardyearleft 2011\harvardyearright , `Climate is a stronger
+  driver of tree and forest growth rates than soil and disturbance', {\em
+  Journal of Ecology} {\bf 99}(1),~254--264.
+\newline\harvardurl{https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-2745.2010.01741.x}
 
 \end{thebibliography}

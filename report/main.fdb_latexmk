@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1724186009 "main.aux" "main.bbl" "main" 1724186453 0
-  "./bib.bib" 1724186008 8728 ca426537071acfcad81c0e65f0cfe056 ""
+["bibtex main"] 1724237737 "main.aux" "main.bbl" "main" 1724238073 0
+  "./bib.bib" 1724235308 9873 317059f11206d975b03089ed56f9a4cb ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/harvard/agsm.bst" 1136766823 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
-  "main.aux" 1724186453 11992 6ebde7e4ce7f71fa0fda462ddaacd558 "pdflatex"
+  "main.aux" 1724238073 13852 f9db5026e37414c3bc236ea2303ee25a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1724186451 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724186453 0
+["pdflatex"] 1724238072 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724238073 0
   "/etc/texmf/web2c/texmf.cnf" 1721928383 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pj/sentinel/report/main.tex" 1724062353 7034 9b2a9cc001039e3b5844938cde8858c0 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -162,15 +162,18 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1721928459 7880881 aba413bc45bdb95402b8aa34847b0632 ""
   "chapters/abstract.tex" 1724185593 1323 a9bbdbe9c8a41454f9ff08ae5320bf8f ""
   "chapters/class_data.tex" 1724185583 16731 d4c7c08d5ad541ceba40c010e4deafad ""
-  "chapters/climate.tex" 1724186451 705 554c59f990a991b092363187bf2fa068 ""
+  "chapters/climate.tex" 1724238072 3604 1cc99f7685c837f073f1e401d422de74 ""
   "chapters/declaration.tex" 1724185441 1885 8ae474ed5e32fad2ead71adbec2b7ce6 ""
   "chapters/feature_selection.tex" 1724185424 7458 2b61bfb369422ed1b956ddde7036a892 ""
-  "chapters/hyper.tex" 1724185175 3397 eef8e9cb3091da542f4da9667562e2bc ""
+  "chapters/hyper.tex" 1724237653 3399 3d93333316c8fefc78a46b29da1e37a7 ""
   "chapters/title.tex" 1724185375 1802 8e8c12ba529fb56b39125b27287135a5 ""
   "figures/figures_analysis/band_selection.pdf" 1723995721 31844 a6ed826fea51a0f811c8d6a7296339c0 ""
   "figures/figures_analysis/band_selection_further.pdf" 1723995721 29918 2a5ae5e88921d81ee6cc4bff3156c778 ""
   "figures/figures_analysis/seasonal_selection.pdf" 1723995721 30743 29bdbdbc722db969e57ebcec6ed8673a ""
   "figures/figures_analysis/soil_elevation_analysis.pdf" 1723995721 25967 5553fd83d1f5de08c31188e5dacb62c2 ""
+  "figures/figures_climate/genus_corr.pdf" 1724234265 21218 cd1b73ca8aba561bd97a3e3819843320 ""
+  "figures/figures_climate/regression_results.pdf" 1724237873 20999 a9703947d2ddec7b3bdea3c05370bfd7 ""
+  "figures/figures_climate/selected_variables_stats.pdf" 1724234264 40727 1fd50e0a2a1f9e0127b13c6ce38256da ""
   "figures/figures_features/bgr_hist.pdf" 1723995721 26224 ed34b3a4b4f0517796b0998013587fde ""
   "figures/figures_features/elevation_hist.pdf" 1723995721 11999 e24db9a3d6e132550691426aeed6b4dc ""
   "figures/figures_features/nir_hist.pdf" 1723995721 36282 f718c19dbb69e9f77b6cefb19f2d724a ""
@@ -191,13 +194,13 @@
   "figures/figures_tuner/fixed_layers.pdf" 1724062353 28481 320df8eaa42d825b7fea127b199318ed ""
   "figures/figures_tuner/fixed_layers.tex" 1724062353 616 5087f9cb4a78cbd3971664f6bf0d60c5 ""
   "figures/figures_tuner/model_layered_view.png" 1724062353 144765 bb8151f720d1e9a0320c0c758f96c598 ""
-  "main.aux" 1724186453 11992 6ebde7e4ce7f71fa0fda462ddaacd558 "pdflatex"
-  "main.bbl" 1724186010 2634 aa46852f7b12765155ae91adb3c67217 "bibtex main"
-  "main.lof" 1724186453 3770 9389421d6293e04020ff3ba2539a8d74 "pdflatex"
-  "main.lot" 1724186453 214 0add69ffa23242d148a165ab6494a64a "pdflatex"
-  "main.out" 1724186453 2086 f16969b8f911c273b1e5a2509307b028 "pdflatex"
+  "main.aux" 1724238073 13852 f9db5026e37414c3bc236ea2303ee25a "pdflatex"
+  "main.bbl" 1724237737 3528 485c5b341189b851917584361559dffb "bibtex main"
+  "main.lof" 1724238073 4500 5b131f179eb0872be5c6bb4d3e7df9c9 "pdflatex"
+  "main.lot" 1724238073 214 0add69ffa23242d148a165ab6494a64a "pdflatex"
+  "main.out" 1724238073 2101 a7dca7175377062d12334e5b1680001a "pdflatex"
   "main.tex" 1724062353 7034 9b2a9cc001039e3b5844938cde8858c0 ""
-  "main.toc" 1724186453 1096 f378af3952195797e2aaa3e9349a0a6f "pdflatex"
+  "main.toc" 1724238073 1099 eb866d8731a8a9adbae0a5765e1edb2c "pdflatex"
   (generated)
   "main.aux"
   "main.lof"
