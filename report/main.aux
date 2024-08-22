@@ -15,94 +15,134 @@
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{visualkeras}
 \citation{era5_dataset}
+\citation{bonan2008forests}
+\citation{watson2018intact}
+\citation{fao2020gfra}
+\citation{hansen2013forestcover}
+\citation{turner2003remotesensing}
+\citation{sexton2013treecover}
+\citation{vose2018forests}
+\citation{pettorelli2016satellite}
+\citation{lefsky2002lidar}
+\citation{zheng2019deep,breiman2001random}
+\citation{hansen2013forestcover}
+\citation{belgium_classification}
+\citation{pakistan}
+\citation{copernicus_main}
+\citation{germany_bavaria}
 \citation{eu_forest_data}
-\@writefile{toc}{\contentsline {chapter}{\numberline {1}Data Exploration}{1}{chapter.1}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:data}{{1}{1}{Data Exploration}{chapter.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.1}EU-Forest Labels}{1}{section.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Map of the most common tree genera in EU-Forest.\relax }}{1}{figure.caption.6}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:genus_cutoff_map}{{1.1}{1}{Map of the most common tree genera in EU-Forest.\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Distribution of genera (left) and species (right) in EU-Forest.\relax }}{2}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:cutoff_barplots}{{1.2}{2}{Distribution of genera (left) and species (right) in EU-Forest.\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces Distribution of genera (left) and species (right) per location.\relax }}{2}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:grouped_histograms}{{1.3}{2}{Distribution of genera (left) and species (right) per location.\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.4}{\ignorespaces Sentinel-2 mission infographic. It highlights important facts and achievements of the mission. Courtesy of \href  {https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2}{ESA}. \relax }}{3}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:sentinel2_info}{{1.4}{3}{Sentinel-2 mission infographic. It highlights important facts and achievements of the mission. Courtesy of \href {https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2}{ESA}. \relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Sentinel-2 Features}{3}{section.1.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.5}{\ignorespaces Multiple sample locations overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }}{4}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:label_sample_area}{{1.5}{4}{Multiple sample locations overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.6}{\ignorespaces Sample location overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }}{4}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:label_sample}{{1.6}{4}{Sample location overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.7}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for RGB bands.\relax }}{5}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:bgr_hist}{{1.7}{5}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for RGB bands.\relax }{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.8}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for NIR bands.\relax }}{5}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:nir_hist}{{1.8}{5}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for NIR bands.\relax }{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.9}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for SWIR bands.\relax }}{6}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:swir_hist}{{1.9}{6}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for SWIR bands.\relax }{figure.caption.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.10}{\ignorespaces Seasonal Sentinel-2 band correlations.\relax }}{7}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:season_correlation}{{1.10}{7}{Seasonal Sentinel-2 band correlations.\relax }{figure.caption.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Copernicus DEM GLO-30}{7}{section.1.3}\protected@file@percent }
+\citation{dem_dataset}
 \citation{soil_report}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.11}{\ignorespaces Distributions for elevation (left), including a sample means as a dotted line, and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.\relax }}{8}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:elevation_hist}{{1.11}{8}{Distributions for elevation (left), including a sample means as a dotted line, and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.\relax }{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.4}SoilGrids}{8}{section.1.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1.12}{\ignorespaces Distributions for soil properties (left), including a sample means as a dotted line, and z-score normalization (right) for the SoilGrids dataset.\relax }}{8}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:soil_hist}{{1.12}{8}{Distributions for soil properties (left), including a sample means as a dotted line, and z-score normalization (right) for the SoilGrids dataset.\relax }{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Feature Selection}{10}{chapter.2}\protected@file@percent }
+\citation{era5_dataset}
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:analysis}{{2}{10}{Feature Selection}{chapter.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Sentinel-2 Seasons}{10}{section.2.1}\protected@file@percent }
-\newlabel{section:seasonal}{{2.1}{10}{Sentinel-2 Seasons}{section.2.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }}{10}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:seasonal_selection}{{2.1}{10}{Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Sentinel-2 Bands}{11}{section.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{12}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:band_selection}{{2.2}{12}{Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }{figure.caption.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{12}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:band_selection_further}{{2.3}{12}{Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Soil and Elevation}{13}{section.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{13}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:soil_elevation_analysis}{{2.4}{13}{Analysis of SoilGrids and elevation data integration.\relax }{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Neural Network Configuration}{14}{chapter.3}\protected@file@percent }
+\newlabel{chapter:intro}{{1}{1}{Introduction}{chapter.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Remote Sensing and Machine Learning in Forest Monitoring}{1}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Data Integration and Methodology}{1}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Challenges and Considerations}{2}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Data Exploration}{3}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:hyper}{{3}{14}{Neural Network Configuration}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Hyperparameter Optimization}{14}{section.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Summary of initial hyperparameter search space.\relax }}{14}{table.caption.22}\protected@file@percent }
-\newlabel{tab:fixed_layers}{{3.1}{14}{Summary of initial hyperparameter search space.\relax }{table.caption.22}{}}
+\newlabel{chapter:data}{{2}{3}{Data Exploration}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}EU-Forest Labels}{3}{section.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Map of the most common tree genera in EU-Forest.\relax }}{3}{figure.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:genus_cutoff_map}{{2.1}{3}{Map of the most common tree genera in EU-Forest.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Distribution of genera (left) and species (right) in EU-Forest.\relax }}{4}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:cutoff_barplots}{{2.2}{4}{Distribution of genera (left) and species (right) in EU-Forest.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Distribution of genera (left) and species (right) per location.\relax }}{4}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:grouped_histograms}{{2.3}{4}{Distribution of genera (left) and species (right) per location.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Sentinel-2 mission infographic. It highlights important facts and achievements of the mission. Courtesy of \href  {https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2}{ESA}. \relax }}{5}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:sentinel2_info}{{2.4}{5}{Sentinel-2 mission infographic. It highlights important facts and achievements of the mission. Courtesy of \href {https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2}{ESA}. \relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Sentinel-2 Features}{5}{section.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Multiple sample locations overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }}{6}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:label_sample_area}{{2.5}{6}{Multiple sample locations overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Sample location overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }}{6}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:label_sample}{{2.6}{6}{Sample location overlaid on Google Earth (left) and Sentinel-2 (right) images.\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for RGB bands.\relax }}{7}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:bgr_hist}{{2.7}{7}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for RGB bands.\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for NIR bands.\relax }}{7}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:nir_hist}{{2.8}{7}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for NIR bands.\relax }{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for SWIR bands.\relax }}{8}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:swir_hist}{{2.9}{8}{Distributions for surface reflectance (left), including a sample means as a dotted line, and z-score normalization (right) for SWIR bands.\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Seasonal Sentinel-2 band correlations.\relax }}{9}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:season_correlation}{{2.10}{9}{Seasonal Sentinel-2 band correlations.\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Copernicus DEM GLO-30}{9}{section.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Distributions for elevation (left), including a sample means as a dotted line, and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.\relax }}{10}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:elevation_hist}{{2.11}{10}{Distributions for elevation (left), including a sample means as a dotted line, and z-score normalization (right) for the Copernicus DEM GLO-30 dataset.\relax }{figure.caption.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}SoilGrids}{10}{section.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Distributions for soil properties (left), including a sample means as a dotted line, and z-score normalization (right) for the SoilGrids dataset.\relax }}{10}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:soil_hist}{{2.12}{10}{Distributions for soil properties (left), including a sample means as a dotted line, and z-score normalization (right) for the SoilGrids dataset.\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Feature Selection}{12}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:analysis}{{3}{12}{Feature Selection}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Sentinel-2 Seasons}{12}{section.3.1}\protected@file@percent }
+\newlabel{section:seasonal}{{3.1}{12}{Sentinel-2 Seasons}{section.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }}{12}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:seasonal_selection}{{3.1}{12}{Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Sentinel-2 Bands}{13}{section.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{14}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:band_selection}{{3.2}{14}{Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{14}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:band_selection_further}{{3.3}{14}{Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Soil and Elevation}{15}{section.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{15}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:soil_elevation_analysis}{{3.4}{15}{Analysis of SoilGrids and elevation data integration.\relax }{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Neural Network Configuration}{16}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:hyper}{{4}{16}{Neural Network Configuration}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Hyperparameter Optimization}{16}{section.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of initial hyperparameter search space.\relax }}{16}{table.caption.21}\protected@file@percent }
+\newlabel{tab:fixed_layers}{{4.1}{16}{Summary of initial hyperparameter search space.\relax }{table.caption.21}{}}
 \citation{visualkeras}
 \citation{visualkeras}
 \citation{resnet}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{15}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:fixed_layers}{{3.1}{15}{The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Model Architecture}{15}{section.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite  {visualkeras}).\relax }}{16}{figure.caption.24}\protected@file@percent }
-\newlabel{fig:model_layered_view}{{3.2}{16}{The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{17}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:fixed_layers}{{4.1}{17}{The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Model Architecture}{17}{section.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite  {visualkeras}).\relax }}{18}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:model_layered_view}{{4.2}{18}{The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }{figure.caption.23}{}}
 \citation{era5}
 \citation{era5_dataset}
 \citation{era5_dataset}
 \citation{climate_choice}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Climate Analysis}{17}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Climate Analysis}{19}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chapter:climate}{{4}{17}{Climate Analysis}{chapter.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}ECMWF Reanalysis v5 Dataset}{17}{section.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite  {era5_dataset}, where detailed information is available.\relax }}{17}{figure.caption.25}\protected@file@percent }
-\newlabel{fig:selected_variables_stats}{{4.1}{17}{Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{18}{figure.caption.26}\protected@file@percent }
-\newlabel{fig:genus_corr}{{4.2}{18}{Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }{figure.caption.26}{}}
+\newlabel{chapter:climate}{{5}{19}{Climate Analysis}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}ECMWF Reanalysis v5 Dataset}{19}{section.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite  {era5_dataset}, where detailed information is available.\relax }}{19}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:selected_variables_stats}{{5.1}{19}{Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }{figure.caption.24}{}}
 \bibstyle{agsm}
 \bibdata{bib}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }}{19}{figure.caption.27}\protected@file@percent }
-\newlabel{fig:regression_results}{{4.3}{19}{R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }{figure.caption.27}{}}
-\bibcite{era5_dataset}{{1}{1950-Present}{{ECMWF}}{{}}}
-\bibcite{visualkeras}{{2}{2020}{{Gavrikov}}{{}}}
-\bibcite{resnet}{{3}{2015}{{He et~al.}}{{He, Zhang, Ren and\ Sun}}}
-\bibcite{era5}{{4}{2020}{{Hersbach et~al.}}{{Hersbach, Bell, Berrisford, Hirahara, Horányi, Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla, Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren, Dee, Diamantakis, Dragani, Flemming, Forbes, Fuentes, Geer, Haimberger, Healy, Hogan, Hólm, Janisková, Keeley, Laloyaux, Lopez, Lupu, Radnoti, de~Rosnay, Rozum, Vamborg, Villaume and\ Thépaut}}}
-\bibcite{eu_forest_data}{{5}{2017}{{Mauri et~al.}}{{Mauri, Strona and\ San-Miguel-Ayanz}}}
-\bibcite{soil_report}{{6}{2021}{{Poggio et~al.}}{{Poggio, de~Sousa, Batjes, Heuvelink, Kempen, Ribeiro and\ Rossiter}}}
-\bibcite{climate_choice}{{7}{2011}{{Toledo et~al.}}{{Toledo, Poorter, Peña-Claros, Alarcón, Balcázar, Leaño, Licona, Llanque, Vroomans, Zuidema and\ Bongers}}}
-\gdef \@abspage@last{27}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{20}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:genus_corr}{{5.2}{20}{Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }}{21}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:regression_results}{{5.3}{21}{R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }{figure.caption.26}{}}
+\bibcite{copernicus_main}{{1}{2023}{{Ahlswede et~al.}}{{Ahlswede, Schulz, Gava, Helber, Bischke, F\"orster, Arias, Hees, Demir and\ Kleinschmit}}}
+\bibcite{belgium_classification}{{2}{2022}{{Bolyn et~al.}}{{Bolyn, Lejeune, Michez and\ Latte}}}
+\bibcite{bonan2008forests}{{3}{2008}{{Bonan}}{{}}}
+\bibcite{breiman2001random}{{4}{2001}{{Breiman}}{{}}}
+\bibcite{dem_dataset}{{5}{2011-2015}{{Copernicus}}{{}}}
+\bibcite{era5_dataset}{{6}{1950-Present}{{ECMWF}}{{}}}
+\bibcite{fao2020gfra}{{7}{2020}{{Food and Agriculture Organization of the United Nations}}{{}}}
+\bibcite{visualkeras}{{8}{2020}{{Gavrikov}}{{}}}
+\bibcite{hansen2013forestcover}{{9}{2013}{{Hansen et~al.}}{{Hansen, Potapov, Moore, Hancher, Turubanova, Tyukavina, Thau, Stehman, Goetz, Loveland, Kommareddy, Egorov, Chini, Justice and\ Townshend}}}
+\bibcite{resnet}{{10}{2015}{{He et~al.}}{{He, Zhang, Ren and\ Sun}}}
+\bibcite{era5}{{11}{2020}{{Hersbach et~al.}}{{Hersbach, Bell, Berrisford, Hirahara, Horányi, Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla, Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren, Dee, Diamantakis, Dragani, Flemming, Forbes, Fuentes, Geer, Haimberger, Healy, Hogan, Hólm, Janisková, Keeley, Laloyaux, Lopez, Lupu, Radnoti, de~Rosnay, Rozum, Vamborg, Villaume and\ Thépaut}}}
+\bibcite{lefsky2002lidar}{{12}{2002}{{Lefsky et~al.}}{{Lefsky, Harding, Cohen, Parker and\ Walton}}}
+\bibcite{eu_forest_data}{{13}{2017}{{Mauri et~al.}}{{Mauri, Strona and\ San-Miguel-Ayanz}}}
+\bibcite{pakistan}{{14}{2024}{{Mehmood et~al.}}{{Mehmood, Anees, Muhammad, Hussain, Shahzad, Liu, Ansari, Alharbi and\ Khan}}}
+\bibcite{pettorelli2016satellite}{{15}{2016}{{Pettorelli et~al.}}{{Pettorelli, Duncan and\ Williamson}}}
+\bibcite{soil_report}{{16}{2021}{{Poggio et~al.}}{{Poggio, de~Sousa, Batjes, Heuvelink, Kempen, Ribeiro and\ Rossiter}}}
+\bibcite{sexton2013treecover}{{17}{2013}{{Sexton et~al.}}{{Sexton, Song, Feng, Noojipady, Anand, Huang, Kim, Collins, Channan, DiMiceli and\ Townshend}}}
+\bibcite{climate_choice}{{18}{2011}{{Toledo et~al.}}{{Toledo, Poorter, Peña-Claros, Alarcón, Balcázar, Leaño, Licona, Llanque, Vroomans, Zuidema and\ Bongers}}}
+\bibcite{turner2003remotesensing}{{19}{2003}{{Turner et~al.}}{{Turner, Spector, Gardiner, Fladeland, Sterling and\ Steininger}}}
+\bibcite{vose2018forests}{{20}{2018}{{Vose et~al.}}{{}}}
+\bibcite{watson2018intact}{{21}{2018}{{Watson et~al.}}{{Watson, Evans, Venter, Williams, Tulloch, Stewart, Thompson, Ray, Murray, Salazar, McAlpine, Potapov, Walston, Robinson, Painter, Wilkie, Filardi, Laurance, Houghton, Maxwell, Grantham, Samper, Wang, Laestadius, Runting, Silva-Ch{\'a}vez, Ervin and\ Lindenmayer}}}
+\bibcite{germany_bavaria}{{22}{2018}{{Wessel et~al.}}{{Wessel, Brandmeier and\ Tiede}}}
+\bibcite{zheng2019deep}{{23}{2019}{{Zheng and\ Wu}}{{}}}
+\gdef \@abspage@last{29}
