@@ -31,3 +31,7 @@ Fig.\,\ref{fig:model_layered_view} illustrates the detailed architecture of the 
 
 The architecture incorporates residual connections for maintaining gradient flow during backpropagation. These connections enable the network to be deep without suffering from issues like vanishing gradients, as highlighted in \cite{resnet}. As the network advances, spatial dimensions are reduced through pooling and striding operations, leading to a flattening layer that prepares the data for the fully connected (dense) layers. These dense layers further reduce the dimensionality, eventually outputting a 7-dimensional vector corresponding to the classification into 7 different tree genera, aligning with the model's goal of predicting tree types.
 
+
+\section{Tools and Software}
+
+The analysis was conducted using Python in Jupyter Notebooks. Data for the study was downloaded from Google Earth Engine and pre-processed using several libraries, including NumPy, Scikit-Learn, Pandas, and GeoPandas. Visualization of the data was performed with Plotly, Geemap, and Holoviews. For model development, TensorFlow and Keras were employed to build and train the machine learning models. Hyperparameter tuning was conducted using Keras Tuner and the Hyperband algorithm to optimize model performance.

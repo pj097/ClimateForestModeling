@@ -16,3 +16,7 @@ previous_sentinel/treesatai/TreeSatBA_v9_60m_multi_labels.json
 __pycache__/
 models/
 trials/
+old_notebooks/
+previous_sentinel/
+
+test.ipynb
