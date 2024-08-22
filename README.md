@@ -1,4 +1,4 @@
-The findings of this study are summarized in the document report/main.pdf. Please note that the views and conclusions presented in this document reflect the opinions of the author and do not necessarily represent those of any other individual or organization.
+The findings of this study are summarized in the [report](report/main.pdf). Please note that the views and conclusions presented in this document reflect the opinions of the author and do not necessarily represent those of any other individual or organization.
 
 The provided Python files serve as tools for the Jupyter notebooks and are best used in conjunction with the report.
 
