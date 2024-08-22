@@ -8,12 +8,17 @@
 \contentsline {section}{\numberline {2.2}Sentinel-2 Features}{5}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Copernicus DEM GLO-30}{9}{section.2.3}%
 \contentsline {section}{\numberline {2.4}SoilGrids}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Summary}{11}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Feature Selection}{12}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Sentinel-2 Seasons}{12}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Sentinel-2 Bands}{13}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Soil and Elevation}{15}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Summary}{15}{section.3.4}%
 \contentsline {chapter}{\numberline {4}Neural Network Configuration}{16}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hyperparameter Optimization}{16}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Model Architecture}{17}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Climate Analysis}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}ECMWF Reanalysis v5 Dataset}{19}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{22}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusions}{22}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future work}{22}{section.6.2}%

@@ -24,3 +24,4 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{19}{figure.caption.24}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{20}{figure.caption.25}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.\relax }}{21}{figure.caption.26}%
+\addvspace {10\p@ }
