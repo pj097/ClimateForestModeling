@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: agsm.bst
 Database file #1: bib.bib
+Warning--empty chapter and pages in hoegh2018climate
 You've used 24 entries,
             2909 wiz_defined-function locations,
-            802 strings with 11478 characters,
-and the built_in function-call counts, 260590 in all, are:
-= -- 43536
-> -- 3769
+            803 strings with 11643 characters,
+and the built_in function-call counts, 284969 in all, are:
+= -- 47670
+> -- 4151
 < -- 1
-+ -- 22188
-- -- 1211
-* -- 23945
-:= -- 49812
++ -- 24378
+- -- 1337
+* -- 26263
+:= -- 54320
 add.period$ -- 24
 call.type$ -- 24
-change.case$ -- 335
+change.case$ -- 334
 chr.to.int$ -- 24
-cite$ -- 24
-duplicate$ -- 371
-empty$ -- 797
-format.name$ -- 1280
-if$ -- 46858
+cite$ -- 25
+duplicate$ -- 373
+empty$ -- 803
+format.name$ -- 1407
+if$ -- 51256
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 21
+missing$ -- 22
 newline$ -- 78
-num.names$ -- 255
-pop$ -- 90
+num.names$ -- 256
+pop$ -- 95
 preamble$ -- 1
 purify$ -- 360
 quote$ -- 0
-skip$ -- 320
+skip$ -- 316
 stack$ -- 0
-substring$ -- 63909
-swap$ -- 66
+substring$ -- 70094
+swap$ -- 65
 text.length$ -- 337
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 94
-warning$ -- 0
+type$ -- 92
+warning$ -- 1
 while$ -- 529
 width$ -- 0
-write$ -- 326
+write$ -- 328
+(There was 1 warning)

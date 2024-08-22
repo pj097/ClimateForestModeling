@@ -8,7 +8,7 @@ Fig.\,\ref{fig:seasonal_selection} shows the performance of the CNN model across
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/seasonal_selection.pdf}
+    \includegraphics[width=0.98\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/seasonal_selection.pdf}
     \caption{Seasonal Sentinel-2 analysis for all season combinations using a 3D CNN.}
     \label{fig:seasonal_selection}
 \end{figure}
@@ -17,7 +17,7 @@ Fig.\,\ref{fig:seasonal_selection} shows the performance of the CNN model across
 
 LSTM was introduced to the model alongside 2D convolutions because they process the spatial structure of the Sentinel-2 images through convolution operations while simultaneously capturing temporal sequences. This dual capability allows the model to learn intricate spatial patterns within each image and understand how these patterns evolve over time.
 
-The selected metrics used to create Fig.\,\ref{fig:seasonal_selection} are well-suited for handling class imbalance in the seasonal analysis of the CNN model. Recall ensures the model captures as many instances of the minority classes as possible, which is critical when dealing with imbalanced datasets. Precision assesses the accuracy of the model's positive predictions, reducing the impact of false positives. The weighted f1-score balances precision and recall, accounting for class imbalance by considering the support of each class. PRC focuses on the trade-off between precision and recall, highlighting the model's performance on minority classes. Lastly, AUC measures overall model performance across all thresholds, providing a comprehensive view of its ability to distinguish between classes.
+The selected metrics used to create Fig.\,\ref{fig:seasonal_selection} are tailored to address class imbalance. Recall measures the ability to capture instances of minority classes, while precision assesses the accuracy of positive predictions. The weighted f1-score combines precision and recall, considering class support. PRC emphasizes the precision-recall trade-off, particularly for minority classes. AUC evaluates overall model performance across all thresholds, indicating its discriminative ability.
 
 For individual seasons, the model performs best in summer and autumn overall across the metrics. This suggests that the CNN model is more effective at classifying tree genera during these times, likely due to clearer and more distinct spectral signatures in the data collected during summer and autumn. The lower performance in spring and winter might be attributed to less distinct spectral signatures or more challenging environmental conditions, such as cloud cover and snow, which can affect data quality.
 
@@ -29,7 +29,7 @@ Based on these results, further analysis focused solely on summer seasons. This 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/band_selection.pdf}
+    \includegraphics[width=0.98\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/band_selection.pdf}
     \caption{Sentinel-2 analysis for all combinations within three band groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.}
     \label{fig:band_selection}
 \end{figure}
@@ -40,7 +40,7 @@ The resulting analysis, shown in Fig.\,\ref{fig:band_selection}, indicates that 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/band_selection_further.pdf}
+    \includegraphics[width=0.98\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/band_selection_further.pdf}
     \caption{Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.}
     \label{fig:band_selection_further}
 \end{figure}
@@ -51,7 +51,7 @@ Fig.\,\ref{fig:band_selection_further} shows that most selected combinations per
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/soil_elevation_analysis.pdf}
+    \includegraphics[width=0.98\linewidth, trim={20pt 40pt 10pt 30pt}, clip]{figures/figures_analysis/soil_elevation_analysis.pdf}
     \caption{Analysis of SoilGrids and elevation data integration.}
     \label{fig:soil_elevation_analysis}
 \end{figure}
@@ -61,3 +61,5 @@ Fig.\,\ref{fig:soil_elevation_analysis} demonstrates the performance metrics for
 Given that Sentinel-2 data alone provides strong results, further enhancements and optimizations were solely focused on this dataset. 
 
 \section{Summary}
+
+The analysis highlights the influence of various seasonal combinations, Sentinel-2 bands, and additional datasets such as soil composition and elevation data on the performance of the CNN model for tree genus classification. Summer and autumn seasons were found to be the most effective for accurate classification, with minimal gains observed from including additional seasons. In terms of band selection, NIR and SWIR bands demonstrated the best results, leading to the selection of the B3, B6, B8, and B11 combination for further analysis due to its optimal balance between performance and storage efficiency. While soil composition and elevation data provided marginal improvements, Sentinel-2 data remained the most critical factor in model accuracy. Consequently, further optimizations focused primarily on the B3, B6, B8, and B11 bands of Sentinel-2.

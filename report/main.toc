@@ -19,6 +19,8 @@
 \contentsline {section}{\numberline {4.2}Model Architecture}{17}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Climate Analysis}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}ECMWF Reanalysis v5 Dataset}{19}{section.5.1}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{22}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusions}{22}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future work}{22}{section.6.2}%
+\contentsline {section}{\numberline {5.2}Change Maps Correlations}{20}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Relationship Modeling}{21}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Conclusions and Future Directions}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusions}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Directions}{24}{section.6.2}%

@@ -6,27 +6,40 @@ The ECMWF Reanalysis v5 (ERA5) dataset (\cite{era5}) was selected for correlatin
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={20pt 20pt 10pt 40pt}, clip]{figures/figures_climate/selected_variables_stats.pdf}
+    \includegraphics[width=0.98\linewidth, trim={20pt 20pt 10pt 40pt}, clip]{figures/figures_climate/selected_variables_stats.pdf}
     \caption{Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite{era5_dataset}, where detailed information is available.}
     \label{fig:selected_variables_stats}
 \end{figure}
 
 As the ERA5 dataset contains numerous meteorological variables, a selection was made based on domain knowledge and studies such as \cite{climate_choice}. Fig.\,\ref{fig:selected_variables_stats} summarizes this selection, showing the median and quantiles for the aggregated dataset across all study locations. The figure illustrates the significant variability within Europe, with the top-left plot indicating a difference of approximately 50\,K between the 1.0 quantile of minimum and maximum temperature measurements.
 
+\section{Change Maps Correlations}
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={10pt 20pt 10pt 40pt}, clip]{figures/figures_climate/genus_corr.pdf}
+    \includegraphics[width=0.98\linewidth, trim={10pt 20pt 10pt 40pt}, clip]{figures/figures_climate/genus_corr.pdf}
     \caption{Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.}
     \label{fig:genus_corr}
 \end{figure}
 
-The representative medians of the variables shown in Fig.\,\ref{fig:selected_variables_stats} were calculated for the years 2010 to 2017. The differences between these medians and those for each individual year from 2020 to 2024 were analyzed and correlated with the discrepancies between classification predictions and actual values. These results are summarized in Fig.\,\ref{fig:genus_corr}. This figure suggests that, over a short-term period of 5 years, the 7 most prominent European tree genera were not significantly affected by climate change. However, this does not account for potential long-term impacts, where even small changes could have substantial effects on ecological dynamics. Additionally, the analysis is limited to Europe, which may experience less pronounced climate changes compared to other regions that are more severely affected. Furthermore, the study does not consider less frequent tree genera, which might be more sensitive to climate change and could exhibit different patterns of response.
+The representative medians of the variables shown in Fig.\,\ref{fig:selected_variables_stats} were calculated for the years 2010 to 2017. The differences between these medians and those for each individual year from 2020 to 2024 were analyzed and correlated with the discrepancies between classification predictions and actual values. These results are summarized in Fig.\,\ref{fig:genus_corr}. This figure suggests that, over a short-term period of 5 years, the 7 most prominent European tree genera were not significantly affected by climate change. However, this does not account for potential long-term impacts, where even small changes could have substantial effects on ecological dynamics. Additionally, this analysis is limited to Europe, a region that may experience less pronounced climate changes compared to other parts of the world, as discussed in \cite{hoegh2018climate}. Furthermore, the study does not consider less frequent tree genera, which might be more sensitive to climate change and could exhibit different patterns of response.
+
+\section{Relationship Modeling}
+
+Unlike correlation, which measures the strength and direction of linear relationships between variables, relationship modeling with neural networks aims to uncover complex, non-linear interactions between variables. To further explore the relationships illustrated in Fig.\,\ref{fig:genus_corr}, a narrow, fully-connected regression neural network was developed. This network used changes in meteorological variables as predictors to analyze how these changes relate to variations in tree genera maps.
+
+The model was trained using the Huber loss function, which combines the advantages of Mean Absolute Error (MAE) and Mean Squared Error (MSE). Huber loss is particularly effective in scenarios with noisy data and outliers, as it provides a balance between the robustness of MAE and the sensitivity to errors of MSE. 
+
+R$^2$ was used as a primary metric because it directly measures the proportion of variance in the dependent variable that can be explained by the independent variables. This metric is particularly valuable for assessing how well the model captures the underlying relationships in the data. A higher R$^2$ value indicates a stronger relationship between the predictors and the target variable, offering insights into the effectiveness of the model in explaining variability.
+
+MAE was chosen to evaluate the accuracy of the model's predictions. MAE provides an average of the absolute differences between the predicted and actual values, giving a clear indication of the magnitude of prediction errors. While MAE does not measure the strength of relationships directly, it helps assess how closely the model's predictions align with actual outcomes.
+
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth, trim={10pt 20pt 10pt 40pt}, clip]{figures/figures_climate/regression_results.pdf}
-    \caption{R$^2$ score of a narrow fully-connected regression neural network using meteorological change maps as predictors for genera change maps derived from tree classification.}
+    \includegraphics[width=0.98\linewidth, trim={10pt 20pt 50pt 40pt}, clip]{figures/figures_climate/regression_results.pdf}
+    \caption{R$^2$ score (top-left), MAE (top-right), and residuals (bottom) for a narrow, fully-connected regression neural network, using meteorological change maps as predictors for changes in tree genus maps derived from tree classification.}
     \label{fig:regression_results}
 \end{figure}
 
-To further verify the results shown in Fig.\,\ref{fig:genus_corr}, a narrow fully-connected regression neural network was developed. This network used the change map of meteorological variables as predictors to estimate changes in the tree genera maps.
+As illustrated in Fig.\,\ref{fig:regression_results}, the model exhibits a very low, and at times negative, R$^2$ value and a high MAE. Additionally, the residuals display no discernible pattern. These results collectively indicate that the model fails to capture any significant relationship between the climate change maps and the changes in tree genus distributions. The poor performance metrics suggest that the predictors used do not meaningfully explain the variability in tree genus changes.
