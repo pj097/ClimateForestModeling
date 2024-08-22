@@ -4,9 +4,9 @@ The provided Python files serve as tools for the Jupyter notebooks and are best 
 
 To get started, it is recommended to create a new Python environment. Please refer to the guidelines for Conda or Pip for instructions on setting up a new environment. If using Conda, you can create the environment with the following command using the .yml file in this repository:
 
-'''
+```
 conda env create -f environment.yml -p your_env_path_here
-'''
+```
 
 However, it may be preferable to install only the libraries you need individually, as the environment file may include unnecessary dependencies.
 
