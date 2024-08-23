@@ -27,6 +27,14 @@ Bonan, G.~B.  \harvardyearleft 2008\harvardyearright , `Forests and climate
 Breiman, L.  \harvardyearleft 2001\harvardyearright , `Random forests', {\em
   Machine Learning} {\bf 45}(1),~5--32.
 
+\harvarditem[Chauvier et~al.]{Chauvier, Thuiller, Brun, Lavergne, Descombes,
+  Karger, Renaud \harvardand\ Zimmermann}{2021}{chauvier2021}
+Chauvier, Y., Thuiller, W., Brun, P., Lavergne, S., Descombes, P., Karger,
+  D.~N., Renaud, J. \harvardand\ Zimmermann, N.~E.  \harvardyearleft
+  2021\harvardyearright , `Influence of climate, soil, and land cover on plant
+  species distribution in the european alps', {\em Ecological Monographs} {\bf
+  91}(2),~e01433.
+
 \harvarditem{Copernicus}{2011-2015}{dem_dataset}
 Copernicus  \harvardyearleft 2011-2015\harvardyearright , `{Copernicus DEM \-
   Global and European Digital Elevation Model}',
@@ -61,6 +69,14 @@ Hansen, M.~C., Potapov, P.~V., Moore, R., Hancher, M., Turubanova, S.~A.,
 He, K., Zhang, X., Ren, S. \harvardand\ Sun, J.  \harvardyearleft
   2015\harvardyearright , `Deep residual learning for image recognition'.
 
+\harvarditem[He et~al.]{He, Zhou, Xu, Hu, Xue, Xu, Lou, Zeng \harvardand\
+  Wang}{2023}{Qingyuan}
+He, T., Zhou, H., Xu, C., Hu, J., Xue, X., Xu, L., Lou, X., Zeng, K.
+  \harvardand\ Wang, Q.  \harvardyearleft 2023\harvardyearright , `Deep
+  learning in forest tree species classification using sentinel-2 on google
+  earth engine: A case study of qingyuan county', {\em Sustainability} {\bf
+  15}(3).
+
 \harvarditem[Hersbach et~al.]{Hersbach, Bell, Berrisford, Hirahara, Horányi,
   Muñoz-Sabater, Nicolas, Peubey, Radu, Schepers, Simmons, Soci, Abdalla,
   Abellan, Balsamo, Bechtold, Biavati, Bidlot, Bonavita, De~Chiara, Dahlgren,
@@ -89,11 +105,26 @@ Hoegh-Guldberg, O., Jacob, D., Taylor, M., Bindi, M., Brown, S., Camilloni, I.,
   \harvardand\ Tschakert, P.  \harvardyearleft 2018\harvardyearright , {\em
   Impacts of 1.5ºC global warming on natural and human systems}, IPCC.
 
+\harvarditem[Krist et~al.]{Krist, Ellenwood, Woods, McMahan, Cowardin, Ryerson,
+  Sapio, Zweifler \harvardand\ Romero}{2014}{usda}
+Krist, F.~J., Ellenwood, J.~R., Woods, M.~E., McMahan, A.~J., Cowardin, J.~P.,
+  Ryerson, D.~E., Sapio, F.~J., Zweifler, M.~O. \harvardand\ Romero, S.~A.
+  \harvardyearleft 2014\harvardyearright , `2013-2027 national insect and
+  disease forest risk assessment.', {\em Fort Collins, CO: US Forest Service,
+  Forest Health Technology and Enterprise Team} .
+
 \harvarditem[Lefsky et~al.]{Lefsky, Harding, Cohen, Parker \harvardand\
   Walton}{2002}{lefsky2002lidar}
 Lefsky, M.~A., Harding, D., Cohen, W.~B., Parker, G.~G. \harvardand\ Walton, J.
    \harvardyearleft 2002\harvardyearright , `Lidar remote sensing for ecosystem
   studies', {\em BioScience} {\bf 52}(1),~19--30.
+
+\harvarditem[Magalh{\~a}es et~al.]{Magalh{\~a}es, Amoroso \harvardand\
+  Larson}{2021}{Magalhães2021}
+Magalh{\~a}es, J. G. d.~S., Amoroso, M.~M. \harvardand\ Larson, B.~C.
+  \harvardyearleft 2021\harvardyearright , `What evidence exists on the effects
+  of competition on trees' responses to climate change? a systematic map
+  protocol', {\em Environmental Evidence} {\bf 10}(1),~34.
 
 \harvarditem[Mauri et~al.]{Mauri, Strona \harvardand\
   San-Miguel-Ayanz}{2017}{eu_forest_data}
@@ -108,6 +139,14 @@ Mehmood, K., Anees, S.~A., Muhammad, S., Hussain, K., Shahzad, F., Liu, Q.,
   2024\harvardyearright , `Analyzing vegetation health dynamics across seasons
   and regions through ndvi and climatic variables', {\em Scientific Reports}
   {\bf 14}(1),~11775.
+
+\harvarditem[Pazos-Outón et~al.]{Pazos-Outón, Vasconcelos, Raichuk, Arnab,
+  Morris \harvardand\ Neumann}{2024}{plantedforest}
+Pazos-Outón, L.~M., Vasconcelos, C.~N., Raichuk, A., Arnab, A., Morris, D.
+  \harvardand\ Neumann, M.  \harvardyearleft 2024\harvardyearright , `Planted:
+  a dataset for planted forest identification from multi-satellite time
+  series'.
+\newline\harvardurl{https://arxiv.org/abs/2406.18554}
 
 \harvarditem[Pettorelli et~al.]{Pettorelli, Duncan \harvardand\
   Williamson}{2016}{pettorelli2016satellite}
@@ -175,6 +214,14 @@ Wessel, M., Brandmeier, M. \harvardand\ Tiede, D.  \harvardyearleft
   for scalable classification of tree types and tree species based on
   sentinel-2 data', {\em Remote Sensing} {\bf 10}(9).
 \newline\harvardurl{https://www.mdpi.com/2072-4292/10/9/1419}
+
+\harvarditem[Xi et~al.]{Xi, Ren, Tian, Ren, Dong \harvardand\
+  Zhang}{2021}{Yanbiao2021}
+Xi, Y., Ren, C., Tian, Q., Ren, Y., Dong, X. \harvardand\ Zhang, Z.
+  \harvardyearleft 2021\harvardyearright , `Exploitation of time series
+  sentinel-2 data and different machine learning algorithms for detailed tree
+  species classification', {\em IEEE Journal of Selected Topics in Applied
+  Earth Observations and Remote Sensing} {\bf 14},~7589--7603.
 
 \harvarditem{Zheng \harvardand\ Wu}{2019}{zheng2019deep}
 Zheng, Y. \harvardand\ Wu, Z.  \harvardyearleft 2019\harvardyearright , `Deep

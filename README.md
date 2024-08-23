@@ -16,31 +16,6 @@ Begin with explore_euforest.ipynb, which explores the EU-Forest dataset (link to
 
 Use the download_data.ipynb notebook to download data from Google Earth Engine (Google Earth Engine Python API). The downloaded data can then be explored using visualise_features.ipynb.
 
-For hyperparameter tuning, refer to hypertune.ipynb, which is configured using hyper_model_creator.py. Alternatively, you can skip hyperparameter tuning and create the model directly with keras_model_creator.py, then train it using other notebooks such as climate.ipynb.
+For hyperparameter tuning, refer to hypertune.ipynb, which is configured using hyper_model_creator.py. Alternatively, you can skip hyperparameter tuning and create the model directly with keras_model_creator.py, then train it using other notebooks such as climate.ipynb. To visualize tuning results, simply activate Tensorboard code within hypertune.ipynb. Alternatively, plot_tuner.ipynb can be used as a basis for more tailored plots. 
 
 The final notebook, climate.ipynb, requires ERA5 data. Instructions for obtaining this data can be found in download_data.ipynb. This notebook performs correlations between change maps in tree genus classification results and climate variables and implements a narrow neural network to predict tree change maps based on climate data.
-
-
-
-
-MIT License
-
-Copyright (c) [2024] [Pedro Junio]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
