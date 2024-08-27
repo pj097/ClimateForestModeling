@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1724417990 "main.aux" "main.bbl" "main" 1724418014 0
+["bibtex main"] 1724758974 "main.aux" "main.bbl" "main" 1724759050 0
   "./bib.bib" 1724413781 16992 917ffd3859b500712c076d4adf423908 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/harvard/agsm.bst" 1136766823 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
-  "main.aux" 1724418014 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
+  "main.aux" 1724759050 19303 dd265cb5a6d1acb4b68d072dd308eee5 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1724418013 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724418014 0
+["pdflatex"] 1724759048 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724759050 0
   "/etc/texmf/web2c/texmf.cnf" 1721928383 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pj/sentinel/report/main.tex" 1724412297 6573 13157adf6b80993d63dc3db83d5262d6 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -173,7 +173,7 @@
   "chapters/declaration.tex" 1724185441 1885 8ae474ed5e32fad2ead71adbec2b7ce6 ""
   "chapters/feature_selection.tex" 1724339333 8044 077836efbdb494a0fc1f64bb1d85d06f ""
   "chapters/intro.tex" 1724329525 6557 83b5c1d89c423c287b40e136d0f587de ""
-  "chapters/model.tex" 1724326364 3379 a46bb82e212459ceec8441e4f179d713 ""
+  "chapters/model.tex" 1724759048 3434 02da3c1ed6d0d8b355e04d1650f9703a ""
   "chapters/title.tex" 1724321001 1800 833648a2e58644586f8043f4b698b394 ""
   "figures/figures_analysis/band_selection.pdf" 1723995721 31844 a6ed826fea51a0f811c8d6a7296339c0 ""
   "figures/figures_analysis/band_selection_further.pdf" 1723995721 29918 2a5ae5e88921d81ee6cc4bff3156c778 ""
@@ -199,15 +199,15 @@
   "figures/figures_sentinel/sample_area_sentinel.png" 1723995721 1186367 f65345ee47d55ce86daa3a3507de901e ""
   "figures/figures_sentinel/sample_earth.png" 1723995721 1649061 bdf1b64ad52079f5e824df7c0e483518 ""
   "figures/figures_sentinel/sample_sentinel.png" 1723995721 1380873 ab29e0b8b5a4e1e885efede19309e202 ""
-  "figures/figures_tuner/fixed_layers.pdf" 1724062353 28481 320df8eaa42d825b7fea127b199318ed ""
-  "figures/figures_tuner/fixed_layers.tex" 1724062353 616 5087f9cb4a78cbd3971664f6bf0d60c5 ""
-  "figures/figures_tuner/model_layered_view.png" 1724354299 144765 bb8151f720d1e9a0320c0c758f96c598 ""
-  "main.aux" 1724418014 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
-  "main.bbl" 1724417990 13043 e6295df929b65591a5b78de1c21ea962 "bibtex main"
-  "main.lof" 1724418014 4631 f625d9ef545a2c75e08742cfaf1a8e7c "pdflatex"
-  "main.out" 1724418014 4137 f1b75a68e1faa77046ee8ff86a062a7d "pdflatex"
+  "figures/figures_tuner/hyperband_resnet_params.pdf" 1724752656 47958 e0c1a9eef8733d9b7a16bda69ddca5bc ""
+  "figures/figures_tuner/hyperband_resnet_params.tex" 1724758972 627 41ad6bfc25d82e754fa23ddfa8a7dd88 ""
+  "figures/figures_tuner/model_layered_view.png" 1724749474 144765 bb8151f720d1e9a0320c0c758f96c598 ""
+  "main.aux" 1724759050 19303 dd265cb5a6d1acb4b68d072dd308eee5 "pdflatex"
+  "main.bbl" 1724758974 13043 e6295df929b65591a5b78de1c21ea962 "bibtex main"
+  "main.lof" 1724759050 4631 f625d9ef545a2c75e08742cfaf1a8e7c "pdflatex"
+  "main.out" 1724759050 4137 f1b75a68e1faa77046ee8ff86a062a7d "pdflatex"
   "main.tex" 1724412297 6573 13157adf6b80993d63dc3db83d5262d6 ""
-  "main.toc" 1724418014 2086 85815f1ebbf6c077f2b2fbc8b13007c2 "pdflatex"
+  "main.toc" 1724759050 2086 85815f1ebbf6c077f2b2fbc8b13007c2 "pdflatex"
   (generated)
   "main.aux"
   "main.lof"
