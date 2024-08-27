@@ -18,10 +18,13 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{14}{figure.caption.19}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{15}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{17}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }}{18}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{16}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{17}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }}{18}{figure.caption.23}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{20}{figure.caption.24}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{21}{figure.caption.25}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces R$^2$ score (top-left), MAE (top-right), and residuals (bottom) for a narrow, fully-connected regression neural network, using meteorological change maps as predictors for changes in tree genus maps derived from tree classification.\relax }}{22}{figure.caption.26}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Correlations heatmap between various ERA5 variables. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{19}{figure.caption.24}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year.\relax }}{20}{figure.caption.25}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces R$^2$ score (top-left), MAE (top-right), and residuals (bottom) for a narrow, fully-connected regression neural network, using meteorological change maps as predictors for changes in tree genus maps derived from tree classification.\relax }}{23}{figure.caption.27}%
 \addvspace {10\p@ }

@@ -15,12 +15,16 @@
 \contentsline {section}{\numberline {3.3}Soil and Elevation}{15}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Summary}{15}{section.3.4}%
 \contentsline {chapter}{\numberline {4}Neural Network Configuration}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hyperparameter Optimization}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Model Architecture}{17}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Climate Analysis}{19}{chapter.5}%
-\contentsline {section}{\numberline {5.1}ECMWF Reanalysis v5 Dataset}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Change Maps Correlations}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Relationship Modeling}{21}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Directions}{23}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusions}{23}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Directions}{24}{section.6.2}%
+\contentsline {section}{\numberline {4.1}Hyperparameter Optimization I}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Hyperparameter Optimization II}{17}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Model Architecture}{17}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Climate Data}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}ERA5 Dataset}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}ERA5 Exploration}{20}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Results and Validation}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Classification Validation}{21}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Change Map Correlations}{21}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Relationship Modeling}{22}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Directions}{24}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusions}{24}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Future Directions}{25}{section.7.2}%
