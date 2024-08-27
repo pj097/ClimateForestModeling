@@ -20,7 +20,7 @@
 \contentsline {section}{\numberline {4.3}Model Architecture}{17}{section.4.3}%
 \contentsline {chapter}{\numberline {5}Climate Data}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}ERA5 Dataset}{19}{section.5.1}%
-\contentsline {section}{\numberline {5.2}ERA5 Exploration}{20}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Dataset Exploration}{20}{section.5.2}%
 \contentsline {chapter}{\numberline {6}Results and Validation}{21}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Classification Validation}{21}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Change Map Correlations}{21}{section.6.2}%

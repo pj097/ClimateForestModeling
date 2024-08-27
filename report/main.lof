@@ -18,7 +18,7 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Sentinel-2 analysis for selected combinations between each of the three groups using a CNN. The horizontal black line represents the weighted f1-score for all bands.\relax }}{14}{figure.caption.19}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Analysis of SoilGrids and elevation data integration.\relax }}{15}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{16}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores out of nearly 700 Hyperband (\cite {hyperband}) trials. The best score is marked by a diamond shape.\relax }}{16}{figure.caption.21}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{17}{figure.caption.22}%
 \contentsline {figure}{\numberline {4.3}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }}{18}{figure.caption.23}%
 \addvspace {10\p@ }

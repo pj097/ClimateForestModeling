@@ -42,7 +42,7 @@ class BuildHyperModel(kt.HyperModel):
             ),
         ]
         return callbacks
-        
+
     def get_metrics(self):
         prc = tf.keras.metrics.AUC(name='prc', curve='PR')
         f1_score = tf.keras.metrics.FBetaScore(
@@ -161,12 +161,11 @@ class BuildHyperModel(kt.HyperModel):
         return training_generator, testing_generator
 
     def fit(self, hp, model, **kwargs):
-        kwargs['callbacks'] = self.get_callbacks()
+        kwargs['callbacks'] += self.get_callbacks()
         training_generator, testing_generator = self.get_train_test()
         return model.fit(
             x=training_generator,
             validation_data=testing_generator,
-            # callbacks=self.get_callbacks(),
             class_weight=self.data_summary['class_weights'],
             **kwargs,
         )

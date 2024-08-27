@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: agsm.bst
 Database file #1: bib.bib
 Warning--empty chapter and pages in hoegh2018climate
-You've used 30 entries,
+You've used 31 entries,
             2909 wiz_defined-function locations,
-            836 strings with 13413 characters,
-and the built_in function-call counts, 342850 in all, are:
-= -- 57283
-> -- 5054
+            842 strings with 13627 characters,
+and the built_in function-call counts, 350441 in all, are:
+= -- 58541
+> -- 5166
 < -- 1
-+ -- 29277
-- -- 1624
-* -- 31576
-:= -- 65447
-add.period$ -- 30
-call.type$ -- 30
-change.case$ -- 418
-chr.to.int$ -- 30
-cite$ -- 31
-duplicate$ -- 462
-empty$ -- 985
-format.name$ -- 1712
-if$ -- 61662
++ -- 29906
+- -- 1659
+* -- 32267
+:= -- 66917
+add.period$ -- 31
+call.type$ -- 31
+change.case$ -- 432
+chr.to.int$ -- 31
+cite$ -- 32
+duplicate$ -- 478
+empty$ -- 1018
+format.name$ -- 1750
+if$ -- 63027
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 27
-newline$ -- 97
-num.names$ -- 322
-pop$ -- 115
+missing$ -- 28
+newline$ -- 100
+num.names$ -- 333
+pop$ -- 117
 preamble$ -- 1
-purify$ -- 450
+purify$ -- 465
 quote$ -- 0
-skip$ -- 398
+skip$ -- 412
 stack$ -- 0
-substring$ -- 84125
-swap$ -- 80
-text.length$ -- 421
+substring$ -- 85947
+swap$ -- 83
+text.length$ -- 435
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 116
+type$ -- 120
 warning$ -- 1
-while$ -- 658
+while$ -- 681
 width$ -- 0
-write$ -- 412
+write$ -- 426
 (There was 1 warning)

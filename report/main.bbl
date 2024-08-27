@@ -119,6 +119,13 @@ Lefsky, M.~A., Harding, D., Cohen, W.~B., Parker, G.~G. \harvardand\ Walton, J.
    \harvardyearleft 2002\harvardyearright , `Lidar remote sensing for ecosystem
   studies', {\em BioScience} {\bf 52}(1),~19--30.
 
+\harvarditem[Li et~al.]{Li, Jamieson, DeSalvo, Rostamizadeh \harvardand\
+  Talwalkar}{2018}{hyperband}
+Li, L., Jamieson, K., DeSalvo, G., Rostamizadeh, A. \harvardand\ Talwalkar, A.
+  \harvardyearleft 2018\harvardyearright , `Hyperband: A novel bandit-based
+  approach to hyperparameter optimization', {\em Journal of Machine Learning
+  Research} {\bf 18}(185),~1--52.
+
 \harvarditem[Magalh{\~a}es et~al.]{Magalh{\~a}es, Amoroso \harvardand\
   Larson}{2021}{Magalhães2021}
 Magalh{\~a}es, J. G. d.~S., Amoroso, M.~M. \harvardand\ Larson, B.~C.
