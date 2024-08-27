@@ -56,7 +56,7 @@ class BuildHyperModel(kt.HyperModel):
         ] 
         return metrics
         
-    def residual_block(self, hp, x, filters):
+    def residual_block(self, x, filters):
         r = BatchNormalization()(x)
         r = Conv2D(
             filters=filters, kernel_size=3, strides=2, padding='same',
@@ -88,10 +88,19 @@ class BuildHyperModel(kt.HyperModel):
         
         x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         x = BatchNormalization()(x0)
-        
-        for filter_size in [128, 256, 512]:
-            x = self.residual_block(hp, x, filter_size)
+
+        filter_min = hp.Choice('filter_size_min', [128, 64, 32])
+        filter_max = hp.Choice('filter_size_max', [1024, 512, 256])
+
+        n_conv_layers = 0
+        filter_current = hp.get('filter_size_min')
+        while filter_current <= filter_max:
+            x = self.residual_block(x, filter_current)
             x = SpatialDropout2D(0.1)(x)
+            filter_current *= 2
+            n_conv_layers += 1
+
+        conv_layers = hp.Fixed('convolutional_layers', n_conv_layers)
 
         x = MaxPooling2D(
             pool_size=4, 
@@ -100,16 +109,25 @@ class BuildHyperModel(kt.HyperModel):
         x = BatchNormalization()(x)
         
         x = Flatten()(x)
-        
-        for units in [512, 256]:
+
+        units_min = hp.Choice('units_min', [256, 128, 64])
+        units_max = hp.Choice('units_max', [2048, 1024, 512])
+
+        n_dense_layers = 0
+        units_current = hp.get('units_max')
+        while units_current >= units_min:
             x = Dense(
-                units, 
+                units_current, 
                 activation='relu',
                 kernel_regularizer='l1l2'
             )(x)
             x = BatchNormalization()(x)
             x = Dropout(0.5)(x)
-            
+            units_current //= 2
+            n_dense_layers += 1
+
+        dense_layers = hp.Fixed('dense_layers', n_dense_layers)
+        
         outputs = Dense(
             self.selected_classes.shape[1],
             bias_initializer=tf.keras.initializers.Constant(self.data_summary['initial_bias']),
@@ -143,11 +161,12 @@ class BuildHyperModel(kt.HyperModel):
         return training_generator, testing_generator
 
     def fit(self, hp, model, **kwargs):
+        kwargs['callbacks'] = self.get_callbacks()
         training_generator, testing_generator = self.get_train_test()
         return model.fit(
             x=training_generator,
             validation_data=testing_generator,
+            # callbacks=self.get_callbacks(),
             class_weight=self.data_summary['class_weights'],
-            callbacks=self.get_callbacks(),
             **kwargs,
         )
