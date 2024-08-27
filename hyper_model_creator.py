@@ -20,6 +20,29 @@ reload(sentinel_utils)
 reload(data_generator)
 
 class BuildHyperModel(kt.HyperModel):
+    def __init__(self, trials_dir, trial_metric):
+        self.trials_dir = trials_dir
+        self.trial_metric = trial_metric
+        self.training_years = '2017_2018_2019'
+
+        utils = sentinel_utils.SentinelUtils(min_occurrences=20000)
+        self.selected_classes = utils.get_processed_labels()
+        self.data_summary = utils.get_data_summary(
+            self.selected_classes, training_years=self.training_years
+        )
+
+    def get_callbacks(self):
+        callbacks = [
+            tf.keras.callbacks.TensorBoard(self.trials_dir.joinpath('board')),
+            tf.keras.callbacks.EarlyStopping(
+                monitor=self.trial_metric, patience=10, mode='max'
+            ),
+            tf.keras.callbacks.ReduceLROnPlateau(
+                monitor=self.trial_metric, factor=0.5, patience=8, min_lr=1e-6,
+            ),
+        ]
+        return callbacks
+        
     def get_metrics(self):
         prc = tf.keras.metrics.AUC(name='prc', curve='PR')
         f1_score = tf.keras.metrics.FBetaScore(
@@ -32,90 +55,64 @@ class BuildHyperModel(kt.HyperModel):
             'accuracy', 'recall', 'precision', 'auc', prc, f1_score, f2_score
         ] 
         return metrics
-
-    def initialise_vars(self, hp):
-        use_weights = hp.Boolean('class_weight', default=True)
         
-        training_years_choice = hp.Choice(
-            'training_years', ['2017_2018_2019', '2017']
-        )
-        
-        utils = sentinel_utils.SentinelUtils(min_occurrences=20000)
-        self.selected_classes = utils.get_processed_labels()
-        self.data_summary = utils.get_data_summary(
-            self.selected_classes, training_years=training_years_choice
-        )
-
     def residual_block(self, hp, x, filters):
         r = BatchNormalization()(x)
         r = Conv2D(
             filters=filters, kernel_size=3, strides=2, padding='same',
-            activation=hp.get('activation'), 
-            kernel_regularizer=hp.get('kernel_regularizer')
+            activation='relu', 
+            kernel_regularizer='l1l2'
         )(r)
         r = BatchNormalization()(r)
         r = Conv2D(
             filters=filters, kernel_size=3, padding='same',
-            activation=hp.get('activation'), 
-            kernel_regularizer=hp.get('kernel_regularizer')
+            activation='relu', 
+            kernel_regularizer='l1l2'
         )(r)
         r = Conv2D(
             filters=1, kernel_size=1,
-            activation=hp.get('activation'), 
-            kernel_regularizer=hp.get('kernel_regularizer')
+            activation='relu', 
+            kernel_regularizer='l1l2'
         )(r)
         x = Conv2D(
             filters=filters, kernel_size=3, strides=2, padding='same',
-            activation=hp.get('activation'), 
-            kernel_regularizer=hp.get('kernel_regularizer')
+            activation='relu', 
+            kernel_regularizer='l1l2'
         )(x)
         
         return Add()([x, r])
         
     def build(self, hp):
-        self.initialise_vars(hp)
-        
         sentinel_10m_input = Input((100, 100, 2))
         sentinel_20m_input = Input((50, 50, 2))
-
-        kernel_regularizer = hp.Choice('kernel_regularizer', ['l1l2', 'l1', 'l2'])
-        
-        spatial_dropout = hp.Choice('spatial_dropout', [0.3, 0.1, 0.5])
-        
-        activation = hp.Choice('activation', ['leaky_relu', 'relu'])
         
         x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         x = BatchNormalization()(x0)
         
         for filter_size in [128, 256, 512]:
             x = self.residual_block(hp, x, filter_size)
-            x = SpatialDropout2D(spatial_dropout)(x)
+            x = SpatialDropout2D(0.1)(x)
 
         x = MaxPooling2D(
-            pool_size=hp.Choice('pool_size', [4, 2]), 
+            pool_size=4, 
             padding='same'
         )(x)    
         x = BatchNormalization()(x)
         
         x = Flatten()(x)
-
-        dropout = hp.Choice('dropout', [0.3, 0.1, 0.5])
         
         for units in [512, 256]:
             x = Dense(
                 units, 
-                activation=activation,
-                kernel_regularizer=kernel_regularizer
+                activation='relu',
+                kernel_regularizer='l1l2'
             )(x)
             x = BatchNormalization()(x)
-            x = Dropout(dropout)(x)
+            x = Dropout(0.5)(x)
             
         outputs = Dense(
             self.selected_classes.shape[1],
-            bias_initializer=(
-                tf.keras.initializers.Constant(self.data_summary['initial_bias']) 
-                if hp.Boolean('bias_initializer', default=True) else None
-            ),
+            bias_initializer=tf.keras.initializers.Constant(self.data_summary['initial_bias']),
             activation='sigmoid',   
         )(x)
         m = tf.keras.models.Model(
@@ -123,37 +120,34 @@ class BuildHyperModel(kt.HyperModel):
             outputs=outputs
         )
         m.compile(
-            optimizer=Adam(
-                learning_rate=hp.Choice('learning_rate', [1e-3, 1e-4, 1e-2])
-            ),
-            loss=hp.Choice(
-                'loss_function', 
-                ['binary_focal_crossentropy', 'binary_crossentropy'],
-            ), 
+            optimizer=Adam(learning_rate=1e-4),
+            loss='binary_crossentropy', 
             metrics=self.get_metrics()
         )
         return m
 
-    def fit(self, hp, model, **kwargs):
+    def get_train_test(self):
         training_ids, test_ids = train_test_split(
             self.selected_classes.index, test_size=10000, random_state=42
         )
         gen_params = dict(
             selected_classes=self.selected_classes,
             data_summary=self.data_summary,
-            years=hp.get('training_years'),
+            years=self.training_years,
             batch_size=64,
         )
         training_generator = data_generator.DataGenerator(
             training_ids, **gen_params)
         testing_generator = data_generator.DataGenerator(
             test_ids, **gen_params)
-        
+        return training_generator, testing_generator
+
+    def fit(self, hp, model, **kwargs):
+        training_generator, testing_generator = self.get_train_test()
         return model.fit(
             x=training_generator,
             validation_data=testing_generator,
-            class_weight=(
-                self.data_summary['class_weights'] if hp.get('class_weight') else None
-            ),
+            class_weight=self.data_summary['class_weights'],
+            callbacks=self.get_callbacks(),
             **kwargs,
         )
