@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1724417665 "main.aux" "main.bbl" "main" 1724417666 0
+["bibtex main"] 1724417990 "main.aux" "main.bbl" "main" 1724418014 0
   "./bib.bib" 1724413781 16992 917ffd3859b500712c076d4adf423908 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/harvard/agsm.bst" 1136766823 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
-  "main.aux" 1724417666 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
+  "main.aux" 1724418014 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1724417665 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724417666 0
+["pdflatex"] 1724418013 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724418014 0
   "/etc/texmf/web2c/texmf.cnf" 1721928383 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pj/sentinel/report/main.tex" 1724412297 6573 13157adf6b80993d63dc3db83d5262d6 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -167,7 +167,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1721928398 4623455 fa0568a71dd9a288d6c226ee477506c6 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1721928459 7880881 aba413bc45bdb95402b8aa34847b0632 ""
   "chapters/abstract.tex" 1724353731 2077 4828b6f00cc2236d71af7e218f57290b ""
-  "chapters/climate.tex" 1724417663 5862 f2ad13ff64e40a3d7eb4a0db85b0224e ""
+  "chapters/climate.tex" 1724418013 5862 f2ad13ff64e40a3d7eb4a0db85b0224e ""
   "chapters/conclusion.tex" 1724417179 5832 26349645c4716173814c91796142d2ea ""
   "chapters/data_exploration.tex" 1724339315 17666 60a84c2e9d6721ae5e5dd90c253faa69 ""
   "chapters/declaration.tex" 1724185441 1885 8ae474ed5e32fad2ead71adbec2b7ce6 ""
@@ -179,9 +179,9 @@
   "figures/figures_analysis/band_selection_further.pdf" 1723995721 29918 2a5ae5e88921d81ee6cc4bff3156c778 ""
   "figures/figures_analysis/seasonal_selection.pdf" 1723995721 30743 29bdbdbc722db969e57ebcec6ed8673a ""
   "figures/figures_analysis/soil_elevation_analysis.pdf" 1723995721 25967 5553fd83d1f5de08c31188e5dacb62c2 ""
-  "figures/figures_climate/genus_corr.pdf" 1724406672 27876 f0531617149af20ed4c8a16427887a76 ""
+  "figures/figures_climate/genus_corr.pdf" 1724417858 27876 c80ec48c38c705a96fbc2d26c81d637c ""
   "figures/figures_climate/regression_results.pdf" 1724417072 3880716 ad63f1b2aacca8af95dfaf76de743cb8 ""
-  "figures/figures_climate/selected_variables_stats.pdf" 1724406672 40727 560674d5b76ad2db2ec3c0c334132064 ""
+  "figures/figures_climate/selected_variables_stats.pdf" 1724417858 40727 85b86a74eff49d51ca448352ea5e88f6 ""
   "figures/figures_features/bgr_hist.pdf" 1723995721 26224 ed34b3a4b4f0517796b0998013587fde ""
   "figures/figures_features/elevation_hist.pdf" 1723995721 11999 e24db9a3d6e132550691426aeed6b4dc ""
   "figures/figures_features/nir_hist.pdf" 1723995721 36282 f718c19dbb69e9f77b6cefb19f2d724a ""
@@ -202,12 +202,12 @@
   "figures/figures_tuner/fixed_layers.pdf" 1724062353 28481 320df8eaa42d825b7fea127b199318ed ""
   "figures/figures_tuner/fixed_layers.tex" 1724062353 616 5087f9cb4a78cbd3971664f6bf0d60c5 ""
   "figures/figures_tuner/model_layered_view.png" 1724354299 144765 bb8151f720d1e9a0320c0c758f96c598 ""
-  "main.aux" 1724417666 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
-  "main.bbl" 1724417665 13043 e6295df929b65591a5b78de1c21ea962 "bibtex main"
-  "main.lof" 1724417666 4631 f625d9ef545a2c75e08742cfaf1a8e7c "pdflatex"
-  "main.out" 1724417666 4137 f1b75a68e1faa77046ee8ff86a062a7d "pdflatex"
+  "main.aux" 1724418014 19281 1360cda020fb65f2c1884a3ff060d14e "pdflatex"
+  "main.bbl" 1724417990 13043 e6295df929b65591a5b78de1c21ea962 "bibtex main"
+  "main.lof" 1724418014 4631 f625d9ef545a2c75e08742cfaf1a8e7c "pdflatex"
+  "main.out" 1724418014 4137 f1b75a68e1faa77046ee8ff86a062a7d "pdflatex"
   "main.tex" 1724412297 6573 13157adf6b80993d63dc3db83d5262d6 ""
-  "main.toc" 1724417666 2086 85815f1ebbf6c077f2b2fbc8b13007c2 "pdflatex"
+  "main.toc" 1724418014 2086 85815f1ebbf6c077f2b2fbc8b13007c2 "pdflatex"
   (generated)
   "main.aux"
   "main.lof"
