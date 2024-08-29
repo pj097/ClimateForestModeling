@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1724768015 "main.aux" "main.bbl" "main" 1724768017 0
+["bibtex main"] 1724768015 "main.aux" "main.bbl" "main" 1724928710 0
   "./bib.bib" 1724767848 17338 354665dec44b36bd84d2963ec57a79f1 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/harvard/agsm.bst" 1136766823 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
-  "main.aux" 1724768017 20558 2eb80c4de7dd88e63e5804fa4fd8b046 "pdflatex"
+  "main.aux" 1724928710 20558 2eb80c4de7dd88e63e5804fa4fd8b046 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1724768015 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724768017 0
+["pdflatex"] 1724928708 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724928710 0
   "/etc/texmf/web2c/texmf.cnf" 1721928383 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pj/sentinel/report/main.tex" 1724763742 6606 1e25a2a8ad51938fc5e1b79b0809bbb4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -173,7 +173,7 @@
   "chapters/declaration.tex" 1724185441 1885 8ae474ed5e32fad2ead71adbec2b7ce6 ""
   "chapters/feature_selection.tex" 1724339333 8044 077836efbdb494a0fc1f64bb1d85d06f ""
   "chapters/intro.tex" 1724329525 6557 83b5c1d89c423c287b40e136d0f587de ""
-  "chapters/model.tex" 1724768013 3734 bf21e249d731573c0ff67be0a9003506 ""
+  "chapters/model.tex" 1724928708 3734 bf21e249d731573c0ff67be0a9003506 ""
   "chapters/results.tex" 1724763789 4365 49e38eea882147e299e696d57c8d3457 ""
   "chapters/title.tex" 1724321001 1800 833648a2e58644586f8043f4b698b394 ""
   "figures/figures_analysis/band_selection.pdf" 1723995721 31844 a6ed826fea51a0f811c8d6a7296339c0 ""
@@ -201,15 +201,15 @@
   "figures/figures_sentinel/sample_area_sentinel.png" 1723995721 1186367 f65345ee47d55ce86daa3a3507de901e ""
   "figures/figures_sentinel/sample_earth.png" 1723995721 1649061 bdf1b64ad52079f5e824df7c0e483518 ""
   "figures/figures_sentinel/sample_sentinel.png" 1723995721 1380873 ab29e0b8b5a4e1e885efede19309e202 ""
-  "figures/figures_tuner/hyperband_resnet_followup_params.pdf" 1724761311 16746 6f0aaef9721226bd727c564ab03a47bb ""
+  "figures/figures_tuner/hyperband_resnet_followup_params.pdf" 1724928549 23405 4706a83c2a92b03ce75f9633a892031f ""
   "figures/figures_tuner/hyperband_resnet_params.pdf" 1724761298 46754 0d3e4524380bfd31209f6e4e01af9585 ""
   "figures/figures_tuner/model_layered_view.png" 1724759636 144765 bb8151f720d1e9a0320c0c758f96c598 ""
-  "main.aux" 1724768017 20558 2eb80c4de7dd88e63e5804fa4fd8b046 "pdflatex"
+  "main.aux" 1724928710 20558 2eb80c4de7dd88e63e5804fa4fd8b046 "pdflatex"
   "main.bbl" 1724768015 13413 19f65991494a1f19398a82046b48a004 "bibtex main"
-  "main.lof" 1724768017 4999 915e907b13d8b42e2ba12904d6f68efc "pdflatex"
-  "main.out" 1724768017 4751 0ac25160a4d24dea38ec967f098f6464 "pdflatex"
+  "main.lof" 1724928710 4999 915e907b13d8b42e2ba12904d6f68efc "pdflatex"
+  "main.out" 1724928710 4751 0ac25160a4d24dea38ec967f098f6464 "pdflatex"
   "main.tex" 1724763742 6606 1e25a2a8ad51938fc5e1b79b0809bbb4 ""
-  "main.toc" 1724768017 2404 fc3c33b7b45275bc4862d661d0651fa8 "pdflatex"
+  "main.toc" 1724928710 2404 fc3c33b7b45275bc4862d661d0651fa8 "pdflatex"
   (generated)
   "main.aux"
   "main.lof"

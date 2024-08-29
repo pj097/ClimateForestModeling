@@ -89,8 +89,8 @@ class BuildHyperModel(kt.HyperModel):
         x0 = concatenate([sentinel_10m_input, UpSampling2D(2)(sentinel_20m_input)])
         x = BatchNormalization()(x0)
 
-        filter_min = hp.Choice('filter_size_min', [256, 128, 64, 32])
-        filter_max = hp.Choice('filter_size_max', [1024, 512, 256])
+        filter_min = hp.Choice('filter_size_min', [512, 256])
+        filter_max = hp.Choice('filter_size_max', [512])
 
         n_conv_layers = 0
         filter_current = hp.get('filter_size_min')
@@ -110,8 +110,8 @@ class BuildHyperModel(kt.HyperModel):
         
         x = Flatten()(x)
 
-        units_min = hp.Choice('units_min', [256, 128, 64])
-        units_max = hp.Choice('units_max', [2048, 1024, 512])
+        units_min = hp.Choice('units_min', [512, 1024])
+        units_max = hp.Choice('units_max', [1024])
 
         n_dense_layers = 0
         units_current = hp.get('units_max')
