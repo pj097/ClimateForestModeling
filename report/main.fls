@@ -1164,11 +1164,11 @@ INPUT ./figures/figures_climate/genus_corr.pdf
 INPUT figures/figures_climate/genus_corr.pdf
 INPUT ./figures/figures_climate/genus_corr.pdf
 INPUT ./figures/figures_climate/genus_corr.pdf
-INPUT ./figures/figures_climate/regression_results.pdf
-INPUT ./figures/figures_climate/regression_results.pdf
-INPUT figures/figures_climate/regression_results.pdf
-INPUT ./figures/figures_climate/regression_results.pdf
-INPUT ./figures/figures_climate/regression_results.pdf
+INPUT ./figures/figures_climate/regression_results.png
+INPUT ./figures/figures_climate/regression_results.png
+INPUT figures/figures_climate/regression_results.png
+INPUT ./figures/figures_climate/regression_results.png
+INPUT ./figures/figures_climate/regression_results.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
