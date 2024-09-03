@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1724962344 "main.aux" "main.bbl" "main" 1724962345 0
+["bibtex main"] 1725361651 "main.aux" "main.bbl" "main" 1725361886 0
   "./bib.bib" 1724767848 17338 354665dec44b36bd84d2963ec57a79f1 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/harvard/agsm.bst" 1136766823 25549 e3d0f1ab4ae55e777f7352db30e2c6f7 ""
-  "main.aux" 1724962345 20924 fda9feb9512c1bf8942cffd45500431f "pdflatex"
+  "main.aux" 1725361886 20922 dee42adc478fe6d9198761b77c4b8d81 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1724962344 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1724962345 0
+["pdflatex"] 1725361885 "/home/pj/sentinel/report/main.tex" "main.pdf" "main" 1725361886 0
   "/etc/texmf/web2c/texmf.cnf" 1721928383 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/pj/sentinel/report/main.tex" 1724763742 6606 1e25a2a8ad51938fc5e1b79b0809bbb4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -173,8 +173,8 @@
   "chapters/declaration.tex" 1724185441 1885 8ae474ed5e32fad2ead71adbec2b7ce6 ""
   "chapters/feature_selection.tex" 1724339333 8044 077836efbdb494a0fc1f64bb1d85d06f ""
   "chapters/intro.tex" 1724329525 6557 83b5c1d89c423c287b40e136d0f587de ""
-  "chapters/model.tex" 1724936365 3734 bf21e249d731573c0ff67be0a9003506 ""
-  "chapters/results.tex" 1724962343 4413 55db05515db3fd5cbfa83f92463fee06 ""
+  "chapters/model.tex" 1725361731 4492 02c3f3638c7efb4b988bfb01ecb83e2c ""
+  "chapters/results.tex" 1725361885 4413 55db05515db3fd5cbfa83f92463fee06 ""
   "chapters/title.tex" 1724321001 1800 833648a2e58644586f8043f4b698b394 ""
   "figures/figures_analysis/band_selection.pdf" 1723995721 31844 a6ed826fea51a0f811c8d6a7296339c0 ""
   "figures/figures_analysis/band_selection_further.pdf" 1723995721 29918 2a5ae5e88921d81ee6cc4bff3156c778 ""
@@ -182,7 +182,7 @@
   "figures/figures_analysis/soil_elevation_analysis.pdf" 1723995721 25967 5553fd83d1f5de08c31188e5dacb62c2 ""
   "figures/figures_class/class_analysis.tex" 1724962204 671 12a18f1e0ac3d42136bd2195140d6ba8 ""
   "figures/figures_climate/genus_corr.pdf" 1724417858 27876 c80ec48c38c705a96fbc2d26c81d637c ""
-  "figures/figures_climate/regression_results.pdf" 1724417072 3880716 ad63f1b2aacca8af95dfaf76de743cb8 ""
+  "figures/figures_climate/regression_results.pdf" 1725361859 3712709 6c9af6c6c125897d81737d63533af620 ""
   "figures/figures_climate/selected_variables_stats.pdf" 1724417858 40727 85b86a74eff49d51ca448352ea5e88f6 ""
   "figures/figures_climate/weather_correlations.pdf" 1724763131 18630 51e90250178938d174a976b249d5f558 ""
   "figures/figures_features/bgr_hist.pdf" 1723995721 26224 ed34b3a4b4f0517796b0998013587fde ""
@@ -204,13 +204,13 @@
   "figures/figures_sentinel/sample_sentinel.png" 1723995721 1380873 ab29e0b8b5a4e1e885efede19309e202 ""
   "figures/figures_tuner/hyperband_resnet_followup_params.pdf" 1724961232 23204 94c94b285c8d7bfa38b5ef7bece06750 ""
   "figures/figures_tuner/hyperband_resnet_params.pdf" 1724761298 46754 0d3e4524380bfd31209f6e4e01af9585 ""
-  "figures/figures_tuner/model_layered_view.png" 1724961232 137792 3aadb697d5ef345e6a96733d909abd64 ""
-  "main.aux" 1724962345 20924 fda9feb9512c1bf8942cffd45500431f "pdflatex"
-  "main.bbl" 1724962344 13413 19f65991494a1f19398a82046b48a004 "bibtex main"
-  "main.lof" 1724962345 4999 69a1b33a08499321f3852d10b3b3afb4 "pdflatex"
-  "main.out" 1724962345 4751 0ac25160a4d24dea38ec967f098f6464 "pdflatex"
+  "figures/figures_tuner/model_layered_view.png" 1725361636 130470 1a98bf40b523ffdb0c13ea9ac4541c32 ""
+  "main.aux" 1725361886 20922 dee42adc478fe6d9198761b77c4b8d81 "pdflatex"
+  "main.bbl" 1725361652 13413 19f65991494a1f19398a82046b48a004 "bibtex main"
+  "main.lof" 1725361886 4998 94f53a56986f621b833c47fecd4de011 "pdflatex"
+  "main.out" 1725361886 4751 0ac25160a4d24dea38ec967f098f6464 "pdflatex"
   "main.tex" 1724763742 6606 1e25a2a8ad51938fc5e1b79b0809bbb4 ""
-  "main.toc" 1724962345 2404 acbe9e7cf1b7a23de413351eb9a64226 "pdflatex"
+  "main.toc" 1725361886 2404 acbe9e7cf1b7a23de413351eb9a64226 "pdflatex"
   (generated)
   "main.aux"
   "main.lof"

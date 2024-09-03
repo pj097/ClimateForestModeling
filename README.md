@@ -1,6 +1,11 @@
 Under development. To be considered completed once tag v1.0 is released. 
 
-The findings of this study are summarized in the [report](report/main.pdf). Please note that the views and conclusions presented in this document reflect the opinions of the author and do not necessarily represent those of any other individual or organization. Additionally, some aspects of the work presented in the report may rely on an earlier version of this repository, tagged as v0.1.
+The findings of this study are summarized in the [report](report/main.pdf). Please note that the views and conclusions presented in this document reflect the opinions of the author and do not necessarily represent those of any other individual or organization. Additionally, some aspects of the work presented in the report may rely on earlier versions of this repository as per the tags:
+
+1. v0.1: includes feature selection such as seasons, additional feature datasets such as SoilGrids and elevation, and Sentinel-2 bands.
+2. v0.2: first hyperparameter tuning set of trials.
+3. v0.3: second hyperparameter tuning set of trials.
+4. v1.0: conclusion of project, includes code for, e.g. figures in the results section of the report.
 
 The provided Python files serve as tools for the Jupyter notebooks and are best used in conjunction with the report.
 

@@ -20,7 +20,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces The top f2-scores out of nearly 700 Hyperband (\cite {hyperband}) trials. The best score is marked by a diamond shape.\relax }}{16}{figure.caption.21}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces The top f2-scores for the initial hyperparameter tuning process are highlighted, with the best score marked by a diamond shape.\relax }}{17}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras (\cite {visualkeras}).\relax }}{18}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces The model's layered architecture is depicted. The top-right shows the input layers, the middle section displays the convolutional layers, and the bottom-right illustrates the fully-connected layers. The layered views were generated using VisualKeras, \cite {visualkeras}.\relax }}{18}{figure.caption.23}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Correlations heatmap between various ERA5 variables. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{19}{figure.caption.24}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year.\relax }}{20}{figure.caption.25}%
