@@ -1,5 +1,3 @@
-Under development. To be considered completed once tag v1.0 is released. 
-
 The findings of this study are summarized in the [report](report/main.pdf). Please note that the views and conclusions presented in this document reflect the opinions of the author and do not necessarily represent those of any other individual or organization. Additionally, some aspects of the work presented in the report may rely on earlier versions of this repository as per the tags:
 
 1. v0.1: includes feature selection such as seasons, additional feature datasets such as SoilGrids and elevation, and Sentinel-2 bands.

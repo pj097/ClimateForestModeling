@@ -25,6 +25,7 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Correlations heatmap between various ERA5 variables. The data was downloaded from \cite {era5_dataset}, where detailed information is available.\relax }}{19}{figure.caption.24}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Median and quantiles of various monthly ERA5 variables by year.\relax }}{20}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{22}{figure.caption.27}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces R$^2$ score (top-left), MAE (top-right), and residuals (bottom) for a narrow, fully-connected regression neural network, using meteorological change maps as predictors for changes in tree genus maps derived from tree classification.\relax }}{23}{figure.caption.28}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Top: table displaying the evaluation metrics, including evaluation count and training count, for each tree genus. Bottom: scatter plot of the scores with a respective ordinary least squares (OLS) fit line.\relax }}{21}{figure.caption.26}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Median and quantiles of Pearson correlations between changes in tree genera maps predicted by classification and differences in meteorological conditions.\relax }}{22}{figure.caption.27}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces R$^2$ score (top-left), MAE (top-right), and residuals (bottom) for a narrow, fully-connected regression neural network, using meteorological change maps as predictors for changes in tree genus maps derived from tree classification.\relax }}{24}{figure.caption.28}%
 \addvspace {10\p@ }

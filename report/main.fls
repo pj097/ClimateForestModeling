@@ -1154,10 +1154,11 @@ INPUT ./chapters/results.tex
 INPUT chapters/results.tex
 INPUT ./chapters/results.tex
 INPUT chapters/results.tex
-INPUT ./figures/figures_class/class_analysis.tex
-INPUT figures/figures_class/class_analysis.tex
-INPUT ./figures/figures_class/class_analysis.tex
-INPUT figures/figures_class/class_analysis.tex
+INPUT ./figures/figures_class/class_analysis.pdf
+INPUT ./figures/figures_class/class_analysis.pdf
+INPUT figures/figures_class/class_analysis.pdf
+INPUT ./figures/figures_class/class_analysis.pdf
+INPUT ./figures/figures_class/class_analysis.pdf
 INPUT ./figures/figures_climate/genus_corr.pdf
 INPUT ./figures/figures_climate/genus_corr.pdf
 INPUT figures/figures_climate/genus_corr.pdf

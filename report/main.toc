@@ -21,10 +21,10 @@
 \contentsline {chapter}{\numberline {5}Climate Data}{19}{chapter.5}%
 \contentsline {section}{\numberline {5.1}ERA5 Dataset}{19}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Dataset Exploration}{20}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Results and Validation}{21}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Classification Validation}{21}{section.6.1}%
+\contentsline {chapter}{\numberline {6}Results, Validation, and Discussion}{21}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Tree Genus Classification}{21}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Change Map Correlations}{22}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Relationship Modeling}{22}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusions and Future Directions}{24}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Conclusions}{24}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Future Directions}{25}{section.7.2}%
+\contentsline {section}{\numberline {6.3}Relationship Modeling}{23}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Directions}{25}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusions}{25}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Future Directions}{26}{section.7.2}%
