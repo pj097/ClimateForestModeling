@@ -21,4 +21,6 @@ Use the download_data.ipynb notebook to download data from Google Earth Engine (
 
 For hyperparameter tuning, refer to hypertune.ipynb, which is configured using hyper_model_creator.py. To visualize tuning results, simply activate Tensorboard code within hypertune.ipynb. Alternatively, plot_tuner.ipynb can be used as a basis for more tailored plots. 
 
+The best model obtained from both hypertuning parts is configured in best_model_creator.py. Visualization of metric results per class can be performed in class_analysis.ipynb.
+
 The final notebook, climate.ipynb, requires ERA5 data. Instructions for obtaining this data can be found in download_data.ipynb. This notebook performs correlations between change maps in tree genus classification results and climate variables and implements a narrow neural network to predict tree change maps based on climate data.
