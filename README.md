@@ -19,6 +19,6 @@ Begin with explore_euforest.ipynb, which explores the EU-Forest dataset (link to
 
 Use the download_data.ipynb notebook to download data from Google Earth Engine (Google Earth Engine Python API). The downloaded data can then be explored using visualise_features.ipynb.
 
-For hyperparameter tuning, refer to hypertune.ipynb, which is configured using hyper_model_creator.py. Alternatively, you can skip hyperparameter tuning and create the model directly with keras_model_creator.py, then train it using other notebooks such as climate.ipynb. To visualize tuning results, simply activate Tensorboard code within hypertune.ipynb. Alternatively, plot_tuner.ipynb can be used as a basis for more tailored plots. 
+For hyperparameter tuning, refer to hypertune.ipynb, which is configured using hyper_model_creator.py. To visualize tuning results, simply activate Tensorboard code within hypertune.ipynb. Alternatively, plot_tuner.ipynb can be used as a basis for more tailored plots. 
 
 The final notebook, climate.ipynb, requires ERA5 data. Instructions for obtaining this data can be found in download_data.ipynb. This notebook performs correlations between change maps in tree genus classification results and climate variables and implements a narrow neural network to predict tree change maps based on climate data.
