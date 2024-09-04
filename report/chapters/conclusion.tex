@@ -1,0 +1,30 @@
+\chapter{Conclusions and Future Directions}
+\label{chapter:conclusion}
+\section{Conclusions}
+
+
+This study explored how various factors influence tree genus classification using Sentinel-2 imagery, different seasonal and spectral band combinations, and additional environmental datasets.
+
+The analysis revealed that the classification model performed most effectively during summer and autumn, when the spectral signatures for tree genera were the clearest and most distinct. This is further supported by studies such as \cite{belgium_classification}, which focused on summer months. In contrast, performance dropped during spring and winter, likely due to less distinct spectral features and complications from environmental factors such as cloud cover and snow.
+
+Among the Sentinel-2 bands, those in the NIR and SWIR ranges yielded better results. The combination of bands B3, B6, B8, and B11 emerged as the optimal choice, balancing classification accuracy with storage efficiency. This blend provided an effective trade-off between data richness and computational demands. Other studies have concluded differently: \cite{Qingyuan} found that the RGB bands performed best, whereas \cite{Yanbiao2021} found correlation between the best performing bands and the months used in the analysis.
+
+Incorporating soil composition and elevation data offered only marginal improvements in model performance compared to using Sentinel-2 data alone despite soil composition alone showing a strong predictor value. The high-resolution spectral data from Sentinel-2 proved to be the most critical factor in achieving accurate classification results.
+
+Further analysis using the ERA5 dataset revealed that short-term climate variations had minimal impact on tree genus classification over a 5-year period. This brief perspective may not fully capture long-term climate effects, which could significantly influence ecological dynamics. Additionally, focusing on Europe, a region currently experiencing relatively moderate climate changes, might limit the broader applicability of these findings.
+
+Efforts to model the relationship between climate change and tree genus distributions using a regression neural network were unsuccessful. The model demonstrated poor performance, with low R$^2$ values and high MAE, indicating that the climate predictors did not effectively explain the variations in tree genus changes.
+
+In conclusion, this research underscores the critical role of seasonal timing and spectral band selection in tree genus classification. It also highlights the limited impact of additional environmental data and short-term climate changes on model performance. While the current models can achieve high accuracy with well-chosen data and parameters, predicting the long-term impacts of climate change on tree distributions remains a complex and challenging task.
+
+\section{Future Directions}
+
+To achieve a more comprehensive understanding of the effects of climate change on tree genera, future research should prioritize long-term data analysis. For instance, the approach utilized in \cite{pakistan} emphasizes the importance of examining extended time periods. This method involves incorporating broader climate datasets, enabling the capture of gradual shifts and potential delayed effects on tree distributions. While Sentinel-2 data offers high-resolution imagery suitable for short-term studies, datasets such as Landsat, which provide decades of historical data, are invaluable for contextualizing these changes over a longer timeline.
+
+Expanding the geographic scope beyond Europe, as applied in \cite{plantedforest}, could yield more generalized insights. Studying regions experiencing more pronounced climate changes could reveal diverse patterns of interaction between climate variables and tree distributions at both the genus and species levels. This broader approach may uncover regional differences that contribute to a more nuanced understanding of climate impacts globally.
+
+Moreover, future research should differentiate between commercial forests and long-term, natural forests. The change maps of these forest types may exhibit distinct patterns due to varying management practices and ecological dynamics. As highlighted by \cite{chauvier2021}, commercial forests, influenced by planned harvesting, replanting, and other management activities, often display predictable changes. In contrast, long-term, natural forests are subject to complex ecological processes such as natural disturbances, successional dynamics, and gradual environmental shifts. A comparative analysis of these forest types could reveal how different management strategies and natural processes influence tree genus distributions and their responses to climate change, thereby providing more nuanced and actionable findings.
+
+Additionally, incorporating a wider range of environmental variables beyond soil composition and elevation could enhance the robustness of future models. Factors such as land cover changes, pest outbreaks, and other biotic interactions may significantly influence tree genus distributions. For example, \cite{usda} illustrates the importance of considering variables that may not be immediately apparent, such as surface slope and frost periods, which could play critical roles in shaping tree distributions.
+
+Finally, interdisciplinary collaboration with ecologists and botanists could greatly enrich future studies. Integrating ecological insights, such as those on competition and species-specific responses to environmental changes discussed in \cite{Magalhães2021}, can refine model parameters and improve prediction accuracy. This holistic approach would allow for the incorporation of biological factors that directly affect tree distributions, ultimately leading to more precise and reliable outcomes.

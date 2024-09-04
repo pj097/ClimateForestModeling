@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: agsm.bst
+Database file #1: bib.bib
+Warning--empty chapter and pages in hoegh2018climate
+You've used 31 entries,
+            2909 wiz_defined-function locations,
+            842 strings with 13627 characters,
+and the built_in function-call counts, 350441 in all, are:
+= -- 58541
+> -- 5166
+< -- 1
++ -- 29906
+- -- 1659
+* -- 32267
+:= -- 66917
+add.period$ -- 31
+call.type$ -- 31
+change.case$ -- 432
+chr.to.int$ -- 31
+cite$ -- 32
+duplicate$ -- 478
+empty$ -- 1018
+format.name$ -- 1750
+if$ -- 63027
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 28
+newline$ -- 100
+num.names$ -- 333
+pop$ -- 117
+preamble$ -- 1
+purify$ -- 465
+quote$ -- 0
+skip$ -- 412
+stack$ -- 0
+substring$ -- 85947
+swap$ -- 83
+text.length$ -- 435
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 120
+warning$ -- 1
+while$ -- 681
+width$ -- 0
+write$ -- 426
+(There was 1 warning)
