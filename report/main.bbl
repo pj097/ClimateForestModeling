@@ -8,7 +8,6 @@ Ahlswede, S., Schulz, C., Gava, C., Helber, P., Bischke, B., F\"orster, M.,
   2023\harvardyearright , `\textit{TreeSatAI Benchmark Archive}: a
   multi-sensor, multi-label dataset for tree species classification in remote
   sensing', {\em Earth System Science Data} {\bf 15}(2),~681--695.
-\newline\harvardurl{https://essd.copernicus.org/articles/15/681/2023/}
 
 \harvarditem[Bolyn et~al.]{Bolyn, Lejeune, Michez \harvardand\
   Latte}{2022}{belgium_classification}
@@ -16,7 +15,6 @@ Bolyn, C., Lejeune, P., Michez, A. \harvardand\ Latte, N.  \harvardyearleft
   2022\harvardyearright , `Mapping tree species proportions from satellite
   imagery using spectral–spatial deep learning', {\em Remote Sensing of
   Environment} {\bf 280},~113205.
-\newline\harvardurl{https://www.sciencedirect.com/science/article/pii/S0034425722003145}
 
 \harvarditem{Bonan}{2008}{bonan2008forests}
 Bonan, G.~B.  \harvardyearleft 2008\harvardyearright , `Forests and climate
@@ -153,7 +151,6 @@ Pazos-Outón, L.~M., Vasconcelos, C.~N., Raichuk, A., Arnab, A., Morris, D.
   \harvardand\ Neumann, M.  \harvardyearleft 2024\harvardyearright , `Planted:
   a dataset for planted forest identification from multi-satellite time
   series'.
-\newline\harvardurl{https://arxiv.org/abs/2406.18554}
 
 \harvarditem[Pettorelli et~al.]{Pettorelli, Duncan \harvardand\
   Williamson}{2016}{pettorelli2016satellite}
@@ -220,7 +217,6 @@ Wessel, M., Brandmeier, M. \harvardand\ Tiede, D.  \harvardyearleft
   2018\harvardyearright , `Evaluation of different machine learning algorithms
   for scalable classification of tree types and tree species based on
   sentinel-2 data', {\em Remote Sensing} {\bf 10}(9).
-\newline\harvardurl{https://www.mdpi.com/2072-4292/10/9/1419}
 
 \harvarditem[Xi et~al.]{Xi, Ren, Tian, Ren, Dong \harvardand\
   Zhang}{2021}{Yanbiao2021}

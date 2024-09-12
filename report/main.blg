@@ -6,14 +6,14 @@ Database file #1: bib.bib
 Warning--empty chapter and pages in hoegh2018climate
 You've used 31 entries,
             2909 wiz_defined-function locations,
-            842 strings with 13627 characters,
-and the built_in function-call counts, 350441 in all, are:
+            838 strings with 13439 characters,
+and the built_in function-call counts, 350429 in all, are:
 = -- 58541
 > -- 5166
 < -- 1
 + -- 29906
 - -- 1659
-* -- 32267
+* -- 32259
 := -- 66917
 add.period$ -- 31
 call.type$ -- 31
@@ -27,13 +27,13 @@ if$ -- 63027
 int.to.chr$ -- 5
 int.to.str$ -- 0
 missing$ -- 28
-newline$ -- 100
+newline$ -- 96
 num.names$ -- 333
 pop$ -- 117
 preamble$ -- 1
 purify$ -- 465
 quote$ -- 0
-skip$ -- 412
+skip$ -- 416
 stack$ -- 0
 substring$ -- 85947
 swap$ -- 83
@@ -44,5 +44,5 @@ type$ -- 120
 warning$ -- 1
 while$ -- 681
 width$ -- 0
-write$ -- 426
+write$ -- 422
 (There was 1 warning)
